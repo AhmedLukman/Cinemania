@@ -8,7 +8,7 @@ const MoviesPage = async () => {
     `${POPULAR_MOVIES_URL}?page=1`,
     POPULAR_MOVIES_OPTIONS
   );
-  const { results: popularMovies } = await res.json();
+  const { results: popularMovies }: TPopularMovieResult = await res.json();
 
   if (!popularMovies) notFound();
 
