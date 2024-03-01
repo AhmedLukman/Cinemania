@@ -7,6 +7,9 @@ export const POPULAR_MOVIES_OPTIONS = {
   },
 };
 
+export const POPULAR_MOVIES_URL =
+  "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
+
 export const BASE_URL = "http://image.tmdb.org/t/p/";
 
 export const IMAGE_SIZE = "original";
