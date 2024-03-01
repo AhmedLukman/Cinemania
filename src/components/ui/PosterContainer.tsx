@@ -21,11 +21,9 @@ const PosterContainer = ({
     <div className={`h-screen rounded-md relative`}>
       {/* Main Image */}
       <Image
-        objectFit="cover"
         placeholder={dataUrl as PlaceholderValue}
-        objectPosition="center"
         priority
-        className=" -z-40"
+        className=" -z-40 object-cover object-center"
         src={`${IMAGE_URL}${backdropPath}`}
         alt={title}
         fill
