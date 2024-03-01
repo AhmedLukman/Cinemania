@@ -39,6 +39,32 @@ type TPosterContent = {
   rating: string;
   genres: number[];
   description: string;
+  movieId: number
 };
 
 type TPosterSideImage = { posterPath: string; title: string };
+
+type TVideoModal = {
+  isOpen: boolean;
+  onOpenChange: () => void;
+  movieId: number;
+  title: string
+}
+
+type TVideo = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  published_at: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  id: string;
+}
+
+type TVideoResponse = {
+  id: number;
+  results: TVideo[];
+}
