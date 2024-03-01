@@ -14,10 +14,7 @@ export const BASE_URL = "http://image.tmdb.org/t/p/";
 
 export const IMAGE_SIZE = "original";
 
-export const getGenreNameById = (genreId: number) => {
-  const genre = GENRES.find((genre) => genre.id === genreId);
-  return genre ? genre.name : "Unknown"; // If genre is found, return its name, otherwise return "Unknown"
-}
+export const IMAGE_URL = `${BASE_URL}${IMAGE_SIZE}`;
 
 export const GENRES = [
   {
