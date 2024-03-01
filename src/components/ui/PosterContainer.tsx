@@ -31,6 +31,7 @@ const PosterContainer = ({
       <Backdrop />
       <div className="h-full z-50 md:gap-5 md:flex cursor-grab px-5 md:px-20  text-white">
         <PosterContent
+          movieId={movieId}
           description={description}
           genres={genres}
           rating={rating}
