@@ -6,7 +6,6 @@ import Slider from 'react-slick';
 const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: any, popularMovies: TPopularMovie[]}) => {
   return (
     <Slider
-      lazyLoad="progressive"
       asNavFor={nav1}
       autoplay
       autoplaySpeed={6000}
