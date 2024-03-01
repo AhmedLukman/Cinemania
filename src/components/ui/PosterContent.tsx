@@ -2,8 +2,9 @@ import React from "react";
 
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, cn } from "@nextui-org/react";
+import { Button, cn, useDisclosure } from "@nextui-org/react";
 import { getGenreNameById } from "@/lib/utls";
+import VideoModal from "./VideoModal";
 
 const PosterContent = ({
   title,
@@ -11,7 +12,10 @@ const PosterContent = ({
   rating,
   genres,
   description,
+  movieId
 }: TPosterContent) => {
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <div className="md:w-2/3 pt-24">
       <h2
@@ -34,7 +38,8 @@ const PosterContent = ({
       </div>
       <p className="max-w-prose mt-10">{description}</p>
       <div className="mt-16">
-        <Button>Watch trailer</Button>
+        <Button onPress={onOpen}>Watch trailer</Button>
+        <VideoModal movieId = {movieId} title = {title} isOpen = {isOpen} onOpenChange = {onOpenChange} />
         <Button variant="bordered" className="text-white ml-3">
           More details
         </Button>
