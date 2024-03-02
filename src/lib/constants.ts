@@ -10,8 +10,14 @@ export const MOVIES_OPTIONS = {
 export const POPULAR_MOVIES_URL =
   "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
 
-export const TRENDING_MOVIE_URL =
+export const TRENDING_MOVIES_URL =
   "https://api.themoviedb.org/3/trending/movie/day?language=en-US";
+
+export const TOP_RATED_MOVIES_URL =
+  "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1";
+  
+export const UPCOMING_MOVIES_URL =
+  "https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1";
 
 export const BASE_URL = "http://image.tmdb.org/t/p/";
 
