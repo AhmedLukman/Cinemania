@@ -1,8 +1,5 @@
 "use client";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 import React, { useState, useEffect, useRef } from "react";
 
 import BigSlider from "./BigSlider";
