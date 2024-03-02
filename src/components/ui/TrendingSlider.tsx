@@ -49,7 +49,7 @@ const TrendingSlider = ({
           >
             <Card
               radius="lg"
-              className="border-none cursor-pointer group h-72 md:h-96 shadow-sm shadow-gray-500"
+              className="border-none cursor-pointer group h-72 md:h-[400px] shadow-sm shadow-gray-500"
             >
               <Image
                 alt={trendingMovie.title}
