@@ -13,6 +13,8 @@ import {
 import { Link } from "@nextui-org/link";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { Input } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,6 +64,7 @@ const Header = () => {
           placeholder="Search..."
           size="sm"
           type="search"
+          endContent={<FontAwesomeIcon icon={faMagnifyingGlass} className="text-[#cecece]" />}
         />
         <NavbarItem>
           <Button as={Link} href="#" variant="flat" className="text-white">
