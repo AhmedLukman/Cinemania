@@ -3,7 +3,7 @@
 import React from "react";
 import Slider from "react-slick";
 import Image from "next/image";
-import { Card, CardFooter } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
 import { IMAGE_URL } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 
@@ -16,7 +16,7 @@ const settings = {
   autoplaySpeed: 5000,
 };
 
-const TrendingSlider = ({
+const MovieCategorySlider = ({
   trendingMovies,
 }: {
   trendingMovies: TTrendingMovie[];
@@ -71,4 +71,4 @@ const TrendingSlider = ({
   );
 };
 
-export default TrendingSlider;
+export default MovieCategorySlider;

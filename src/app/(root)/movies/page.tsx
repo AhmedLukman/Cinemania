@@ -1,7 +1,7 @@
 import DoubleSlider from "@/components/ui/DoubleSlider";
-import TrendingMovies from "@/components/ui/TrendingMovies";
+import MovieCategory from "@/components/ui/MovieCategory";
 import {
-  POPULAR_MOVIES_OPTIONS,
+  MOVIES_OPTIONS,
   POPULAR_MOVIES_URL,
   TRENDING_MOVIE_URL,
 } from "@/lib/constants";
@@ -9,24 +9,30 @@ import { notFound } from "next/navigation";
 import React from "react";
 
 const MoviesPage = async () => {
-  const res = await fetch(
+  const popularMoviesRes = await fetch(
     `${POPULAR_MOVIES_URL}?page=1`,
-    POPULAR_MOVIES_OPTIONS
+    MOVIES_OPTIONS
   );
-  const { results: popularMovies }: TPopularMovieResult = await res.json();
+  const { results: popularMovies }: TPopularMovieResult =
+    await popularMoviesRes.json();
 
   // Return a text instead
   if (!popularMovies) notFound();
 
-  const res2 = await fetch(TRENDING_MOVIE_URL, POPULAR_MOVIES_OPTIONS);
+  const trendingMoviesRes = await fetch(
+    TRENDING_MOVIE_URL,
+    MOVIES_OPTIONS
+  );
 
   const { results: trendingMovies } =
-    (await res2.json()) as TTrendingMovieResponse;
+    (await trendingMoviesRes.json()) as TTrendingMovieResponse;
 
   return (
     <>
       <DoubleSlider popularMovies={popularMovies} />
-      <TrendingMovies trendingMovies={trendingMovies} />
+      <MovieCategory heading="Trending" trendingMovies={trendingMovies} />
+      <MovieCategory heading="Top Rated" trendingMovies={trendingMovies} />
+      <MovieCategory heading="Upcoming" trendingMovies={trendingMovies} />
     </>
   );
 };
