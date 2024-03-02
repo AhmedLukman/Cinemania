@@ -7,50 +7,31 @@ import {
   TRENDING_MOVIES_URL,
   UPCOMING_MOVIES_URL,
 } from "@/lib/constants";
+import { fetchMovies } from "@/lib/utls";
 import { notFound } from "next/navigation";
 import React from "react";
 
 const MoviesPage = async () => {
-  const popularMoviesRes = await fetch(
-    `${POPULAR_MOVIES_URL}?page=1`,
-    MOVIES_OPTIONS
-  );
-  const { results: popularMovies }: TMovieResponse =
-    await popularMoviesRes.json();
-
-  // Return a text instead
-  if (!popularMovies) notFound();
-
-  const trendingMoviesRes = await fetch(TRENDING_MOVIES_URL, MOVIES_OPTIONS);
-
-  const { results: trendingMovies } =
-    (await trendingMoviesRes.json()) as TMovieResponse;
-
-  // Return a text instead
-  if (!trendingMovies) notFound();
- 
-  const topRatedMoviesRes = await fetch(TOP_RATED_MOVIES_URL, MOVIES_OPTIONS);
-
-  const { results: topRatedMovies } =
-    (await topRatedMoviesRes.json()) as TMovieResponse;
-
-  // Return a text instead
-  if (!topRatedMovies) notFound();
-
-  const upcomingMoviesRes = await fetch(UPCOMING_MOVIES_URL, MOVIES_OPTIONS);
-
-  const { results: upcomingMovies } =
-    (await upcomingMoviesRes.json()) as TMovieResponse;
-
-  // Return a text instead
-  if (!upcomingMovies) notFound();
+  
+  const popularMovies = (await fetchMovies(
+    POPULAR_MOVIES_URL
+  )) as TMovieResponse;
+  const trendingMovies = (await fetchMovies(
+    TRENDING_MOVIES_URL
+  )) as TMovieResponse;
+  const upcomingMovies = (await fetchMovies(
+    UPCOMING_MOVIES_URL
+  )) as TMovieResponse;
+  const topRatedMovies = (await fetchMovies(
+    TOP_RATED_MOVIES_URL
+  )) as TMovieResponse;
 
   return (
     <>
-      <DoubleSlider popularMovies={popularMovies} />
-      <MovieCategory heading="Trending" movies={trendingMovies} />
-      <MovieCategory heading="Top Rated" movies={topRatedMovies} />
-      <MovieCategory heading="Upcoming" movies={upcomingMovies} />
+      <DoubleSlider popularMovies={popularMovies.results} />
+      <MovieCategory heading="Trending" movies={trendingMovies.results} />
+      <MovieCategory heading="Top Rated" movies={topRatedMovies.results} />
+      <MovieCategory heading="Upcoming" movies={upcomingMovies.results} />
     </>
   );
 };

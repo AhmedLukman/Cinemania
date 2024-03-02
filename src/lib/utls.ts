@@ -1,4 +1,4 @@
-import { GENRES } from "./constants";
+import { GENRES, MOVIES_OPTIONS } from "./constants";
 
 // PLACEHOLDER LOADER
 const shimmer = (w: number, h: number) => `
@@ -27,4 +27,13 @@ export const dataUrl = `data:image/svg+xml;base64,${toBase64(
 export const getGenreNameById = (genreId: number) => {
   const genre = GENRES.find((genre) => genre.id === genreId);
   return genre ? genre.name : "Unknown"; // If genre is found, return its name, otherwise return "Unknown"
+};
+
+export const fetchMovies = async (url: string) => {
+  const res = await fetch(url, MOVIES_OPTIONS);
+  if (!res.ok) throw new Error("Something went wrong");
+  const result: TMovieResponse = await res.json();
+  if (!result) return;
+
+  return result;
 };
