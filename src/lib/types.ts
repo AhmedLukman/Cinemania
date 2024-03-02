@@ -1,11 +1,11 @@
-type TPopularMovieResult = {
+type TMovieResponse = {
   page: number;
-  results: TPopularMovie[];
+  results: TMovie[];
   total_pages: number;
   total_results: number;
 };
 
-type TPopularMovie = {
+type TMovie = {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids: number[];
@@ -67,29 +67,4 @@ type TVideo = {
 type TVideoResponse = {
   id: number;
   results: TVideo[];
-}
-
-type TTrendingMovie = {
-  adult: boolean;
-  backdrop_path: string;
-  id: number;
-  title: string;
-  original_language: string;
-  original_title: string;
-  overview: string;
-  poster_path: string;
-  media_type: string;
-  genre_ids: number[];
-  popularity: number;
-  release_date: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
-}
-
-type TTrendingMovieResponse = {
-  page: number;
-  results: TTrendingMovie[];
-  total_pages: number;
-  total_results: number;
 }

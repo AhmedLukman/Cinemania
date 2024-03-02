@@ -3,7 +3,7 @@ import { HoverCard } from "./HoverCard";
 import { BASE_URL, IMAGE_SIZE } from "@/lib/constants";
 import Slider from 'react-slick';
 
-const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: any, popularMovies: TPopularMovie[]}) => {
+const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: any, popularMovies: TMovie[]}) => {
   return (
     <Slider
       asNavFor={nav1}

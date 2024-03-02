@@ -17,9 +17,9 @@ const settings = {
 };
 
 const MovieCategorySlider = ({
-  trendingMovies,
+  movies,
 }: {
-  trendingMovies: TTrendingMovie[];
+  movies: TMovie[];
 }) => {
   const router = useRouter();
   return (
@@ -41,7 +41,7 @@ const MovieCategorySlider = ({
         ]}
         {...settings}
       >
-        {trendingMovies.map((trendingMovie) => (
+        {movies.map((trendingMovie) => (
           <div
             className="px-2 md:px-4"
             key={trendingMovie.id}

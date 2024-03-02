@@ -3,10 +3,10 @@ import MovieCategorySlider from "./MovieCategorySlider";
 import { Button } from "@nextui-org/react";
 
 const MovieCategory = ({
-  trendingMovies,
+  movies,
   heading
 }: {
-  trendingMovies: TTrendingMovie[];
+  movies: TMovie[];
   heading: string
 }) => {
   return (
@@ -17,7 +17,7 @@ const MovieCategory = ({
         </h3>
         <Button className="text-white" variant="bordered">View more</Button>
       </div>
-      <MovieCategorySlider trendingMovies={trendingMovies} />
+      <MovieCategorySlider movies={movies} />
     </section>
   );
 };

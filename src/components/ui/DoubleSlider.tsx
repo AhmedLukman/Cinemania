@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from "react";
 import BigSlider from "./BigSlider";
 import MiniSlider from "./MiniSlider";
 
-const DoubleSlider = ({ popularMovies }: { popularMovies: TPopularMovie[] }) => {
+const DoubleSlider = ({ popularMovies }: { popularMovies: TMovie[] }) => {
   const [nav1, setNav1] = useState<any>(null);
   const [nav2, setNav2] = useState<any>(null);
   let sliderRef1 = useRef<any>(null);

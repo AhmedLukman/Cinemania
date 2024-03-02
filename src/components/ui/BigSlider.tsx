@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import PosterContainer from './PosterContainer';
 
-const BigSlider = ({popularMovies, nav2, sliderRef1}: {popularMovies: TPopularMovie[], nav2: any, sliderRef1: any}) => {
+const BigSlider = ({popularMovies, nav2, sliderRef1}: {popularMovies: TMovie[], nav2: any, sliderRef1: any}) => {
   return (
     <Slider
       className="h-[75vh]"
