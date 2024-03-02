@@ -11,3 +11,9 @@
 .no-visible-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+@layer base {
+  body {
+    @apply bg-gradient-to-b from-[#222] to-black 
+  }
+}
