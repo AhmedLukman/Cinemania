@@ -9,7 +9,7 @@ import {
   ModalFooter,
   Button,
 } from "@nextui-org/react";
-import { POPULAR_MOVIES_OPTIONS } from "@/lib/constants";
+import { MOVIES_OPTIONS } from "@/lib/constants";
 
 const VideoModal = ({ isOpen, onOpenChange, movieId, title }: TVideoModal) => {
   const [data, setData] = useState<TVideoResponse | null>(null);
@@ -18,7 +18,7 @@ const VideoModal = ({ isOpen, onOpenChange, movieId, title }: TVideoModal) => {
     const fetchData = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}/videos`,
-        POPULAR_MOVIES_OPTIONS
+        MOVIES_OPTIONS
       );
       const data = (await res.json()) as TVideoResponse;
       setData(data);

@@ -1,4 +1,4 @@
-export const POPULAR_MOVIES_OPTIONS = {
+export const MOVIES_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
