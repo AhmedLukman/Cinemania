@@ -36,7 +36,7 @@ const PosterContent = ({
           ))}
         </div>
       </div>
-      <p className="max-w-prose mt-10">{description}</p>
+      <p className="max-w-prose mt-10 line-clamp-4">{description}</p>
       <div className="mt-16">
         <Button onPress={onOpen}>Watch trailer</Button>
         <VideoModal movieId = {movieId} title = {title} isOpen = {isOpen} onOpenChange = {onOpenChange} />
