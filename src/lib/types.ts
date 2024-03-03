@@ -35,7 +35,7 @@ type TPosterContainer = {
   year: string;
   rating: string;
   genres: number[];
-  movieId: number;
+  mediaId: number;
   posterPath: string;
   backdropPath: string;
 };
@@ -46,7 +46,7 @@ type TPosterContent = {
   rating: string;
   genres: number[];
   description: string;
-  movieId: number;
+  mediaId: number;
 };
 
 type TPosterSideImage = { posterPath: string; title: string };
@@ -54,7 +54,7 @@ type TPosterSideImage = { posterPath: string; title: string };
 type TVideoModal = {
   isOpen: boolean;
   onOpenChange: () => void;
-  movieId: number;
+  mediaId: number;
   title: string;
 };
 
