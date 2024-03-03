@@ -13,25 +13,32 @@ import { MOVIES_OPTIONS } from "@/lib/constants";
 
 const VideoModal = ({ isOpen, onOpenChange, movieId, title }: TVideoModal) => {
   const [data, setData] = useState<TVideoResponse | null>(null);
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(
         `https://api.themoviedb.org/3/movie/${movieId}/videos`,
         MOVIES_OPTIONS
       );
-      const data = (await res.json()) as TVideoResponse;
-      setData(data);
+      if (res.ok) {
+        const data = (await res.json()) as TVideoResponse;
+        setData(data);
+      } else if (!res.ok) {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/tv/${movieId}/videos`,
+          MOVIES_OPTIONS
+        );
+        const data = await res.json();
+        setData(data);
+      }
     };
 
     fetchData();
   }, [movieId]);
-  const key = data?.results[0].key;
-  const name = data?.results[0].name;
-  // const key = data.results.find(data => data.name.toLowerCase().includes(title.toLowerCase()))
-  // console.log(key)
+
+  const key = data?.results?.[0]?.key;
+  const name = data?.results?.[0]?.name;
+
   return (
-    // from-red-200 via-blue-300 to-purple-100
     <Modal
       backdrop="blur"
       //  bg-[#19172c]/70
