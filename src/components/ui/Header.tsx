@@ -15,10 +15,12 @@ import { Button, ButtonGroup } from "@nextui-org/button";
 import { Input } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = ["Login", "Sign up"];
+  const pathname = usePathname()
   return (
     <Navbar
       className=" fixed w-full bg-transparent"
@@ -40,14 +42,27 @@ const Header = () => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <ButtonGroup>
           <Button
-            variant="ghost"
-            className="text-white hover:text-black"
+            variant={pathname === "/movies" ? "ghost" : "faded"}
+            className={
+              pathname === "/movies"
+                ? "text-white hover:text-black"
+                : "text-black"
+            }
             as={Link}
             href="/movies"
           >
             Movies
           </Button>
-          <Button as={Link} href="/tvshows">
+          <Button
+            className={
+              pathname === "/tvshows"
+                ? "text-white hover:text-black"
+                : "text-black"
+            }
+            as={Link}
+            variant={pathname === "/tvshows" ? "ghost" : "faded"}
+            href="/tvshows"
+          >
             TV Shows
           </Button>
         </ButtonGroup>
@@ -64,7 +79,12 @@ const Header = () => {
           placeholder="Search..."
           size="sm"
           type="search"
-          endContent={<FontAwesomeIcon icon={faMagnifyingGlass} className="text-[#cecece]" />}
+          endContent={
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="text-[#cecece]"
+            />
+          }
         />
         <NavbarItem>
           <Button as={Link} href="#" variant="flat" className="text-white">
