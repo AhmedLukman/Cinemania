@@ -14,6 +14,6 @@
 
 @layer base {
   body {
-    @apply bg-gradient-to-b from-[#222] to-black 
+    @apply bg-gradient-to-b from-[#141414] to-black 
   }
 }
