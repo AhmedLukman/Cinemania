@@ -31,9 +31,10 @@ export const getGenreNameById = (genreId: number) => {
 
 export const fetchMovies = async (url: string) => {
   const res = await fetch(url, MOVIES_OPTIONS);
-  if (!res.ok) throw new Error("Something went wrong");
-  const result: TMovieResponse = await res.json();
-  if (!result) return;
+  if (!res.ok) console.error("Something went wrong");
+  const result: TMediaResponse<TMovie> | TMediaResponse<TTVShow> =
+    await res.json();
+  if (!result) console.error('No results');
 
   return result;
 };
