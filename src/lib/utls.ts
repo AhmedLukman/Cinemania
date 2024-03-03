@@ -1,4 +1,4 @@
-import { GENRES, MOVIES_OPTIONS } from "./constants";
+import { GENRES, MEDIA_OPTIONS } from "./constants";
 
 // PLACEHOLDER LOADER
 const shimmer = (w: number, h: number) => `
@@ -30,11 +30,11 @@ export const getGenreNameById = (genreId: number) => {
 };
 
 export const fetchMovies = async (url: string) => {
-  const res = await fetch(url, MOVIES_OPTIONS);
+  const res = await fetch(url, MEDIA_OPTIONS);
   if (!res.ok) console.error("Something went wrong");
   const result: TMediaResponse<TMovie> | TMediaResponse<TTVShow> =
     await res.json();
-  if (!result) console.error('No results');
+  if (!result) console.error("No results");
 
   return result;
 };

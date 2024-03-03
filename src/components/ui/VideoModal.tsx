@@ -9,7 +9,7 @@ import {
   ModalFooter,
   Button,
 } from "@nextui-org/react";
-import { MOVIES_OPTIONS } from "@/lib/constants";
+import { MEDIA_OPTIONS } from "@/lib/constants";
 import { usePathname } from "next/navigation";
 
 const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
@@ -24,7 +24,7 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
       try {
         const mediaUrl = `https://api.themoviedb.org/3${pathname}/${mediaId}/videos`;
 
-        const res = await fetch(mediaUrl, MOVIES_OPTIONS);
+        const res = await fetch(mediaUrl, MEDIA_OPTIONS);
         if (!res.ok) throw new Error();
         const data = (await res.json()) as TVideoResponse;
         setData(data);

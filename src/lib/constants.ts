@@ -1,4 +1,4 @@
-export const MOVIES_OPTIONS = {
+export const MEDIA_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
