@@ -1,25 +1,32 @@
-type TMovieResponse = {
-  page: number;
-  results: TMovie[];
-  total_pages: number;
-  total_results: number;
-};
-
-type TMovie = {
+type TMediaBase = {
   adult: boolean;
   backdrop_path: string | null;
   genre_ids: number[];
   id: number;
   original_language: string;
-  original_title: string;
   overview: string;
   popularity: number;
   poster_path: string | null;
-  release_date: string;
-  title: string;
   video: boolean;
   vote_average: number;
   vote_count: number;
+};
+
+type TMovie = TMediaBase & {
+  original_title: string;
+  release_date: string;
+};
+
+type TTVShow = TMediaBase & {
+  original_name: string;
+  first_air_date: string;
+};
+
+type TMediaResponse<T> = {
+  page: number;
+  results: T[];
+  total_pages: number;
+  total_results: number;
 };
 
 type TPosterContainer = {
@@ -39,7 +46,7 @@ type TPosterContent = {
   rating: string;
   genres: number[];
   description: string;
-  movieId: number
+  movieId: number;
 };
 
 type TPosterSideImage = { posterPath: string; title: string };
@@ -48,8 +55,8 @@ type TVideoModal = {
   isOpen: boolean;
   onOpenChange: () => void;
   movieId: number;
-  title: string
-}
+  title: string;
+};
 
 type TVideo = {
   iso_639_1: string;
@@ -62,9 +69,9 @@ type TVideo = {
   type: string;
   official: boolean;
   id: string;
-}
+};
 
 type TVideoResponse = {
   id: number;
   results: TVideo[];
-}
+};
