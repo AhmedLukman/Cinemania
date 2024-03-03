@@ -7,7 +7,7 @@ const Home = () => {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace("/movies");
+    router.replace("/movie");
   }, [router]);
 
   return null

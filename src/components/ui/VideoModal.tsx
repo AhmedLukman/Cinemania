@@ -10,38 +10,38 @@ import {
   Button,
 } from "@nextui-org/react";
 import { MOVIES_OPTIONS } from "@/lib/constants";
+import { usePathname } from "next/navigation";
 
-const VideoModal = ({ isOpen, onOpenChange, movieId, title }: TVideoModal) => {
+const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
   const [data, setData] = useState<TVideoResponse | null>(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  const pathname = usePathname();
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(
-        `https://api.themoviedb.org/3/movie/${movieId}/videos`,
-        MOVIES_OPTIONS
-      );
-      if (res.ok) {
+      try {
+        const mediaUrl = `https://api.themoviedb.org/3${pathname}/${mediaId}/videos`;
+
+        const res = await fetch(mediaUrl, MOVIES_OPTIONS);
+        if (!res.ok) throw new Error();
         const data = (await res.json()) as TVideoResponse;
         setData(data);
-      } else if (!res.ok) {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/tv/${movieId}/videos`,
-          MOVIES_OPTIONS
-        );
-        const data = await res.json();
-        setData(data);
+      } catch (error) {
+        setError("Failed to fetch data");
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, [movieId]);
-
-  const key = data?.results?.[0]?.key;
-  const name = data?.results?.[0]?.name;
+  }, [mediaId, pathname]);
 
   return (
     <Modal
+      scrollBehavior="outside"
       backdrop="blur"
-      //  bg-[#19172c]/70
       classNames={{
         body: "py-6",
         base: "border-[#292f46] bg-[#000]/40 text-white",
@@ -57,14 +57,20 @@ const VideoModal = ({ isOpen, onOpenChange, movieId, title }: TVideoModal) => {
           <>
             <ModalHeader className="text-4xl font-serif">{title}</ModalHeader>
             <ModalBody>
-              <iframe
-                height="400"
-                src={`https://www.youtube.com/embed/${key}`}
-                className=" rounded-lg"
-                title={name}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              {data?.results.map((result) => (
+                <iframe
+                  key={result.id}
+                  height="400"
+                  src={`https://www.youtube.com/embed/${result.key}`}
+                  className=" rounded-lg"
+                  title={result.name}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ))}
+              {data?.results.length === 0 && (
+                <p>😢 Sorry, no clips available at the moment</p>
+              )}
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>

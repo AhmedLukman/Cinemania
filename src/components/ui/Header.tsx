@@ -42,26 +42,26 @@ const Header = () => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <ButtonGroup>
           <Button
-            variant={pathname === "/movies" ? "ghost" : "faded"}
+            variant={pathname.startsWith("/movie") ? "ghost" : "faded"}
             className={
-              pathname === "/movies"
+              pathname.startsWith("/movie")
                 ? "text-white hover:text-black"
                 : "text-black"
             }
             as={Link}
-            href="/movies"
+            href="/movie"
           >
             Movies
           </Button>
           <Button
             className={
-              pathname === "/tvshows"
+              pathname.startsWith("/tv")
                 ? "text-white hover:text-black"
                 : "text-black"
             }
             as={Link}
-            variant={pathname === "/tvshows" ? "ghost" : "faded"}
-            href="/tvshows"
+            variant={pathname.startsWith("/tv") ? "ghost" : "faded"}
+            href="/tv"
           >
             TV Shows
           </Button>
