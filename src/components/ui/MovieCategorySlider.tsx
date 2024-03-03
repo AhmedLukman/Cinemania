@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { Card } from "@nextui-org/react";
 import { IMAGE_URL } from "@/lib/constants";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const settings = {
   infinite: true,
@@ -22,6 +22,7 @@ const MovieCategorySlider = ({
   movies: TMovie[] | TTVShow[];
 }) => {
   const router = useRouter();
+  const pathname = usePathname()
   return (
     <div className="slider-container px-10">
       <Slider
@@ -45,7 +46,7 @@ const MovieCategorySlider = ({
           <div
             className="px-2 md:px-4"
             key={trendingMovie.id}
-            onClick={() => router.push(`/movies/${trendingMovie.id}`)}
+            onClick={() => router.push(`${pathname}/${trendingMovie.id}`)}
           >
             <Card
               radius="lg"
