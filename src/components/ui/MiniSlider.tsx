@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
 import { HoverCard } from "./HoverCard";
 import { BASE_URL, IMAGE_SIZE } from "@/lib/constants";
-import Slider from 'react-slick';
+import Slider from "react-slick";
 
-const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: any, popularMovies: TMovie[]}) => {
+const MiniSlider = ({
+  nav1,
+  sliderRef2,
+  media,
+}: {
+  nav1: any;
+  sliderRef2: any;
+  media: TMovie[] | TTVShow[];
+}) => {
   return (
     <Slider
       asNavFor={nav1}
@@ -24,7 +32,7 @@ const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: a
       swipeToSlide={true}
       focusOnSelect={true}
     >
-      {popularMovies?.map((popularMovie: any) => {
+      {media?.map((popularMovie: any) => {
         const completeImageUrl = `${BASE_URL}${IMAGE_SIZE}${popularMovie.backdrop_path}`;
 
         return (
@@ -34,7 +42,7 @@ const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: a
               imageUrl={completeImageUrl}
             >
               <p className="font-bold text-xl max-w-lg">
-                {popularMovie.original_title}
+                {popularMovie?.original_title || popularMovie?.original_name}
               </p>
             </HoverCard>
           </div>
@@ -42,6 +50,6 @@ const MiniSlider = ({nav1, sliderRef2, popularMovies}: {nav1: any, sliderRef2: a
       })}
     </Slider>
   );
-}
+};
 
-export default MiniSlider
+export default MiniSlider;

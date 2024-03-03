@@ -6,7 +6,7 @@ const MovieCategory = ({
   movies,
   heading
 }: {
-  movies: TMovie[];
+  movies: TMovie[] | TTVShow[];
   heading: string
 }) => {
   return (

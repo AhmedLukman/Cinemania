@@ -2,7 +2,7 @@ import React from 'react'
 import Slider from "react-slick";
 import PosterContainer from './PosterContainer';
 
-const BigSlider = ({popularMovies, nav2, sliderRef1}: {popularMovies: TMovie[], nav2: any, sliderRef1: any}) => {
+const BigSlider = ({media, nav2, sliderRef1}: {media: TMovie[] | TTVShow[], nav2: any, sliderRef1: any}) => {
   return (
     <Slider
       className="h-[75vh]"
@@ -10,13 +10,16 @@ const BigSlider = ({popularMovies, nav2, sliderRef1}: {popularMovies: TMovie[], 
       asNavFor={nav2}
       ref={(slider) => (sliderRef1.current = slider)}
     >
-      {popularMovies?.map((popularMovie: any) => (
+      {media?.map((popularMovie: any) => (
         <PosterContainer
           key={popularMovie?.id}
           rating={popularMovie?.vote_average?.toFixed(1)}
           genres={popularMovie?.genre_ids}
-          title={popularMovie?.original_title}
-          year={popularMovie?.release_date.substring(0, 4)}
+          title={popularMovie?.original_title || popularMovie?.original_name}
+          year={
+            popularMovie?.release_date?.substring(0, 4) ||
+            popularMovie?.first_air_date.substring(0, 4)
+          }
           description={popularMovie?.overview}
           posterPath={popularMovie?.poster_path}
           movieId={popularMovie?.id}
