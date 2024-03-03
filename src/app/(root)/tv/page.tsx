@@ -1,7 +1,7 @@
 import React from "react";
 import DoubleSlider from "@/components/ui/DoubleSlider";
 import MovieCategory from "@/components/ui/MovieCategory";
-import { fetchMovies } from "@/lib/utls";
+import { fetchMovies } from "@/lib/utils";
 import { TVShowsUrl } from "@/lib/constants";
 
 const TVShowsPage = async () => {

@@ -1,9 +1,7 @@
 import DoubleSlider from "@/components/ui/DoubleSlider";
 import MovieCategory from "@/components/ui/MovieCategory";
-import {
-  MoviesUrl
-} from "@/lib/constants";
-import { fetchMovies } from "@/lib/utls";
+import { MoviesUrl } from "@/lib/constants";
+import { fetchMovies } from "@/lib/utils";
 import React from "react";
 
 const MoviesPage = async () => {

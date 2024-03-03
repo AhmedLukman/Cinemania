@@ -1,5 +1,5 @@
 import { IMAGE_URL } from "@/lib/constants";
-import { dataUrl } from "@/lib/utls";
+import { dataUrl } from "@/lib/utils";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import React from "react";

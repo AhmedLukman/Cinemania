@@ -3,7 +3,7 @@ import React from "react";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Link, cn, useDisclosure } from "@nextui-org/react";
-import { getGenreNameById } from "@/lib/utls";
+import { getGenreNameById } from "@/lib/utils";
 import VideoModal from "./VideoModal";
 import { usePathname } from "next/navigation";
 
