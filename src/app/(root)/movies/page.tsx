@@ -1,34 +1,28 @@
 import DoubleSlider from "@/components/ui/DoubleSlider";
 import MovieCategory from "@/components/ui/MovieCategory";
 import {
-  MOVIES_OPTIONS,
-  POPULAR_MOVIES_URL,
-  TOP_RATED_MOVIES_URL,
-  TRENDING_MOVIES_URL,
-  UPCOMING_MOVIES_URL,
+  MoviesUrl
 } from "@/lib/constants";
 import { fetchMovies } from "@/lib/utls";
-import { notFound } from "next/navigation";
 import React from "react";
 
 const MoviesPage = async () => {
-  
   const popularMovies = (await fetchMovies(
-    POPULAR_MOVIES_URL
-  )) as TMovieResponse;
+    MoviesUrl.Popular + "?language=en-US&page=1"
+  )) as TMediaResponse<TMovie>;
   const trendingMovies = (await fetchMovies(
-    TRENDING_MOVIES_URL
-  )) as TMovieResponse;
+    MoviesUrl.Trending + "/day?language=en-US"
+  )) as TMediaResponse<TMovie>;
   const upcomingMovies = (await fetchMovies(
-    UPCOMING_MOVIES_URL
-  )) as TMovieResponse;
+    MoviesUrl.Upcoming + "?language=en-US&page=1"
+  )) as TMediaResponse<TMovie>;
   const topRatedMovies = (await fetchMovies(
-    TOP_RATED_MOVIES_URL
-  )) as TMovieResponse;
+    MoviesUrl.Popular + "?language=en-US&page=1"
+  )) as TMediaResponse<TMovie>;
 
   return (
     <>
-      <DoubleSlider popularMovies={popularMovies.results} />
+      <DoubleSlider media={popularMovies.results} />
       <MovieCategory heading="Trending" movies={trendingMovies.results} />
       <MovieCategory heading="Top Rated" movies={topRatedMovies.results} />
       <MovieCategory heading="Upcoming" movies={upcomingMovies.results} />
