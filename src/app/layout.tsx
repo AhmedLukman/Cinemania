@@ -6,6 +6,15 @@ import { Providers } from "./Providers";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// Import the Font Awesome styles manually
+import '@fortawesome/fontawesome-svg-core/styles.css';
+
+// Get the configuration object
+import { config } from '@fortawesome/fontawesome-svg-core';
+
+// Prevent Font Awesome from adding its CSS since we did it manually above
+config.autoAddCss = false;
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
