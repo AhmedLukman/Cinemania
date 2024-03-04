@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { IMAGE_URL } from "@/lib/constants";
+import { BASE_URL } from "@/lib/constants";
 import { dataUrl } from "@/lib/utils";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 
@@ -10,7 +10,7 @@ const PosterSideImage = ({ posterPath, title }: TPosterSideImage) => {
       <Image
         className=" object-cover"
         placeholder={dataUrl as PlaceholderValue}
-        src={`${IMAGE_URL}${posterPath}`}
+        src={`${BASE_URL}w500${posterPath}`}
         alt={title}
         fill
       />

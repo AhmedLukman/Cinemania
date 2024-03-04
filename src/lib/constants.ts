@@ -23,10 +23,6 @@ export enum TVShowsUrl {
 
 export const BASE_URL = "http://image.tmdb.org/t/p/";
 
-export const IMAGE_SIZE = "original";
-
-export const IMAGE_URL = `${BASE_URL}${IMAGE_SIZE}`;
-
 export const GENRES = [
   { id: 10759, name: "Action & Adventure" },
   { id: 16, name: "Animation" },

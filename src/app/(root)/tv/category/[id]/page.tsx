@@ -1,4 +1,4 @@
-import { IMAGE_URL, TVShowsUrl } from "@/lib/constants";
+import { BASE_URL, TVShowsUrl } from "@/lib/constants";
 import { fetchMovies } from "@/lib/utils";
 import { Card } from "@nextui-org/react";
 import Image from "next/image";
@@ -48,7 +48,7 @@ const TVCategoryPage = async ({
               alt={tvShow.original_name}
               className="object-cover group-hover:scale-110 transition duration-300"
               fill
-              src={`${IMAGE_URL}${tvShow.poster_path}`}
+              src={`${BASE_URL}w500${tvShow.poster_path}`}
             />
 
             <div className="w-full h-full bg-black opacity-0 group-hover:opacity-75 transition duration-300 z-20"></div>

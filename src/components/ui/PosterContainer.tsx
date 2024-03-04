@@ -1,4 +1,3 @@
-import { IMAGE_URL } from "@/lib/constants";
 import { dataUrl } from "@/lib/utils";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
@@ -6,6 +5,7 @@ import React from "react";
 import PosterSideImage from "./PosterSideImage";
 import PosterContent from "./PosterContent";
 import Backdrop from "./Backdrop";
+import { BASE_URL } from "@/lib/constants";
 
 const PosterContainer = ({
   title,
@@ -23,7 +23,7 @@ const PosterContainer = ({
       <Image
         placeholder={dataUrl as PlaceholderValue}
         className=" -z-40 object-cover object-center"
-        src={`${IMAGE_URL}${backdropPath}`}
+        src={`${BASE_URL}original${backdropPath}`}
         alt={title}
         fill
       />

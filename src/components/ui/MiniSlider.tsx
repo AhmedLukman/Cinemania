@@ -1,6 +1,6 @@
 import React from "react";
 import { HoverCard } from "./HoverCard";
-import { BASE_URL, IMAGE_SIZE } from "@/lib/constants";
+import { BASE_URL } from "@/lib/constants";
 import Slider from "react-slick";
 
 const MiniSlider = ({
@@ -34,7 +34,7 @@ const MiniSlider = ({
       focusOnSelect={true}
     >
       {media?.map((popularMovie: any) => {
-        const completeImageUrl = `${BASE_URL}${IMAGE_SIZE}${popularMovie.backdrop_path}`;
+        const completeImageUrl = `${BASE_URL}w500${popularMovie.backdrop_path}`;
 
         return (
           <div key={popularMovie.id} className=" h-[25vh] p-2 rounded-md">
