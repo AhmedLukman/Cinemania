@@ -15,6 +15,7 @@ const MiniSlider = ({
   return (
     <Slider
       asNavFor={nav1}
+      lazyLoad="progressive"
       autoplay
       autoplaySpeed={6000}
       className="h-[25vh] cursor-grab"

@@ -26,6 +26,7 @@ const MovieCategorySlider = ({
   return (
     <div className="slider-container px-10">
       <Slider
+      lazyLoad="progressive"
         responsive={[
           {
             breakpoint: 800, // This means at less than 640px screen width

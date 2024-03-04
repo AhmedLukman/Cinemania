@@ -10,7 +10,6 @@ const PosterSideImage = ({ posterPath, title }: TPosterSideImage) => {
       <Image
         className=" object-cover"
         placeholder={dataUrl as PlaceholderValue}
-        priority
         src={`${IMAGE_URL}${posterPath}`}
         alt={title}
         fill

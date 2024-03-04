@@ -14,6 +14,7 @@ const BigSlider = ({
   return (
     <Slider
       className="h-[75vh]"
+      lazyLoad="progressive"
       arrows={false}
       asNavFor={nav2}
       ref={(slider) => (sliderRef1.current = slider)}

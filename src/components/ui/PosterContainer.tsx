@@ -22,7 +22,6 @@ const PosterContainer = ({
       {/* Main Image */}
       <Image
         placeholder={dataUrl as PlaceholderValue}
-        priority
         className=" -z-40 object-cover object-center"
         src={`${IMAGE_URL}${backdropPath}`}
         alt={title}
