@@ -9,11 +9,11 @@ import {
   ModalFooter,
   Button,
 } from "@nextui-org/react";
-import { MEDIA_OPTIONS } from "@/lib/constants";
 import { usePathname } from "next/navigation";
+import { fetchMovies } from "@/lib/utils";
 
 const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
-  const [data, setData] = useState<TVideoResponse | null>(null);
+  const [videoData, setVideoData] = useState<TVideo[] | null>(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,11 +23,8 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
     const fetchData = async () => {
       try {
         const mediaUrl = `https://api.themoviedb.org/3${pathname}/${mediaId}/videos`;
-
-        const res = await fetch(mediaUrl, MEDIA_OPTIONS);
-        if (!res.ok) throw new Error();
-        const data = (await res.json()) as TVideoResponse;
-        setData(data);
+        const videoRes = (await fetchMovies(mediaUrl)) as TVideoResponse;
+        setVideoData(videoRes.results);
       } catch (error) {
         setError("Failed to fetch data");
       } finally {
@@ -57,18 +54,18 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
           <>
             <ModalHeader className="text-4xl font-serif">{title}</ModalHeader>
             <ModalBody>
-              {data?.results.map((result) => (
+              {videoData?.map((video) => (
                 <iframe
-                  key={result.id}
+                  key={video.id}
                   height="400"
-                  src={`https://www.youtube.com/embed/${result.key}`}
+                  src={`https://www.youtube.com/embed/${video.key}`}
                   className=" rounded-lg"
-                  title={result.name}
+                  title={video.name}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               ))}
-              {data?.results.length === 0 && (
+              {videoData?.length === 0 && (
                 <p>😢 Sorry, no clips available at the moment</p>
               )}
             </ModalBody>
