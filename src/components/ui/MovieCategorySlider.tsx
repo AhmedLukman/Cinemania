@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Card } from "@nextui-org/react";
 import { BASE_URL} from "@/lib/constants";
 import { usePathname, useRouter } from "next/navigation";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import { dataUrl } from "@/lib/utils";
 
 const settings = {
   infinite: true,
@@ -26,7 +28,7 @@ const MovieCategorySlider = ({
   return (
     <div className="slider-container px-10">
       <Slider
-      lazyLoad="progressive"
+        lazyLoad="progressive"
         responsive={[
           {
             breakpoint: 800, // This means at less than 640px screen width
@@ -54,6 +56,7 @@ const MovieCategorySlider = ({
               className="border-none cursor-pointer group h-72 md:h-[400px] shadow-sm shadow-gray-500"
             >
               <Image
+                placeholder={dataUrl as PlaceholderValue}
                 alt={
                   "original_name" in trendingMovie
                     ? trendingMovie.original_name

@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@nextui-org/react";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
+import { dataUrl } from "@/lib/utils";
 
 export const HoverCard = ({
   imageUrl,
@@ -87,13 +89,13 @@ export const HoverCard = ({
             }}
           >
             <Image
+              placeholder={dataUrl as PlaceholderValue}
               alt="image"
               className={cn(
                 "h-full w-full object-cover scale-[1.15]",
                 imageClassName
               )}
-              width="1000"
-              height="1000"
+              fill
               src={imageUrl}
             />
           </motion.div>

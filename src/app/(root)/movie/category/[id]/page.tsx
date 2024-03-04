@@ -1,8 +1,8 @@
 import { BASE_URL, MoviesUrl } from "@/lib/constants";
-import { fetchMovies } from "@/lib/utils";
+import { dataUrl, fetchMovies } from "@/lib/utils";
 import { Card } from "@nextui-org/react";
+import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import React from "react";
 
 const MovieCategoryPage = async ({
@@ -46,6 +46,7 @@ const MovieCategoryPage = async ({
             className="border-none cursor-pointer group h-72 md:h-[400px] shadow-sm shadow-gray-500"
           >
             <Image
+              placeholder={dataUrl as PlaceholderValue}
               alt={movie.original_title}
               className="object-cover group-hover:scale-110 transition duration-300"
               fill
