@@ -4,7 +4,7 @@ import React, { PropsWithChildren } from "react";
 
 const layout = ({ children }: PropsWithChildren) => {
   return (
-    <div>
+    <div className="flex flex-col justify-between min-h-screen">
       <Header />
       <main>{children}</main>
       <Footer />
