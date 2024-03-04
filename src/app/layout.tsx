@@ -5,7 +5,6 @@ import { Providers } from "./Providers";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { BackgroundBeams } from "@/components/ui/BackgroundBeams";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " relative"}>
-        <BackgroundBeams />
         <Providers>{children}</Providers>
       </body>
     </html>
