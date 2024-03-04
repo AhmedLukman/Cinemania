@@ -9,7 +9,7 @@ const MoviesPage = async () => {
     MoviesUrl.Popular + "?language=en-US&page=1"
   )) as TMediaResponse<TMovie>;
   const trendingMovies = (await fetchMovies(
-    MoviesUrl.Trending + "/day?language=en-US"
+    MoviesUrl.Trending + "/week?language=en-US"
   )) as TMediaResponse<TMovie>;
   const upcomingMovies = (await fetchMovies(
     MoviesUrl.Upcoming + "?language=en-US&page=1"
