@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,6 +6,7 @@ import { Button, Link, cn, useDisclosure } from "@nextui-org/react";
 import { getGenreNameById } from "@/lib/utils";
 import VideoModal from "./VideoModal";
 import { usePathname } from "next/navigation";
+import { faHeart as faFilledHeart } from "@fortawesome/free-solid-svg-icons";
 
 const PosterContent = ({
   title,
@@ -16,6 +17,7 @@ const PosterContent = ({
   mediaId,
 }: TPosterContent) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [isIconClicked, setIsIconClicked] = useState(false);
   const pathname = usePathname();
   return (
     <div className="md:w-2/3 pt-24">
@@ -55,7 +57,8 @@ const PosterContent = ({
           More details
         </Button>
         <FontAwesomeIcon
-          icon={faHeart}
+          onClick={() => setIsIconClicked(prevState => !prevState)}
+          icon={isIconClicked ? faFilledHeart : faHeart}
           className="ml-5 cursor-pointer"
           size="xl"
         />
