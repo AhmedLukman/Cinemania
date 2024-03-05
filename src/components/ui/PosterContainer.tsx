@@ -8,36 +8,31 @@ import Backdrop from "./Backdrop";
 import { BASE_URL } from "@/lib/constants";
 
 const PosterContainer = ({
-  title,
-  description,
-  year,
-  rating,
-  genres,
-  mediaId,
-  posterPath,
-  backdropPath,
-}: TPosterContainer) => {
+  ...props
+}: TMovie | TTVShow | TMovieDetailsResponse) => {
   return (
     <div className={`h-screen rounded-md relative`}>
       {/* Main Image */}
       <Image
         placeholder={dataUrl as PlaceholderValue}
-        className=" -z-40 object-cover object-center"
-        src={`${BASE_URL}original${backdropPath}`}
-        alt={title}
+        className="  object-cover object-center"
+        src={`${BASE_URL}original${props.backdrop_path}`}
+        alt={
+          "original_title" in props ? props.original_title : props.original_name
+        }
         fill
       />
       <Backdrop />
-      <div className="h-full z-50 md:gap-5 md:flex cursor-grab px-5 md:px-20  text-white">
-        <PosterContent
-          mediaId={mediaId}
-          description={description}
-          genres={genres}
-          rating={rating}
-          title={title}
-          year={year}
+      <div className="h-full z-50 md:gap-5 md:flex px-5 md:px-20  text-white">
+        <PosterContent {...props} />
+        <PosterSideImage
+          posterPath={props.poster_path}
+          title={
+            "original_title" in props
+              ? props.original_title
+              : props.original_name
+          }
         />
-        <PosterSideImage posterPath={posterPath} title={title} />
       </div>
     </div>
   );
