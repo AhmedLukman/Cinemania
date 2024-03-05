@@ -15,7 +15,6 @@ import { fetchMovies } from "@/lib/utils";
 const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
   const [videoData, setVideoData] = useState<TVideo[] | null>(null);
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
 
   const pathname = usePathname();
 
@@ -27,9 +26,7 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
         setVideoData(videoRes.results);
       } catch (error) {
         setError("Failed to fetch data");
-      } finally {
-        setIsLoading(false);
-      }
+      } 
     };
 
     fetchData();
@@ -65,9 +62,10 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
                   allowFullScreen
                 />
               ))}
-              {videoData?.length === 0 && (
+              {!error && videoData?.length === 0 && (
                 <p>😢 Sorry, no clips available at the moment</p>
               )}
+              {error && <p className="text-red-500">Oops, an error occurred</p>}
             </ModalBody>
             <ModalFooter>
               <Button color="danger" variant="light" onPress={onClose}>
