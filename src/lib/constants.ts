@@ -12,6 +12,7 @@ export enum MoviesUrl {
   Trending = "https://api.themoviedb.org/3/trending/movie",
   TopRated = "https://api.themoviedb.org/3/movie/top_rated",
   Upcoming = "https://api.themoviedb.org/3/movie/upcoming",
+  Origin = "https://api.themoviedb.org/3/movie/",
 }
 
 export enum TVShowsUrl {
