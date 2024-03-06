@@ -32,7 +32,7 @@ export const getGenreNameById = (genreId: number) => {
 export const fetchMovies = async (url: string) => {
   const res = await fetch(url, MEDIA_OPTIONS);
   if (!res.ok) console.error("Something went wrong");
-  const result: TMediaResponse<TMovie> | TMediaResponse<TTVShow> | TVideoResponse =
+  const result: any =
     await res.json();
   if (!result) console.error("No results");
 
