@@ -20,6 +20,7 @@ export enum TVShowsUrl {
   Trending = "https://api.themoviedb.org/3/trending/tv/",
   TopRated = "https://api.themoviedb.org/3/tv/top_rated",
   Upcoming = "https://api.themoviedb.org/3/tv/on_the_air",
+  Origin = "https://api.themoviedb.org/3/tv/",
 }
 
 export const BASE_URL = "http://image.tmdb.org/t/p/";
