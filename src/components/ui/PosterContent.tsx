@@ -39,12 +39,12 @@ const PosterContent = ({
   }, [props.id]);
   const director = data?.crew?.find((person) => person.job === "Director");
   return (
-    <div className="md:w-2/3 z-10 pt-24">
+    <div className="md:w-2/3 relative z-10 pt-24">
       {props.overview && (
         <>
           <h2
             className={cn(
-              " text-3xl md:text-6xl font-bold font-serif max-w-3xl z-50"
+              " text-3xl  md:text-6xl font-bold font-serif max-w-3xl"
             )}
           >
             {title}
@@ -67,7 +67,7 @@ const PosterContent = ({
               </span>
               <span>{"runtime" in props && props.runtime} min</span>
             </div>
-            <div className=" gap-3 z-50 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">
+            <div className=" gap-3 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">
               {props.genre_ids?.map((genre) => (
                 <span
                   key={genre.toString()}
@@ -152,7 +152,9 @@ const PosterContent = ({
                   Spoken languages:
                 </span>
                 {"spoken_languages" in props &&
-                  props.spoken_languages.map((lang) => lang.english_name + '. ')}
+                  props.spoken_languages.map(
+                    (lang) => lang.english_name + ". "
+                  )}
               </p>
               <p className="italic text-sm text-[#cecece] pt-5 text-center">
                 ~{"tagline" in props && props.tagline}

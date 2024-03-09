@@ -23,7 +23,7 @@ const Header = () => {
   const pathname = usePathname()
   return (
     <Navbar
-      className=" fixed w-full bg-transparent"
+      className=" fixed w-full z-50 bg-transparent"
       maxWidth="xl"
       isMenuOpen={isMenuOpen}
       shouldHideOnScroll
