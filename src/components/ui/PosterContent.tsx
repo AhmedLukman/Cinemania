@@ -9,14 +9,14 @@ import { fetchMovies, getGenreNameById } from "@/lib/utils";
 import VideoModal from "./VideoModal";
 import { usePathname } from "next/navigation";
 import { faHeart as faFilledHeart } from "@fortawesome/free-solid-svg-icons";
-import { MoviesUrl } from "@/lib/constants";
+import { MoviesUrl, TVShowsUrl } from "@/lib/constants";
 
 const PosterContent = ({
   ...props
-}: TMovie | TTVShow | TMovieDetailsResponse) => {
+}: TMovie | TTVShow | TMovieDetailsResponse | TTVShowDetailsResponse) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isIconClicked, setIsIconClicked] = useState(false);
-  const [data, setData] = useState<TMovieCreditsResponse>();
+  const [data, setData] = useState<TMediaCreditsResponse>();
   const pathname = usePathname();
 
   const title =
@@ -29,14 +29,23 @@ const PosterContent = ({
   useEffect(() => {
     const fetchData = async () => {
       if (!props.id) return;
-      const popularMovies = (await fetchMovies(
-        MoviesUrl.Origin + props.id + "/credits?language=en-US"
-      )) as TMovieCreditsResponse;
-      setData(popularMovies);
+      if (pathname === `/movie/${props.id}`) {
+        const movies = (await fetchMovies(
+          MoviesUrl.Origin + props.id + "/credits?language=en-US"
+        )) as TMediaCreditsResponse;
+          console.log(movies);
+
+        setData(movies);
+      } else if(pathname === `/tv/${props.id}`){
+        const tv = (await fetchMovies(
+          TVShowsUrl.Origin + props.id + "/credits?language=en-US"
+        )) as TMediaCreditsResponse;
+        setData(tv);
+      }
     };
 
     fetchData();
-  }, [props.id]);
+  }, [props.id, pathname]);
   const director = data?.crew?.find((person) => person.job === "Director");
   return (
     <div className="md:w-2/3 relative z-10 pt-24">
@@ -68,26 +77,32 @@ const PosterContent = ({
               <span>{"runtime" in props && props.runtime} min</span>
             </div>
             <div className=" gap-3 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">
-              {props.genre_ids?.map((genre) => (
-                <span
-                  key={genre.toString()}
-                  className="border rounded-md p-2 bg-black/40"
-                >
-                  {getGenreNameById(genre)}
-                </span>
-              ))}
-              {"genres" in props &&
-                props.genres?.map((genre) => (
-                  <span
-                    className="border rounded-md p-2 bg-black/40"
-                    key={genre.id}
-                  >
-                    {genre.name}
-                  </span>
-                ))}
+              {"genres" in props
+                ? props.genres?.map((genre) => (
+                    <span
+                      className="border rounded-md p-2 bg-black/40"
+                      key={genre.id}
+                    >
+                      {genre.name}
+                    </span>
+                  ))
+                : props.genre_ids?.map((genre) => (
+                    <span
+                      key={genre.toString()}
+                      className="border rounded-md p-2 bg-black/40"
+                    >
+                      {getGenreNameById(genre)}
+                    </span>
+                  ))}
             </div>
           </div>
-          <p className="max-w-prose mt-10 line-clamp-3">{props?.overview}</p>
+          <p
+            className={cn("max-w-prose mt-10", {
+              "line-clamp-3": pathname === "/movie" || pathname === "/tv",
+            })}
+          >
+            {props?.overview}
+          </p>
           {pathname === "/movie" || pathname === "/tv" ? (
             <div className="mt-16">
               <Button onPress={onOpen}>Watch Clips</Button>
@@ -115,11 +130,12 @@ const PosterContent = ({
             </div>
           ) : (
             <div className="mt-5 hover:bg-white/10 transition-all duration-300  space-y-2 p-6 rounded-lg bg-gradient-to-b from-white/20 via-white/10 to-white/20">
+              {/* Refactor */}
               <p>
                 <span className="text-[#cecece] text-sm mr-3">
                   Directed by:
                 </span>
-                {director?.name}
+                {director?.name || '-'}
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">
@@ -141,11 +157,11 @@ const PosterContent = ({
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">Budget:</span>
-                {"budget" in props && props.budget}
+                {"budget" in props && props.budget || '-'}
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">Revenue:</span>
-                {"revenue" in props && props.revenue}
+                {"revenue" in props && props.revenue || '-'}
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">

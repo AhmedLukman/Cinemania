@@ -10,7 +10,7 @@ const SingleTVShowPage = async ({
 }) => {
   const tv = (await fetchMovies(
     TVShowsUrl.Origin + id.toString() + "?language=en-US"
-  )) as TMovieDetailsResponse;
+  )) as TTVShowDetailsResponse;
 
   return <PosterContainer {...tv} />;
 };

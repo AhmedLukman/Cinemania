@@ -9,7 +9,7 @@ import { BASE_URL } from "@/lib/constants";
 
 const PosterContainer = ({
   ...props
-}: TMovie | TTVShow | TMovieDetailsResponse) => {
+}: TMovie | TTVShow | TMovieDetailsResponse | TTVShowDetailsResponse) => {
   return (
     <div className={`h-screen rounded-md relative`}>
       {/* Main Image */}
