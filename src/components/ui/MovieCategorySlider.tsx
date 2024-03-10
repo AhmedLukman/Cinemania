@@ -4,7 +4,7 @@ import React from "react";
 import Slider from "react-slick";
 import Image from "next/image";
 import { Card } from "@nextui-org/react";
-import { BASE_URL} from "@/lib/constants";
+import { BASE_URL } from "@/lib/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import { dataUrl } from "@/lib/utils";
@@ -18,15 +18,11 @@ const settings = {
   autoplaySpeed: 5000,
 };
 
-const MovieCategorySlider = ({
-  movies,
-}: {
-  movies: TMovie[] | TTVShow[];
-}) => {
+const MovieCategorySlider = ({ movies }: { movies: TMovie[] | TTVShow[] }) => {
   const router = useRouter();
-  const pathname = usePathname()
+  const pathname = usePathname();
   return (
-    <div className="slider-container px-10">
+    <div className="slider-container md:px-10">
       <Slider
         lazyLoad="progressive"
         responsive={[
