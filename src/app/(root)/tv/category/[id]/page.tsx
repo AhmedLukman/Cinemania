@@ -3,6 +3,7 @@ import { dataUrl, fetchMovies } from "@/lib/utils";
 import { Card } from "@nextui-org/react";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React from "react";
 
 const TVCategoryPage = async ({
@@ -15,7 +16,11 @@ const TVCategoryPage = async ({
       ? TVShowsUrl.Trending + "/week"
       : id === "upcoming"
       ? TVShowsUrl.Upcoming
-      : TVShowsUrl.TopRated;
+      : id === "top-rated"
+      ? TVShowsUrl.TopRated
+      : null;
+
+  if (!url) notFound();
 
   let allTVShows: TTVShow[] = [];
 

@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="p-10 md:py-10 md:px-20 flex justify-between items-center text-white">
+    <footer className="px-10 h-[15vh] md:px-20 flex justify-between items-center text-white">
       <h3 className="text-2xl italic">Cinemania</h3>
         <Image
           alt="TMDB logo"

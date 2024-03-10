@@ -6,7 +6,7 @@ import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 
 const PosterSideImage = ({ posterPath, title }: TPosterSideImage) => {
   return (
-    <aside className="mt-10 hidden md:block w-1/3 h-5/6 z-20 rounded-xl relative">
+    <aside className="mt-10 hidden md:block w-1/3 h-[80svh] rounded-xl relative">
       <Image
         className=" object-cover"
         placeholder={dataUrl as PlaceholderValue}
