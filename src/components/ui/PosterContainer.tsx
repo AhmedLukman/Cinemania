@@ -11,7 +11,7 @@ const PosterContainer = ({
   ...props
 }: TMovie | TTVShow | TMovieDetailsResponse | TTVShowDetailsResponse) => {
   return (
-    <div className={`h-screen rounded-md relative`}>
+    <div className={`min-h-[100svh] rounded-md relative`}>
       {/* Main Image */}
       <Image
         placeholder={dataUrl as PlaceholderValue}
