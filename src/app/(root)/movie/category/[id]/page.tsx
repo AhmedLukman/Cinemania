@@ -3,6 +3,7 @@ import { dataUrl, fetchMovies } from "@/lib/utils";
 import { Card } from "@nextui-org/react";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React from "react";
 
 const MovieCategoryPage = async ({
@@ -15,8 +16,12 @@ const MovieCategoryPage = async ({
       ? MoviesUrl.Trending + "/week"
       : id === "upcoming"
       ? MoviesUrl.Upcoming
-      : MoviesUrl.TopRated;
+      : id === "top-rated"
+      ? MoviesUrl.TopRated
+      : null;
 
+  if (!url) notFound();
+  
   let allMovies: TMovie[] = [];
 
   for (let page = 1; page <= 3; page++) {
