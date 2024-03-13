@@ -1,6 +1,7 @@
 import PosterContainer from "@/components/ui/PosterContainer";
 import { TVShowsUrl } from "@/lib/constants";
 import { fetchMovies } from "@/lib/utils";
+import { notFound } from "next/navigation";
 import React from "react";
 
 const SingleTVShowPage = async ({
@@ -11,6 +12,8 @@ const SingleTVShowPage = async ({
   const tv = (await fetchMovies(
     TVShowsUrl.Origin + id.toString() + "?language=en-US"
   )) as TTVShowDetailsResponse;
+
+  if(!tv.overview) return notFound()
 
   return <PosterContainer {...tv} />;
 };
