@@ -16,11 +16,13 @@ import { Input } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = ["Login", "Sign up"];
-  const pathname = usePathname()
+  const pathname = usePathname();
   return (
     <Navbar
       className=" fixed w-full z-50 bg-transparent"
@@ -35,7 +37,7 @@ const Header = () => {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <h1 className=" text-2xl italic text-white">Cinemania</h1>
+          <Logo />
         </NavbarBrand>
       </NavbarContent>
 
@@ -52,6 +54,18 @@ const Header = () => {
             href="/movie"
           >
             Movies
+          </Button>
+          <Button
+            className={
+              pathname.startsWith("/tv")
+                ? "text-white hover:text-black"
+                : "text-black"
+            }
+            as={Link}
+            variant={pathname.startsWith("/tv") ? "ghost" : "faded"}
+            href="/tv"
+          >
+            People
           </Button>
           <Button
             className={
