@@ -74,7 +74,7 @@ const PosterContent = ({
               <span className="border rounded-md p-1">
                 {props.vote_average?.toFixed(1)}
               </span>
-              <span>{"runtime" in props && props.runtime} min</span>
+              {"runtime" in props && props.runtime && <span>{props.runtime} min</span>}
             </div>
             <div className=" gap-3 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">
               {"genres" in props
