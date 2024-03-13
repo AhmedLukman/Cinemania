@@ -1,9 +1,11 @@
+import Header from "@/components/ui/Header";
 import Image from "next/image";
 import React from "react";
 
 const NotFound = () => {
   return (
-    <div className="w-full h-full text-white">
+    <div className="w-screen h-screen text-white">
+      <Header />
       <Image
         src={"/assets/images/superman404.jpeg"}
         alt="Superman"
