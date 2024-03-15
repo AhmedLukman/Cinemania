@@ -7,10 +7,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Import the Font Awesome styles manually
-import '@fortawesome/fontawesome-svg-core/styles.css';
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 // Get the configuration object
-import { config } from '@fortawesome/fontawesome-svg-core';
+import { config } from "@fortawesome/fontawesome-svg-core";
 
 // Prevent Font Awesome from adding its CSS since we did it manually above
 config.autoAddCss = false;
@@ -30,6 +30,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={inter.className + " relative"}>
         <Providers>{children}</Providers>
       </body>
