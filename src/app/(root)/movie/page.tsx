@@ -15,7 +15,7 @@ const MoviesPage = async () => {
     MoviesUrl.Upcoming + "?language=en-US&page=1"
   )) as TMediaResponse<TMovie>;
   const topRatedMovies = (await fetchMovies(
-    MoviesUrl.Popular + "?language=en-US&page=1"
+    MoviesUrl.TopRated + "?language=en-US&page=1"
   )) as TMediaResponse<TMovie>;
 
   return (
