@@ -10,6 +10,8 @@ import VideoModal from "./VideoModal";
 import { usePathname } from "next/navigation";
 import { faHeart as faFilledHeart } from "@fortawesome/free-solid-svg-icons";
 import { MoviesUrl, TVShowsUrl } from "@/lib/constants";
+import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
 
 const PosterContent = ({
   ...props
@@ -105,7 +107,7 @@ const PosterContent = ({
           </p>
           {pathname === "/movie" || pathname === "/tv" ? (
             <div className="mt-16">
-              <Button onPress={onOpen}>Watch Clips</Button>
+              <Button onPress={onOpen} endContent={<FontAwesomeIcon icon={faPlay} />}>Watch Clips</Button>
               <VideoModal
                 mediaId={props.id}
                 title={title}
@@ -117,6 +119,7 @@ const PosterContent = ({
                 href={`${pathname}/${props.id}`}
                 variant="bordered"
                 className="text-white ml-3"
+                endContent = {<FontAwesomeIcon icon={faCircleInfo} />}
               >
                 More details
               </Button>
