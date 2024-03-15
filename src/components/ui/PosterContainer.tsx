@@ -23,7 +23,7 @@ const PosterContainer = ({
         fill
       />
       <Backdrop />
-      <div className="min-h-[100svh] z-50 md:gap-5 md:flex px-5 md:px-20  text-white">
+      <div className="h-full z-50 md:gap-5 md:flex px-5 md:px-20  text-white">
         <PosterContent {...props} />
         <PosterSideImage
           posterPath={props.poster_path}
