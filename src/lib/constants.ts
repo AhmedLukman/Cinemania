@@ -54,3 +54,18 @@ export const GENRES = [
   { id: 53, name: "Thriller" },
   { id: 10752, name: "War" },
 ];
+
+export const MENU = [
+  {
+    route: "/movie",
+    value: "Movies",
+  },
+  {
+    route: "/tv",
+    value: "TV Shows",
+  },
+  {
+    route: "/people",
+    value: "People",
+  },
+];
