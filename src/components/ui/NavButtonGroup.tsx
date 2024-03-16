@@ -22,13 +22,13 @@ const NavButtonGroup = () => {
       </Button>
       <Button
         className={
-          pathname.startsWith("/tv")
+          pathname.startsWith("/people")
             ? "text-white hover:text-black"
             : "text-black"
         }
         as={Link}
-        variant={pathname.startsWith("/tv") ? "ghost" : "faded"}
-        href="/tv"
+        variant={pathname.startsWith("/people") ? "ghost" : "faded"}
+        href="/people"
       >
         People
       </Button>
