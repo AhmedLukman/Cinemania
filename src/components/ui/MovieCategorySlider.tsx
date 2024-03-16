@@ -30,12 +30,15 @@ const MovieCategorySlider = ({ movies }: { movies: TMovie[] | TTVShow[] }) => {
             breakpoint: 800, // This means at less than 640px screen width
             settings: {
               slidesToShow: 3, // Show only 2 slides
+              slidesToScroll: 3,
             },
           },
           {
             breakpoint: 640, // This means at less than 640px screen width
             settings: {
               slidesToShow: 2, // Show only 2 slides
+              slidesToScroll: 2,
+              arrows: false,
             },
           },
         ]}
