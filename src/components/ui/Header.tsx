@@ -11,18 +11,16 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
-import { Button, ButtonGroup } from "@nextui-org/button";
+import { Button } from "@nextui-org/button";
 import { Input } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { usePathname } from "next/navigation";
-import Image from "next/image";
 import Logo from "./Logo";
+import NavButtonGroup from "./NavButtonGroup";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = ["Login", "Sign up"];
-  const pathname = usePathname();
   return (
     <Navbar
       className=" fixed w-full z-50 bg-transparent"
@@ -42,45 +40,9 @@ const Header = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <ButtonGroup>
-          <Button
-            variant={pathname.startsWith("/movie") ? "ghost" : "faded"}
-            className={
-              pathname.startsWith("/movie")
-                ? "text-white hover:text-black"
-                : "text-black"
-            }
-            as={Link}
-            href="/movie"
-          >
-            Movies
-          </Button>
-          <Button
-            className={
-              pathname.startsWith("/tv")
-                ? "text-white hover:text-black"
-                : "text-black"
-            }
-            as={Link}
-            variant={pathname.startsWith("/tv") ? "ghost" : "faded"}
-            href="/tv"
-          >
-            People
-          </Button>
-          <Button
-            className={
-              pathname.startsWith("/tv")
-                ? "text-white hover:text-black"
-                : "text-black"
-            }
-            as={Link}
-            variant={pathname.startsWith("/tv") ? "ghost" : "faded"}
-            href="/tv"
-          >
-            TV Shows
-          </Button>
-        </ButtonGroup>
+        <NavButtonGroup />
       </NavbarContent>
+      
       <NavbarContent justify="end">
         <Input
           classNames={{
