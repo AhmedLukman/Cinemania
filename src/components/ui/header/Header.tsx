@@ -7,7 +7,7 @@ import {
   NavbarContent,
   NavbarMenuToggle,
 } from "@nextui-org/navbar";
-import Logo from "./Logo";
+import Logo from "../Logo";
 import NavButtonGroup from "./NavButtonGroup";
 import NavEnd from "./NavEnd";
 import NavMenu from "./NavMenu";

@@ -1,5 +1,5 @@
 import Footer from "@/components/ui/Footer";
-import Header from "@/components/ui/Header";
+import Header from "@/components/ui/header/Header";
 import React, { PropsWithChildren } from "react";
 
 const layout = ({ children }: PropsWithChildren) => {

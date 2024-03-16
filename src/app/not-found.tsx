@@ -1,4 +1,4 @@
-import Header from "@/components/ui/Header";
+import Header from "@/components/ui/header/Header";
 import Image from "next/image";
 import React from "react";
 
