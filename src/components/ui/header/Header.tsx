@@ -25,7 +25,7 @@ const Header = () => {
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
+          className="sm:hidden text-white"
         />
         <NavbarBrand>
           <Logo />
@@ -36,7 +36,7 @@ const Header = () => {
         <NavButtonGroup />
       </NavbarContent>
 
-      <NavbarContent justify="end" className="mr-3 md:mr-0">
+      <NavbarContent justify="end" className="">
         <NavEnd />
       </NavbarContent>
 
