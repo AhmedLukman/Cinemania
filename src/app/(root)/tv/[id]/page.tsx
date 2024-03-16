@@ -1,4 +1,4 @@
-import PosterContainer from "@/components/ui/PosterContainer";
+import PosterContainer from "@/components/ui/hero/PosterContainer";
 import { TVShowsUrl } from "@/lib/constants";
 import { fetchMovies } from "@/lib/utils";
 import { notFound } from "next/navigation";
@@ -13,7 +13,7 @@ const SingleTVShowPage = async ({
     TVShowsUrl.Origin + id.toString() + "?language=en-US"
   )) as TTVShowDetailsResponse;
 
-  if(!tv.overview) return notFound()
+  if (!tv.overview) return notFound();
 
   return <PosterContainer {...tv} />;
 };

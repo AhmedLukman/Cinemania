@@ -1,4 +1,4 @@
-import DoubleSlider from "@/components/ui/DoubleSlider";
+import DoubleSlider from "@/components/ui/hero/DoubleSlider";
 import MovieCategory from "@/components/ui/MovieCategory";
 import { MoviesUrl } from "@/lib/constants";
 import { fetchMovies } from "@/lib/utils";

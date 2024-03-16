@@ -1,4 +1,4 @@
-import PosterContainer from "@/components/ui/PosterContainer";
+import PosterContainer from "@/components/ui/hero/PosterContainer";
 import { MoviesUrl } from "@/lib/constants";
 import { fetchMovies } from "@/lib/utils";
 import { notFound } from "next/navigation";

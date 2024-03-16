@@ -1,10 +1,10 @@
 import React from "react";
-import DoubleSlider from "@/components/ui/DoubleSlider";
+import DoubleSlider from "@/components/ui/hero/DoubleSlider";
 import MovieCategory from "@/components/ui/MovieCategory";
 import { fetchMovies } from "@/lib/utils";
 import { TVShowsUrl } from "@/lib/constants";
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 const TVShowsPage = async () => {
   const popularTVShows = (await fetchMovies(
     TVShowsUrl.Popular + "?language=en-US&page=1"
