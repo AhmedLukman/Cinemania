@@ -30,26 +30,6 @@ type TMediaResponse<T> = {
   total_results: number;
 };
 
-// type TPosterContainer = {
-//   title: string;
-//   description: string;
-//   year: string;
-//   rating: string;
-//   genres: number[] | { id: number; name: string }[];
-//   mediaId: number;
-//   posterPath: string;
-//   backdropPath: string;
-// };
-
-// type TPosterContent = {
-//   title: string;
-//   year: string;
-//   rating: number;
-//   genres: number[] | { id: number; name: string }[];
-//   description: string;
-//   mediaId: number;
-// };
-
 type TPosterSideImage = { posterPath: string; title: string };
 
 type TVideoModal = {
@@ -76,51 +56,6 @@ type TVideoResponse = {
   id: number;
   results: TVideo[];
 };
-
-// type TAllMedia = {
-//   adult: boolean;
-//   backdrop_path: string;
-//   genre_ids:
-//     | number[]
-//     | {
-//         id: number;
-//         name: string;
-//       }[];
-//   id: number;
-//   original_language: string;
-//   overview: string;
-//   popularity: number;
-//   poster_path: string;
-//   video: boolean;
-//   vote_average: number;
-//   vote_count: number;
-//   belongs_to_collection: string;
-//   budget: number;
-//   homepage: string;
-//   imdb_id: string;
-//   original_title: string;
-//   production_companies: {
-//     id: number;
-//     logo_path: string;
-//     name: string;
-//     origin_country: string;
-//   }[];
-//   production_countries: {
-//     iso_3166_1: string;
-//     name: string;
-//   }[];
-//   release_date: string;
-//   revenue: number;
-//   runtime: number;
-//   spoken_languages: {
-//     english_name: string;
-//     iso_639_1: string;
-//     name: string;
-//   }[];
-//   status: string;
-//   tagline: string;
-//   title: string;
-// };
 
 type CreatedBy = {
   id: number;
