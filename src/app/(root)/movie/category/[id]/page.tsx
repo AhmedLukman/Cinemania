@@ -1,3 +1,4 @@
+import MediaCard from "@/components/ui/MediaCard";
 import { BASE_URL, MoviesUrl } from "@/lib/constants";
 import { dataUrl, fetchMovies } from "@/lib/utils";
 import { Card } from "@nextui-org/react";
@@ -21,7 +22,7 @@ const MovieCategoryPage = async ({
       : null;
 
   if (!url) notFound();
-  
+
   let allMovies: TMovie[] = [];
 
   for (let page = 1; page <= 3; page++) {
@@ -33,8 +34,8 @@ const MovieCategoryPage = async ({
   }
 
   return (
-    <div className="p-14">
-      <h2 className="text-3xl font-serif text-white my-10">
+    <div className="md:p-14 pt-10">
+      <h2 className="text-3xl font-serif text-white my-10 mx-2 md:mx-4">
         {id.startsWith("top")
           ? id
               .split("-")
@@ -43,28 +44,9 @@ const MovieCategoryPage = async ({
           : id.charAt(0).toUpperCase() + id.slice(1)}{" "}
         Movies
       </h2>
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8">
         {allMovies?.map((movie) => (
-          <Card
-            key={movie.id}
-            radius="lg"
-            className="border-none cursor-pointer group h-72 md:h-[400px] shadow-sm shadow-gray-500"
-          >
-            <Image
-              placeholder={dataUrl as PlaceholderValue}
-              alt={movie.original_title}
-              className="object-cover group-hover:scale-110 transition duration-300"
-              fill
-              src={`${BASE_URL}w500${movie.poster_path}`}
-            />
-
-            <div className="w-full h-full bg-black opacity-0 group-hover:opacity-75 transition duration-300 z-20"></div>
-            <div className="absolute bottom-2 w-full md:group-hover:bottom-40 z-40 transition-all duration-500 flex items-center justify-center">
-              <h4 className="text-center mx-6 rounded-lg md:group-hover:border max-w-sm text-white text-lg bg-black/80 py-2 px-4">
-                {movie.original_title}
-              </h4>
-            </div>
-          </Card>
+          <MediaCard key={movie.id} {...movie} />
         ))}
       </div>
     </div>
