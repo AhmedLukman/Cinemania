@@ -1,18 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Link, cn, useDisclosure } from "@nextui-org/react";
-import { fetchMovies, getGenreNameById } from "@/lib/utils";
 import VideoModal from "./VideoModal";
 import { usePathname } from "next/navigation";
 import { faHeart as faFilledHeart } from "@fortawesome/free-solid-svg-icons";
-import { MoviesUrl, TVShowsUrl } from "@/lib/constants";
 import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
 import useFetchCredits from "@/app/hooks/useFetchCredits";
+import MediaInfo from "./MediaInfo";
 
 const PosterContent = ({
   ...props
@@ -23,10 +22,6 @@ const PosterContent = ({
 
   const title =
     "original_title" in props ? props?.original_title : props?.original_name;
-  const releaseDate =
-    "release_date" in props
-      ? props.release_date?.toString()
-      : props.first_air_date?.toString();
 
   const credits = useFetchCredits(props.id);
 
@@ -42,46 +37,7 @@ const PosterContent = ({
           >
             {title}
           </h2>
-          <div className="flex justify-between items-center gap-5 md:gap-0 flex-wrap md:max-w-xl">
-            <div className="space-x-5 text-sm mt-4">
-              <time
-                dateTime={
-                  pathname === "/movie" || pathname === "/tv"
-                    ? releaseDate.substring(0, 4)
-                    : releaseDate
-                }
-              >
-                {pathname === "/movie" || pathname === "/tv"
-                  ? releaseDate.substring(0, 4)
-                  : releaseDate}
-              </time>
-              <span className="border rounded-md p-1">
-                {props.vote_average?.toFixed(1)}
-              </span>
-              {"runtime" in props && props.runtime && (
-                <span>{props.runtime} min</span>
-              )}
-            </div>
-            <div className=" gap-3 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">
-              {"genres" in props
-                ? props.genres?.map((genre) => (
-                    <span
-                      className="border rounded-md p-2 bg-black/40"
-                      key={genre.id}
-                    >
-                      {genre.name}
-                    </span>
-                  ))
-                : props.genre_ids?.map((genre) => (
-                    <span
-                      key={genre.toString()}
-                      className="border rounded-md p-2 bg-black/40"
-                    >
-                      {getGenreNameById(genre)}
-                    </span>
-                  ))}
-            </div>
-          </div>
+          <MediaInfo {...props} />
           <p
             className={cn("max-w-prose mt-10", {
               "line-clamp-3": pathname === "/movie" || pathname === "/tv",
