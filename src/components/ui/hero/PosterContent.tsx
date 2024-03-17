@@ -12,13 +12,13 @@ import { faHeart as faFilledHeart } from "@fortawesome/free-solid-svg-icons";
 import { MoviesUrl, TVShowsUrl } from "@/lib/constants";
 import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
+import useFetchCredits from "@/app/hooks/useFetchCredits";
 
 const PosterContent = ({
   ...props
 }: TMovie | TTVShow | TMovieDetailsResponse | TTVShowDetailsResponse) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isIconClicked, setIsIconClicked] = useState(false);
-  const [data, setData] = useState<TMediaCreditsResponse>();
   const pathname = usePathname();
 
   const title =
@@ -28,27 +28,9 @@ const PosterContent = ({
       ? props.release_date?.toString()
       : props.first_air_date?.toString();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!props.id) return;
-      if (pathname === `/movie/${props.id}`) {
-        const movies = (await fetchMovies(
-          MoviesUrl.Origin + props.id + "/credits?language=en-US"
-        )) as TMediaCreditsResponse;
-          console.log(movies);
+  const credits = useFetchCredits(props.id);
 
-        setData(movies);
-      } else if(pathname === `/tv/${props.id}`){
-        const tv = (await fetchMovies(
-          TVShowsUrl.Origin + props.id + "/credits?language=en-US"
-        )) as TMediaCreditsResponse;
-        setData(tv);
-      }
-    };
-
-    fetchData();
-  }, [props.id, pathname]);
-  const director = data?.crew?.find((person) => person.job === "Director");
+  const director = credits?.crew?.find((person) => person.job === "Director");
   return (
     <div className="md:w-2/3 relative z-10 pt-24">
       {props.overview && (
@@ -76,7 +58,9 @@ const PosterContent = ({
               <span className="border rounded-md p-1">
                 {props.vote_average?.toFixed(1)}
               </span>
-              {"runtime" in props && props.runtime && <span>{props.runtime} min</span>}
+              {"runtime" in props && props.runtime && (
+                <span>{props.runtime} min</span>
+              )}
             </div>
             <div className=" gap-3 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">
               {"genres" in props
@@ -107,7 +91,12 @@ const PosterContent = ({
           </p>
           {pathname === "/movie" || pathname === "/tv" ? (
             <div className="mt-16">
-              <Button onPress={onOpen} endContent={<FontAwesomeIcon icon={faPlay} />}>Watch Clips</Button>
+              <Button
+                onPress={onOpen}
+                endContent={<FontAwesomeIcon icon={faPlay} />}
+              >
+                Watch Clips
+              </Button>
               <VideoModal
                 mediaId={props.id}
                 title={title}
@@ -119,7 +108,7 @@ const PosterContent = ({
                 href={`${pathname}/${props.id}`}
                 variant="bordered"
                 className="text-white ml-3"
-                endContent = {<FontAwesomeIcon icon={faCircleInfo} />}
+                endContent={<FontAwesomeIcon icon={faCircleInfo} />}
               >
                 More details
               </Button>
@@ -138,7 +127,7 @@ const PosterContent = ({
                 <span className="text-[#cecece] text-sm mr-3">
                   Directed by:
                 </span>
-                {director?.name || '-'}
+                {director?.name || "-"}
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">
@@ -160,11 +149,11 @@ const PosterContent = ({
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">Budget:</span>
-                {"budget" in props && props.budget || '-'}
+                {("budget" in props && props.budget) || "-"}
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">Revenue:</span>
-                {"revenue" in props && props.revenue || '-'}
+                {("revenue" in props && props.revenue) || "-"}
               </p>
               <p>
                 <span className="text-[#cecece] text-sm mr-3">
