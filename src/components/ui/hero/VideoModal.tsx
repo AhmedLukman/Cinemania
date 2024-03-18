@@ -10,7 +10,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { fetchMovies } from "@/lib/utils";
+import { fetchMedia } from "@/lib/utils";
 
 const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
   const [videoData, setVideoData] = useState<TVideo[] | null>(null);
@@ -22,11 +22,11 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
     const fetchData = async () => {
       try {
         const mediaUrl = `https://api.themoviedb.org/3${pathname}/${mediaId}/videos`;
-        const videoRes = (await fetchMovies(mediaUrl)) as TVideoResponse;
+        const videoRes = (await fetchMedia(mediaUrl)) as TVideoResponse;
         setVideoData(videoRes.results);
       } catch (error) {
         setError("Failed to fetch data");
-      } 
+      }
     };
 
     fetchData();

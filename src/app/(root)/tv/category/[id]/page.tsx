@@ -1,7 +1,7 @@
 import AllCategoryMedia from "@/components/ui/AllCategoryMedia";
 import MediaCard from "@/components/ui/MediaCard";
 import { TVShowsUrl } from "@/lib/constants";
-import { fetchMovies } from "@/lib/utils";
+import { fetchMedia } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -24,7 +24,7 @@ const TVCategoryPage = async ({
   let allTVShows: TTVShow[] = [];
 
   for (let page = 1; page <= 3; page++) {
-    const moviesResponse = (await fetchMovies(
+    const moviesResponse = (await fetchMedia(
       `${url}?language=en-US&page=${page}`
     )) as TMediaResponse<TTVShow>;
 

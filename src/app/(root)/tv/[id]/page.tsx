@@ -1,6 +1,6 @@
 import PosterContainer from "@/components/ui/hero/PosterContainer";
 import { TVShowsUrl } from "@/lib/constants";
-import { fetchMovies } from "@/lib/utils";
+import { fetchMedia } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -9,7 +9,7 @@ const SingleTVShowPage = async ({
 }: {
   params: { id: string };
 }) => {
-  const tv = (await fetchMovies(
+  const tv = (await fetchMedia(
     TVShowsUrl.Origin + id.toString() + "?language=en-US"
   )) as TTVShowDetailsResponse;
 

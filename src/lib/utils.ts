@@ -29,12 +29,17 @@ export const getGenreNameById = (genreId: number) => {
   return genre ? genre.name : "Unknown"; // If genre is found, return its name, otherwise return "Unknown"
 };
 
-export const fetchMovies = async (url: string) => {
-  const res = await fetch(url, MEDIA_OPTIONS);
-  if (!res.ok) console.error("Something went wrong");
-  const result: any =
-    await res.json();
-  if (!result) console.error("No results");
+export const fetchMedia= async (url: string) => {
+  let result;
+  try {
+    const res = await fetch(url, MEDIA_OPTIONS);
+    if (!res.ok) throw new Error("Something went wrong, please try again");
+    result = await res.json();
+  } catch (e) {
+    if (e instanceof Error) {
+      alert(e.message);
+    }
+  }
 
   return result;
 };

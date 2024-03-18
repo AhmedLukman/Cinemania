@@ -1,20 +1,20 @@
 import DoubleSlider from "@/components/ui/hero/DoubleSlider";
 import MovieCategory from "@/components/ui/MovieCategory";
 import { MoviesUrl } from "@/lib/constants";
-import { fetchMovies } from "@/lib/utils";
+import { fetchMedia } from "@/lib/utils";
 import React from "react";
 
 const MoviesPage = async () => {
-  const popularMovies = (await fetchMovies(
+  const popularMovies = (await fetchMedia(
     MoviesUrl.Popular + "?language=en-US&page=1"
   )) as TMediaResponse<TMovie>;
-  const trendingMovies = (await fetchMovies(
+  const trendingMovies = (await fetchMedia(
     MoviesUrl.Trending + "/week?language=en-US"
   )) as TMediaResponse<TMovie>;
-  const upcomingMovies = (await fetchMovies(
+  const upcomingMovies = (await fetchMedia(
     MoviesUrl.Upcoming + "?language=en-US&page=1"
   )) as TMediaResponse<TMovie>;
-  const topRatedMovies = (await fetchMovies(
+  const topRatedMovies = (await fetchMedia(
     MoviesUrl.TopRated + "?language=en-US&page=1"
   )) as TMediaResponse<TMovie>;
 
