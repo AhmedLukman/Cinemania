@@ -13,7 +13,7 @@ const BigSlider = ({
 }) => {
   return (
     <Slider
-      className="h-[75vh]"
+      className="h-[85svh] md:h-[75svh]"
       lazyLoad="progressive"
       arrows={false}
       asNavFor={nav2}

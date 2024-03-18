@@ -18,7 +18,7 @@ const MiniSlider = ({
       lazyLoad="progressive"
       autoplay
       autoplaySpeed={6000}
-      className="h-[25vh] cursor-grab"
+      className="h-[25svh] cursor-grab"
       arrows={false}
       responsive={[
         {
@@ -37,7 +37,7 @@ const MiniSlider = ({
         const completeImageUrl = `${BASE_URL}w500${popularMovie.backdrop_path}`;
 
         return (
-          <div key={popularMovie.id} className=" h-[25vh] p-2 rounded-md">
+          <div key={popularMovie.id} className=" h-[25svh] p-2 rounded-md">
             <HoverCard
               className="!h-full !w-full cursor-pointer"
               imageUrl={completeImageUrl}

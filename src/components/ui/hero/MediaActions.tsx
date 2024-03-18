@@ -10,37 +10,41 @@ import React, { useState } from "react";
 import VideoModal from "./VideoModal";
 import { usePathname } from "next/navigation";
 
-const MediaActions = ({id, title}: {id: number, title: string}) => {
+const MediaActions = ({ id, title }: { id: number; title: string }) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [isIconClicked, setIsIconClicked] = useState(false);
   const pathname = usePathname();
   return (
-    <div className="mt-16">
-      <Button onPress={onOpen} endContent={<FontAwesomeIcon icon={faPlay} />}>
-        Watch Clips
-      </Button>
+    <div className="mt-10 md:mt-16">
       <VideoModal
         mediaId={id}
         title={title}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       />
-      <Button
-        as={Link}
-        href={`${pathname}/${id}`}
-        variant="bordered"
-        className="text-white ml-3"
-        endContent={<FontAwesomeIcon icon={faCircleInfo} />}
-      >
-        More details
-      </Button>
-      <FontAwesomeIcon
-        onClick={() => setIsIconClicked((prevState) => !prevState)}
-        icon={isIconClicked ? faFilledHeart : faHeart}
-        className="ml-5 cursor-pointer"
-        size="xl"
-      />
-      <span className="ml-2">168</span>
+      <div className="flex items-center gap-4">
+        <Button onPress={onOpen} endContent={<FontAwesomeIcon icon={faPlay} />}>
+          Watch Clips
+        </Button>
+          <Button
+            as={Link}
+            href={`${pathname}/${id}`}
+            variant="bordered"
+            className="text-white"
+            endContent={<FontAwesomeIcon icon={faCircleInfo} />}
+          >
+            More details
+          </Button>
+        <div className="flex gap-2 items-center md:ml-2">
+          <FontAwesomeIcon
+            onClick={() => setIsIconClicked((prevState) => !prevState)}
+            icon={isIconClicked ? faFilledHeart : faHeart}
+            className="cursor-pointer"
+            size="xl"
+          />
+          <span>168</span>
+        </div>
+      </div>
     </div>
   );
 };

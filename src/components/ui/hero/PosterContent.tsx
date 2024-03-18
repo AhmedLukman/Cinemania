@@ -17,7 +17,7 @@ const PosterContent = ({
     "original_title" in props ? props?.original_title : props?.original_name;
 
   return (
-    <div className="md:w-2/3 relative z-10 pt-24">
+    <div className="md:w-2/3 min-h-[75svh] relative z-10 pt-24">
       {props.overview && (
         <>
           <h2 className="text-3xl md:text-6xl font-bold font-serif max-w-3xl">
