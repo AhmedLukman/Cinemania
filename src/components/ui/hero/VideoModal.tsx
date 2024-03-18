@@ -19,7 +19,7 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchVideoData = async () => {
       try {
         const mediaUrl = `https://api.themoviedb.org/3${pathname}/${mediaId}/videos`;
         const videoRes = (await fetchMedia(mediaUrl)) as TVideoResponse;
@@ -29,7 +29,7 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
       }
     };
 
-    fetchData();
+    fetchVideoData();
   }, [mediaId, pathname]);
 
   return (

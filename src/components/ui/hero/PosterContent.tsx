@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 
@@ -11,7 +11,6 @@ import MediaCredits from "./MediaCredits";
 const PosterContent = ({
   ...props
 }: TMovie | TTVShow | TMovieDetailsResponse | TTVShowDetailsResponse) => {
- 
   const pathname = usePathname();
 
   const title =
@@ -21,11 +20,7 @@ const PosterContent = ({
     <div className="md:w-2/3 relative z-10 pt-24">
       {props.overview && (
         <>
-          <h2
-            className={cn(
-              " text-3xl  md:text-6xl font-bold font-serif max-w-3xl"
-            )}
-          >
+          <h2 className="text-3xl md:text-6xl font-bold font-serif max-w-3xl">
             {title}
           </h2>
           <MediaInfo {...props} />
@@ -37,9 +32,9 @@ const PosterContent = ({
             {props?.overview}
           </p>
           {pathname === "/movie" || pathname === "/tv" ? (
-           <MediaActions id={props.id} title={title}/>
+            <MediaActions id={props.id} title={title} />
           ) : (
-           <MediaCredits {...props}/>
+            <MediaCredits {...props} />
           )}
         </>
       )}

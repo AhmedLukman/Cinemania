@@ -32,11 +32,11 @@ const MediaCredits = (
       </p>
       <p>
         <span className="text-[#cecece] text-sm mr-3">Budget:</span>
-        {("budget" in props && props.budget.toLocaleString()) || "-"}
+        {("budget" in props && props.budget !== 0 && props.budget.toLocaleString()) || "-"}
       </p>
       <p>
         <span className="text-[#cecece] text-sm mr-3">Revenue:</span>
-        {("revenue" in props && props.revenue.toLocaleString()) || "-"}
+        {("revenue" in props && props.revenue !== 0 && props.revenue.toLocaleString()) || "-"}
       </p>
       <p>
         <span className="text-[#cecece] text-sm mr-3">Spoken languages:</span>
