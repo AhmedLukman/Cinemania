@@ -11,7 +11,7 @@ const NavMenu = () => {
         <NavbarMenuItem key={item.route}>
           <Link
             className={cn("w-full", {
-              "text-blue": pathname !== item.route,
+              "text-blue": !pathname.startsWith(item.route),
             })}
             href={item.route}
             size="lg"
