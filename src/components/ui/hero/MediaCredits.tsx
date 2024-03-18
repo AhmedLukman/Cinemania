@@ -43,9 +43,8 @@ const MediaCredits = (
         {"spoken_languages" in props &&
           props.spoken_languages.map((lang) => lang.english_name + ". ")}
       </p>
-      <p className="italic text-sm text-[#cecece] pt-5 text-center">
-        ~{"tagline" in props && props.tagline}
-      </p>
+      
+        {"tagline" in props && props.tagline && <p className="italic text-sm text-[#cecece] pt-5 text-center">~ {props.tagline}</p>}
     </div>
   );
 };
