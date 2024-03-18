@@ -1,9 +1,7 @@
+import AllCategoryMedia from "@/components/ui/AllCategoryMedia";
 import MediaCard from "@/components/ui/MediaCard";
-import { BASE_URL, TVShowsUrl } from "@/lib/constants";
-import { dataUrl, fetchMovies } from "@/lib/utils";
-import { Card } from "@nextui-org/react";
-import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
-import Image from "next/image";
+import { TVShowsUrl } from "@/lib/constants";
+import { fetchMovies } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -33,24 +31,7 @@ const TVCategoryPage = async ({
     allTVShows = [...allTVShows, ...moviesResponse.results];
   }
 
-  return (
-    <div className="pt-10 md:p-14 ">
-      <h2 className="text-2xl md:text-3xl font-serif text-white my-10 mx-2 md:mx-4">
-        {id.startsWith("top")
-          ? id
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")
-          : id.charAt(0).toUpperCase() + id.slice(1)}{" "}
-        TV Shows
-      </h2>
-      <div className="grid grid-cols-4 gap-8">
-        {allTVShows?.map((tvShow) => (
-          <MediaCard key={tvShow.id} {...tvShow} />
-        ))}
-      </div>
-    </div>
-  );
+  return <AllCategoryMedia heading="TV Show" id={id} media={allTVShows} />;
 };
 
 export default TVCategoryPage;

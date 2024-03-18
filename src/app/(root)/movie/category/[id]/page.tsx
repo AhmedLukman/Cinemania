@@ -1,9 +1,7 @@
+import AllCategoryMedia from "@/components/ui/AllCategoryMedia";
 import MediaCard from "@/components/ui/MediaCard";
-import { BASE_URL, MoviesUrl } from "@/lib/constants";
-import { dataUrl, fetchMovies } from "@/lib/utils";
-import { Card } from "@nextui-org/react";
-import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
-import Image from "next/image";
+import { MoviesUrl } from "@/lib/constants";
+import { fetchMovies } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -33,24 +31,7 @@ const MovieCategoryPage = async ({
     allMovies = [...allMovies, ...moviesResponse.results];
   }
 
-  return (
-    <div className="md:p-14 pt-10">
-      <h2 className="text-3xl font-serif text-white my-10 mx-2 md:mx-4">
-        {id.startsWith("top")
-          ? id
-              .split("-")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")
-          : id.charAt(0).toUpperCase() + id.slice(1)}{" "}
-        Movies
-      </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8">
-        {allMovies?.map((movie) => (
-          <MediaCard key={movie.id} {...movie} />
-        ))}
-      </div>
-    </div>
-  );
+  return <AllCategoryMedia heading="Movie" id={id} media={allMovies} />;
 };
 
 export default MovieCategoryPage;
