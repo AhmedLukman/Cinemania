@@ -1,3 +1,4 @@
+import MovieCategory from "@/components/ui/MovieCategory";
 import PosterContainer from "@/components/ui/hero/PosterContainer";
 import { TVShowsUrl } from "@/lib/constants";
 import { fetchMedia } from "@/lib/utils";
@@ -15,7 +16,17 @@ const SingleTVShowPage = async ({
 
   if (!tv.overview) return notFound();
 
-  return <PosterContainer {...tv} />;
+   const credits = (await fetchMedia(
+     TVShowsUrl.Origin + id + "/credits?language=en-US"
+   )) as TMediaCreditsResponse;
+
+  return (
+    <>
+      <PosterContainer {...tv} />
+      <MovieCategory heading="Cast" movies={credits?.cast || []} />
+      <MovieCategory heading="Crew" movies={credits?.crew || []} />
+    </>
+  );
 };
 
 export default SingleTVShowPage;
