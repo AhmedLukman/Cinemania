@@ -17,11 +17,14 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
   const [error, setError] = useState("");
 
   const pathname = usePathname();
+  const path = pathname.includes("movie")
+    ? `/movie/${mediaId}`
+    : `/tv/${mediaId}`;
 
   useEffect(() => {
     const fetchVideoData = async () => {
       try {
-        const mediaUrl = `https://api.themoviedb.org/3${pathname}/${mediaId}/videos`;
+        const mediaUrl = `https://api.themoviedb.org/3${path}/videos`;
         const videoRes = (await fetchMedia(mediaUrl)) as TVideoResponse;
         setVideoData(videoRes.results);
       } catch (error) {
