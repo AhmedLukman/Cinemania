@@ -9,7 +9,7 @@ const MovieCategory = ({
   movies,
   heading
 }: {
-  movies: TMovie[] | TTVShow[];
+  movies: TMovie[] | TTVShow[] | TCrew[] | TCast[];
   heading: string
 }) => {
   const pathname = usePathname()

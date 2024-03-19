@@ -1,3 +1,4 @@
+import MovieCategory from "@/components/ui/MovieCategory";
 import PosterContainer from "@/components/ui/hero/PosterContainer";
 import { MoviesUrl } from "@/lib/constants";
 import { fetchMedia } from "@/lib/utils";
@@ -9,14 +10,23 @@ const SingleMoviePage = async ({
 }: {
   params: { id: string };
 }) => {
-
   const movie = (await fetchMedia(
     MoviesUrl.Origin + id.toString() + "?language=en-US"
   )) as TMovieDetailsResponse;
 
-  if(!movie.overview) notFound()
+  if (!movie.overview) notFound();
 
-  return <PosterContainer {...movie} />;
+  const credits = (await fetchMedia(
+    MoviesUrl.Origin + id + "/credits?language=en-US"
+  )) as TMediaCreditsResponse;
+
+  return (
+    <>
+      <PosterContainer {...movie} />
+      <MovieCategory heading="Cast" movies={credits?.cast || []} />
+      <MovieCategory heading="Crew" movies={credits?.crew || []} />
+    </>
+  );
 };
 
 export default SingleMoviePage;

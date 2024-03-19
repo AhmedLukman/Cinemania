@@ -32,7 +32,7 @@ const MediaCard = (media: any) => {
           }
           className="object-cover group-hover:scale-110 transition duration-300"
           fill
-          src={`${BASE_URL}w500${media.poster_path}`}
+          src={media.poster_path || media.profile_path ? `${BASE_URL}w500${media.poster_path || media.profile_path}` : '/assets/images/avatar.jpeg'}
         />
 
         <div className="w-full h-full bg-black opacity-0 group-hover:opacity-75 transition duration-300 z-20"></div>
