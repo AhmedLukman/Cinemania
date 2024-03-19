@@ -6,12 +6,12 @@ import { Card } from "@nextui-org/react";
 import { BASE_URL } from "@/lib/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
-import { dataUrl } from "@/lib/utils";
+import { dataUrl, getPath } from "@/lib/utils";
 
 const MediaCard = (media: any) => {
   const router = useRouter();
   const pathname = usePathname();
-  const path = pathname.includes('movie') ? `/movie/${media.id}` : `/tv/${media.id}`
+  const path = getPath(pathname, media.id);
   return (
     <div
       key={media.id}

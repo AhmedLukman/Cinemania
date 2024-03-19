@@ -10,16 +10,15 @@ import {
   Button,
 } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
-import { fetchMedia } from "@/lib/utils";
+import { fetchMedia, getPath } from "@/lib/utils";
 
 const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
   const [videoData, setVideoData] = useState<TVideo[] | null>(null);
   const [error, setError] = useState("");
 
   const pathname = usePathname();
-  const path = pathname.includes("movie")
-    ? `/movie/${mediaId}`
-    : `/tv/${mediaId}`;
+
+  const path = getPath(pathname, mediaId);
 
   useEffect(() => {
     const fetchVideoData = async () => {
@@ -33,7 +32,7 @@ const VideoModal = ({ isOpen, onOpenChange, mediaId, title }: TVideoModal) => {
     };
 
     fetchVideoData();
-  }, [mediaId, pathname]);
+  }, [mediaId, path]);
 
   return (
     <Modal

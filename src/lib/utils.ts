@@ -43,3 +43,11 @@ export const fetchMedia= async (url: string) => {
 
   return result;
 };
+
+export const getPath = (pathname: string, mediaId: number) => {
+  if (pathname.includes("movie")) {
+    return `/movie/${mediaId}`;
+  } else {
+    return `/tv/${mediaId}`;
+  }
+}
