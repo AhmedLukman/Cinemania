@@ -24,7 +24,7 @@ const SingleMoviePage = async ({
     <>
       <PosterContainer {...movie} />
       {credits.cast.length !== 0 ? (
-        <MovieCategory path="/movie" heading="Cast" movies={credits.cast} />
+        <MovieCategory path="/people" heading="Cast" movies={credits.cast} />
       ) : (
         <div className="p-5 md:py-10 md:px-20 space-y-5">
           <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
@@ -34,7 +34,7 @@ const SingleMoviePage = async ({
         </div>
       )}
       {credits.crew.length !== 0 ? (
-        <MovieCategory path="/movie" heading="Crew" movies={credits.crew} />
+        <MovieCategory path="/people" heading="Crew" movies={credits.crew} />
       ) : (
         <div className="p-5 md:py-10 md:px-20 space-y-5">
           <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
