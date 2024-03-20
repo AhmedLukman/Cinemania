@@ -23,18 +23,18 @@ const SingleMoviePage = async ({
   return (
     <>
       <PosterContainer {...movie} />
-      {!!credits.cast && (
+      {credits.cast.length !== 0 && (
         <MovieCategory
           path="/movie"
           heading="Cast"
-          movies={credits?.cast || []}
+          movies={credits.cast}
         />
       )}
-      {!!credits.crew && (
+      {credits.crew.length !== 0 && (
         <MovieCategory
           path="/movie"
           heading="Crew"
-          movies={credits?.crew || []}
+          movies={credits.crew}
         />
       )}
     </>

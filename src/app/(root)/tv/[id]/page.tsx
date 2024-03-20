@@ -16,16 +16,41 @@ const SingleTVShowPage = async ({
 
   if (!tv.overview) return notFound();
 
-   const credits = (await fetchMedia(
-     TVShowsUrl.Origin + id + "/credits?language=en-US"
-   )) as TMediaCreditsResponse;
+  const credits = (await fetchMedia(
+    TVShowsUrl.Origin + id + "/credits?language=en-US"
+  )) as TMediaCreditsResponse;
 
   return (
     <>
       <PosterContainer {...tv} />
-      {/* Totally not render movie category components when no credits cast or crew and verify */}
-      <MovieCategory path="tv" heading="Cast" movies={credits?.cast || []} />
-      <MovieCategory path="tv" heading="Crew" movies={credits?.crew || []} />
+      {credits.cast.length !== 0 ? (
+        <MovieCategory
+          path="/movie"
+          heading="Cast"
+          movies={credits.cast}
+        />
+      ) : (
+        <div className="p-5 md:py-10 md:px-20 space-y-5">
+          <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
+            Crew
+          </h3>
+          <p className="text-red-500">No Cast Data available</p>
+        </div>
+      )}
+      {credits.crew.length !== 0 ? (
+        <MovieCategory
+          path="/movie"
+          heading="Crew"
+          movies={credits.crew}
+        />
+      ) : (
+        <div className="p-5 md:py-10 md:px-20 space-y-5">
+          <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
+            Crew
+          </h3>
+          <p className="text-red-500">No Crew Data available</p>
+        </div>
+      )}
     </>
   );
 };
