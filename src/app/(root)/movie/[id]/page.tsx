@@ -23,8 +23,8 @@ const SingleMoviePage = async ({
   return (
     <>
       <PosterContainer {...movie} />
-      <MovieCategory heading="Cast" movies={credits?.cast || []} />
-      <MovieCategory heading="Crew" movies={credits?.crew || []} />
+      <MovieCategory path="/movie" heading="Cast" movies={credits?.cast || []} />
+      <MovieCategory path='/movie' heading="Crew" movies={credits?.crew || []} />
     </>
   );
 };

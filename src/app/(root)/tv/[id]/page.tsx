@@ -23,8 +23,9 @@ const SingleTVShowPage = async ({
   return (
     <>
       <PosterContainer {...tv} />
-      <MovieCategory heading="Cast" movies={credits?.cast || []} />
-      <MovieCategory heading="Crew" movies={credits?.crew || []} />
+      {/* Totally not render movie category components when no credits cast or crew and verify */}
+      <MovieCategory path="tv" heading="Cast" movies={credits?.cast || []} />
+      <MovieCategory path="tv" heading="Crew" movies={credits?.crew || []} />
     </>
   );
 };

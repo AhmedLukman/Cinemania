@@ -11,8 +11,11 @@ const settings = {
   autoplaySpeed: 5000,
 };
 
-const MovieCategorySlider = ({ movies }: { movies: TMovie[] | TTVShow[] | TCrew[] | TCast[] }) => {
-
+const MovieCategorySlider = ({
+  movies,
+}: {
+  movies: TMovie[] | TTVShow[] | TCrew[] | TCast[];
+}) => {
   return (
     <div className="slider-container md:px-10">
       <Slider
@@ -37,9 +40,9 @@ const MovieCategorySlider = ({ movies }: { movies: TMovie[] | TTVShow[] | TCrew[
         {...settings}
       >
         {movies.map((movie) => {
-          if('profile_path' in  movie) console.log(movie.profile_path)
-          return <MediaCard key={movie.id} {...movie} />
-})}
+          if ("profile_path" in movie) console.log(movie.profile_path);
+          return <MediaCard key={movie.id} {...movie} />;
+        })}
       </Slider>
     </div>
   );

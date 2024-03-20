@@ -25,9 +25,9 @@ const TVShowsPage = async () => {
   return (
     <>
       <DoubleSlider media={popularTVShows.results} />
-      <MovieCategory heading="Trending" movies={trendingTVShows.results} />
-      <MovieCategory heading="Top Rated" movies={topRatedTVShows.results} />
-      <MovieCategory heading="Upcoming" movies={upcomingTVShows.results} />
+      <MovieCategory path="/tv" heading="Trending" movies={trendingTVShows.results} />
+      <MovieCategory path="/tv" heading="Top Rated" movies={topRatedTVShows.results} />
+      <MovieCategory path="/tv" heading="Upcoming" movies={upcomingTVShows.results} />
     </>
   );
 };
