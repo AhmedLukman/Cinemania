@@ -8,11 +8,10 @@ const MovieCategorySlider = ({
   movies: TMovie[] | TTVShow[] | TCrew[] | TCast[];
 }) => {
   const length = movies.length
-  console.log(length)
   const settings = {
-    infinite: false,
+    infinite: length < 4 ? false : true,
     slidesToShow: 4, // Show 4 slides at a time 
-    slidesToScroll: movies.length < 4 ? 1 : 4, 
+    slidesToScroll: length < 4 ? 1 : 4, 
     draggable: false,
     autoplay: true,
     autoplaySpeed: 5000,
@@ -21,14 +20,14 @@ const MovieCategorySlider = ({
         breakpoint: 800,
         settings: {
           slidesToShow: 3, // Show 3 slides at a time for smaller screens
-          slidesToScroll: movies.length < 3 ? 1 : 3,
+          slidesToScroll: length < 3 ? 1 : 3,
         },
       },
       {
         breakpoint: 640,
         settings: {
           slidesToShow: 2, // Show 2 slides at a time for even smaller screens
-          slidesToScroll: movies.length < 2 ? 1 : 2,
+          slidesToScroll: length < 2 ? 1 : 2,
           arrows: false,
         },
       },
