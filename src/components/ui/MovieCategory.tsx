@@ -2,8 +2,7 @@
 
 import React from "react";
 import MovieCategorySlider from "./MovieCategorySlider";
-import { Button } from "@nextui-org/react";
-import { usePathname, useRouter } from "next/navigation";
+import ViewMoreBtn from "./ViewMoreBtn";
 
 const MovieCategory = ({
   movies,
@@ -14,9 +13,6 @@ const MovieCategory = ({
   heading: string;
   path: string
 }) => {
-  // Both hooks are used in the butyon component and therefore the entire button can be refactored to its
-  // own component and this component be made server comp
-  const router = useRouter()
   const link = heading === 'Trending' ? 'trending' : heading === 'Top Rated' ? 'top-rated' : heading === 'Upcoming' ? 'upcoming' : ''
   return (
     <section>
@@ -24,7 +20,7 @@ const MovieCategory = ({
         <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
           {heading}
         </h3>
-        <Button onPress={() => router.push(`${path}/category/${link}`)} className="text-white" variant="bordered">View more</Button>
+        <ViewMoreBtn link={link} path={path}/>
       </div>
       <MovieCategorySlider movies={movies} />
     </section>
