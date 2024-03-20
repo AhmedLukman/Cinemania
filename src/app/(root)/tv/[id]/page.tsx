@@ -24,31 +24,23 @@ const SingleTVShowPage = async ({
     <>
       <PosterContainer {...tv} />
       {credits.cast.length !== 0 ? (
-        <MovieCategory
-          path="/movie"
-          heading="Cast"
-          movies={credits.cast}
-        />
+        <MovieCategory path="/tv" heading="Cast" movies={credits.cast} />
       ) : (
         <div className="p-5 md:py-10 md:px-20 space-y-5">
           <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
             Crew
           </h3>
-          <p className="text-red-500">No Cast Data available</p>
+          <p className="text-red-500">No Cast data available</p>
         </div>
       )}
       {credits.crew.length !== 0 ? (
-        <MovieCategory
-          path="/movie"
-          heading="Crew"
-          movies={credits.crew}
-        />
+        <MovieCategory path="/tv" heading="Crew" movies={credits.crew} />
       ) : (
         <div className="p-5 md:py-10 md:px-20 space-y-5">
           <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
             Crew
           </h3>
-          <p className="text-red-500">No Crew Data available</p>
+          <p className="text-red-500">No Crew data available</p>
         </div>
       )}
     </>

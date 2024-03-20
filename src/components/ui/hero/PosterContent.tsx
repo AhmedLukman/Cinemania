@@ -2,13 +2,12 @@
 
 import React from "react";
 
-import { Button, Link, cn, useDisclosure } from "@nextui-org/react";
+import { Button, cn, useDisclosure } from "@nextui-org/react";
 import { usePathname } from "next/navigation";
 import MediaInfo from "./MediaInfo";
 import MediaActions from "./MediaActions";
 import MediaCredits from "./MediaCredits";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo, faHeart as faFilledHeart } from "@fortawesome/free-solid-svg-icons";
 import { faPlay } from "@fortawesome/free-solid-svg-icons/faPlay";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import VideoModal from "./VideoModal";

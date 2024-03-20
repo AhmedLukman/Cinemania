@@ -8,8 +8,9 @@ const MovieCategorySlider = ({
   movies: TMovie[] | TTVShow[] | TCrew[] | TCast[];
 }) => {
   const length = movies.length
+  console.log(length)
   const settings = {
-    infinite: true,
+    infinite: false,
     slidesToShow: 4, // Show 4 slides at a time 
     slidesToScroll: movies.length < 4 ? 1 : 4, 
     draggable: false,
