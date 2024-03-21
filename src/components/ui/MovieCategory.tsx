@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import MovieCategorySlider from "./MovieCategorySlider";
@@ -13,23 +13,18 @@ const MovieCategory = ({
   heading: string;
   path: string;
 }) => {
-  // const link =
-  //   heading === "Trending"
-  //     ? "trending"
-  //     : heading === "Top Rated"
-  //     ? "top-rated"
-  //     : heading === "Upcoming"
-  //     ? "upcoming"
-  //     : "";
   return (
     <section>
       <div className="flex p-5 md:py-10 md:px-20 justify-between">
         <h3 className="text-white text-2xl md:text-3xl font-serif font-bold">
           {heading}
         </h3>
-        <ViewMoreBtn path={path} />
+        {movies.length !== 0 && <ViewMoreBtn path={path} />}
       </div>
-      <MovieCategorySlider movies={movies} />
+      {movies.length !== 0 && <MovieCategorySlider movies={movies} />}
+      {movies.length === 0 && (
+        <p className="text-red-500 px-5 md:px-20">No data available</p>
+      )}
     </section>
   );
 };
