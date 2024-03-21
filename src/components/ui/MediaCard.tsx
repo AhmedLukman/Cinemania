@@ -69,9 +69,9 @@ const MediaCard = (media: TMovie | TTVShow | TCrew | TCast) => {
               : media.original_title}
           </h4>
           {"character" in media && media.character ? (
-            <p className="text-gray-500">{media.character}</p>
+            <p className="text-gray-500 text-center text-sm">{media.character}</p>
           ) : "job" in media && media.job ? (
-            <p className="text-gray-500">{media.job}</p>
+            <p className="text-gray-500 text-center text-sm">{media.job}</p>
           ) : null}
         </div>
       </Card>
