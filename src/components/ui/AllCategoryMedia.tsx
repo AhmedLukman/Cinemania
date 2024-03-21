@@ -22,7 +22,7 @@ const AllCategoryMedia = ({
   return (
     <div className="md:p-14 pt-10">
       <h2 className="text-3xl font-serif text-white my-10 mx-2 md:mx-4">
-        {buzz} {heading}s
+        {buzz} {heading}
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8">
         {media?.map((media) => (
