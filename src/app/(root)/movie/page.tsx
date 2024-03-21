@@ -21,9 +21,9 @@ const MoviesPage = async () => {
   return (
     <>
       <DoubleSlider media={popularMovies.results} />
-      <MovieCategory path="/movie" heading="Trending" movies={trendingMovies.results} />
-      <MovieCategory path="/movie" heading="Top Rated" movies={topRatedMovies.results} />
-      <MovieCategory path="/movie" heading="Upcoming" movies={upcomingMovies.results} />
+      <MovieCategory path={`/movie/category/trending`} heading="Trending" movies={trendingMovies.results} />
+      <MovieCategory path={`/movie/category/top-rated`} heading="Top Rated" movies={topRatedMovies.results} />
+      <MovieCategory path={`/movie/category/upcoming`} heading="Upcoming" movies={upcomingMovies.results} />
     </>
   );
 };
