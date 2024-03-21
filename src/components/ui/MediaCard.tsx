@@ -24,7 +24,7 @@ const MediaCard = (media: TMovie | TTVShow | TCrew | TCast) => {
     >
       <Card
         radius="lg"
-        className="border-none cursor-pointer group h-72 md:h-[400px] shadow-sm shadow-gray-500"
+        className="border-none cursor-pointer active:shadow-lg group h-72 md:h-[430px] shadow-sm shadow-gray-500"
         // onClick={() => router.push(`${pathname}/${media.id}`)}
       >
         <Image
@@ -69,7 +69,9 @@ const MediaCard = (media: TMovie | TTVShow | TCrew | TCast) => {
               : media.original_title}
           </h4>
           {"character" in media && media.character ? (
-            <p className="text-gray-500 text-center text-sm">{media.character}</p>
+            <p className="text-gray-500 text-center text-sm">
+              {media.character}
+            </p>
           ) : "job" in media && media.job ? (
             <p className="text-gray-500 text-center text-sm">{media.job}</p>
           ) : null}
