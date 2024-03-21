@@ -60,12 +60,12 @@ const SingleTVShowPage = async ({
         </div>
       )}
       <MovieCategory
-        path={`/${id}/recommendations`}
+        path={`/tv/${id}/recommendations`}
         heading="Recommended"
         movies={recommendedTV}
       />
       <MovieCategory
-        path={`/${id}/similar`}
+        path={`/tv/${id}/similar`}
         heading="Similar"
         movies={similarTV}
       />
