@@ -5,6 +5,7 @@ const Logo = () => {
     <Image
       src={"/assets/icons/cinemania-logo.png"}
       alt="Cinemania logo"
+      priority
       width={100}
       height={100}
     />
