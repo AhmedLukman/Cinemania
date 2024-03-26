@@ -31,7 +31,7 @@ const MovieCategoryPage = async ({
     allMovies = [...allMovies, ...moviesResponse.results];
   }
 
-  return <AllCategoryMedia heading="Movie" id={id} media={allMovies} />;
+  return <AllCategoryMedia heading="Movies" id={id} media={allMovies} />;
 };
 
 export default MovieCategoryPage;
