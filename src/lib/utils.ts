@@ -37,7 +37,7 @@ export const fetchMedia= async (url: string) => {
     result = await res.json();
   } catch (e) {
     if (e instanceof Error) {
-      alert(e.message);
+      console.error(e.message);
     }
   }
 
