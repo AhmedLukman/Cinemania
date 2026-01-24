@@ -10,6 +10,8 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@heroui/react": "^3.0.0-beta.5",
+    "@heroui/styles": "^3.0.0-beta.5",
     "@types/react-slick": "^0.23.13",
     "axios": "^1.13.2",
     "next": "16.1.4",
