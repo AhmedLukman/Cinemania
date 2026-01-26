@@ -1,0 +1,37 @@
+import type { RefObject } from "react";
+import type Slider from "react-slick";
+import type { Settings } from "react-slick";
+import { TMDB_IMAGE_BASE_URL } from "./constants";
+import type { TmdbImageSizes } from "./types";
+
+type SliderConfig = Settings & {
+  ref?: RefObject<Slider | null>;
+};
+
+export const getBigSliderConfig = ({
+  ref,
+  asNavFor,
+  beforeChange,
+}: {
+  ref: RefObject<Slider | null>;
+  asNavFor: Slider | undefined;
+  beforeChange?: (current: number, next: number) => void;
+}): SliderConfig => ({
+  arrows: false,
+  dots: false,
+  ref,
+  asNavFor,
+  beforeChange,
+});
+
+export const getImageUrl = (path: string, size: TmdbImageSizes) =>
+  `${TMDB_IMAGE_BASE_URL}${size}${path}`;
+
+export const isURL = (url: string) => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
