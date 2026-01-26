@@ -1,11 +1,15 @@
+import { SliderProvider } from "@/context/SliderContext";
 import { TmdbApiMovieEndpoints } from "@/lib/constants";
 import { cachedFetchMedia } from "@/lib/serverService";
+import type { Movie, MovieResponse } from "@/lib/types";
+import BigSlider from "./BigSlider";
+import PopularMovieSliderContent from "./PopularMovieSliderContent";
 
 const MovieDoubleSlider = async () => {
-  let popularMovies: any;
+  let popularMovies: Movie[];
   try {
-    const { results } = await cachedFetchMedia(TmdbApiMovieEndpoints.Popular);
-    popularMovies = results || [];
+    const { results } = await cachedFetchMedia(TmdbApiMovieEndpoints.Popular) as MovieResponse;
+    popularMovies = results;
   } catch {
     return (
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
@@ -23,11 +27,19 @@ const MovieDoubleSlider = async () => {
   }
 
   return (
-    <div>
-      {popularMovies.map((movie: any) => (
-        <div key={movie.id}>{movie.title}</div>
-      ))}
-    </div>
+    <SliderProvider>
+      <section className="slider-container">
+        <BigSlider>
+          {popularMovies.map((popularMovie, index: number) => (
+            <PopularMovieSliderContent
+              key={popularMovie.id}
+              popularMovie={popularMovie}
+              isFirstMovie={index === 0}
+            />
+          ))}
+        </BigSlider>
+      </section>
+    </SliderProvider>
   );
 };
 
