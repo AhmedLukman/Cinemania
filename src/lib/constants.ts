@@ -44,3 +44,36 @@ export const TmdbApiGenreEndpoints = {
 
 export type TmdbApiGenreEndpointsType =
   (typeof TmdbApiGenreEndpoints)[keyof typeof TmdbApiGenreEndpoints];
+
+export const TmdbProfileSizes = {
+  W45: "/w45",
+  W185: "/w185",
+  H632: "/h632",
+  ORIGINAL: "/original",
+} as const;
+
+export type TmdbProfileSizesType =
+  (typeof TmdbProfileSizes)[keyof typeof TmdbProfileSizes];
+
+export const TmdbStillSizes = {
+  W92: "/w92",
+  W185: "/w185",
+  W300: "/w300",
+  ORIGINAL: "/original",
+} as const;
+
+export type TmdbStillSizesType =
+  (typeof TmdbStillSizes)[keyof typeof TmdbStillSizes];
+
+export const TmdbLogoSizes = {
+  W45: "/w45",
+  W92: "/w92",
+  W154: "/w154",
+  W185: "/w185",
+  W300: "/w300",
+  W500: "/w500",
+  ORIGINAL: "/original",
+} as const;
+
+export type TmdbLogoSizesType =
+  (typeof TmdbLogoSizes)[keyof typeof TmdbLogoSizes];
