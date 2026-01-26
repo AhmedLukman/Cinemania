@@ -1,6 +1,11 @@
 import axios from "axios";
+import { getPlaiceholder } from "plaiceholder";
 import { cache } from "react";
-import { TMDB_BASE_URL, type TmdbApiMovieEndpointsType } from "./constants";
+import {
+  TMDB_BASE_URL,
+  TmdbApiGenreEndpoints,
+  type TmdbApiMovieEndpointsType,
+} from "./constants";
 
 const apiClient = axios.create({
   baseURL: TMDB_BASE_URL,
@@ -34,3 +39,42 @@ export const fetchMedia = async (endpoint: TmdbApiMovieEndpointsType) => {
 };
 
 export const cachedFetchMedia = cache(fetchMedia);
+
+type GenreResponse = {
+  genres: { id: number; name: string }[];
+};
+
+const fetchMovieGenres = async () => {
+  try {
+    const response = await apiClient(TmdbApiGenreEndpoints.MovieGenres);
+    return response.data as GenreResponse;
+  } catch (error) {
+    displayAxiosError(error);
+  }
+};
+
+export const cachedFetchMovieGenres = cache(fetchMovieGenres);
+
+const fetchTvGenres = async () => {
+  try {
+    const response = await apiClient(TmdbApiGenreEndpoints.TvGenres);
+    return response.data as GenreResponse;
+  } catch (error) {
+    displayAxiosError(error);
+  }
+};
+
+export const cachedFetchTvGenres = cache(fetchTvGenres);
+
+const getBase64 = async (imageUrl: string) => {
+  try {
+    const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
+    const buffer = response.data as ArrayBuffer;
+    const { base64 } = await getPlaiceholder(Buffer.from(buffer), { size: 10 });
+    return base64;
+  } catch (error) {
+    displayAxiosError(error);
+  }
+};
+
+export const cachedGetBase64 = cache(getBase64);
