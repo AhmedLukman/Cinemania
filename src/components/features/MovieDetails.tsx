@@ -42,7 +42,7 @@ const MovieDetails = ({
         <Link href={`movie/${id}`} className="no-underline">
           <Button
             variant="outline"
-            className="text-white rounded-xl border-2 transition-all duration-500 hover:bg-transparent hover:opacity-70"
+            className="text-white rounded-xl border-2 transition-all duration-300 2xl:p-5 hover:bg-transparent hover:opacity-75"
           >
             More details
             <FaCircleInfo />
