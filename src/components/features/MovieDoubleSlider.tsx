@@ -3,7 +3,7 @@ import { TmdbApiMovieEndpoints } from "@/lib/constants";
 import { cachedFetchMedia } from "@/lib/serverService";
 import type { Movie, MovieResponse } from "@/lib/types";
 import BigSlider from "./BigSlider";
-import PopularMovieSliderContent from "./PopularMovieSliderContent";
+import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
 
 const MovieDoubleSlider = async () => {
   let popularMovies: Movie[];
@@ -31,7 +31,7 @@ const MovieDoubleSlider = async () => {
       <section className="slider-container">
         <BigSlider>
           {popularMovies.map((popularMovie, index: number) => (
-            <PopularMovieSliderContent
+            <PopularMoviesBigSliderContent
               key={popularMovie.id}
               popularMovie={popularMovie}
               isFirstMovie={index === 0}

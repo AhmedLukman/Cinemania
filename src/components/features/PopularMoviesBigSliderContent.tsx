@@ -4,12 +4,12 @@ import Backdrop from "../ui/Backdrop";
 import ImageWithBlur from "../ui/ImageWithBlur";
 import MovieDetails from "./MovieDetails";
 
-type PopularMovieSliderContentProps = {
+type PopularMoviesBigSliderContentProps = {
   popularMovie: Movie;
   isFirstMovie: boolean;
 };
 
-const PopularMovieSliderContent = async ({
+const PopularMoviesBigSliderContent = async ({
   popularMovie: {
     title,
     backdrop_path,
@@ -21,7 +21,7 @@ const PopularMovieSliderContent = async ({
     genre_ids,
   },
   isFirstMovie,
-}: PopularMovieSliderContentProps) => {
+}: PopularMoviesBigSliderContentProps) => {
   return (
     <div className="h-screen relative focus:outline-none">
       {/* Full Screen Image */}
@@ -63,4 +63,4 @@ const PopularMovieSliderContent = async ({
   );
 };
 
-export default PopularMovieSliderContent;
+export default PopularMoviesBigSliderContent;
