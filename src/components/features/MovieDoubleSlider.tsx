@@ -4,11 +4,15 @@ import { cachedFetchMedia } from "@/lib/serverService";
 import type { Movie, MovieResponse } from "@/lib/types";
 import BigSlider from "./BigSlider";
 import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
+import PopularMoviesSmallSliderContent from "./PopularMoviesSmallSliderContent";
+import SmallSlider from "./SmallSlider";
 
 const MovieDoubleSlider = async () => {
   let popularMovies: Movie[];
   try {
-    const { results } = await cachedFetchMedia(TmdbApiMovieEndpoints.Popular) as MovieResponse;
+    const { results } = (await cachedFetchMedia(
+      TmdbApiMovieEndpoints.Popular,
+    )) as MovieResponse;
     popularMovies = results;
   } catch {
     return (
@@ -38,6 +42,15 @@ const MovieDoubleSlider = async () => {
             />
           ))}
         </BigSlider>
+        <SmallSlider>
+          {popularMovies.map((popularMovie, index) => (
+            <PopularMoviesSmallSliderContent
+              key={popularMovie.id}
+              popularMovie={popularMovie}
+              index={index}
+            />
+          ))}
+        </SmallSlider>
       </section>
     </SliderProvider>
   );
