@@ -35,3 +35,35 @@ export const isURL = (url: string) => {
     return false;
   }
 };
+
+export const getSmallSliderConfig = ({
+  ref,
+  asNavFor,
+}: {
+  asNavFor: Slider | undefined;
+  ref: RefObject<Slider | null>;
+}): SliderConfig => ({
+  swipeToSlide: true,
+  focusOnSelect: true,
+  arrows: false,
+  accessibility: false,
+  autoplay: true,
+  autoplaySpeed: 5000,
+  responsive: [
+    {
+      breakpoint: 540, // <540 screen width
+      settings: {
+        slidesToShow: 2
+      },
+    },
+    {
+      breakpoint: 800, // <800 screen width
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+  ],
+  slidesToShow: 5,
+  ref,
+  asNavFor,
+});
