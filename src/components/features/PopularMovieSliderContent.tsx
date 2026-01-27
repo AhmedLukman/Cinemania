@@ -47,7 +47,7 @@ const PopularMovieSliderContent = async ({
           voteAverage={vote_average}
         />
         {/* Side Image */}
-        <aside className="mt-10 hidden lg:block w-5/12 xl:w-4/12 h-[68svh] rounded-xl relative">
+        <aside className="mt-10 hidden lg:block w-4/12 max-w-xl h-[68svh] rounded-xl relative mx-auto">
           <ImageWithBlur
             className=" object-cover object-center"
             path={poster_path}
