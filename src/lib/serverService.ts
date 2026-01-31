@@ -21,7 +21,7 @@ const apiClient = axios.create({
   },
 });
 
-const displayAxiosError = (error: unknown) => {
+const displayError = (error: unknown) => {
   if (process.env.NODE_ENV === "production") return;
   if (axios.isAxiosError(error)) {
     console.error("Axios error:", {
@@ -47,7 +47,7 @@ export const fetchMovieList = async (
     const data = MovieResponseSchema.parse(response.data);
     return data;
   } catch (error) {
-    displayAxiosError(error);
+    displayError(error);
     throw error;
   }
 };
@@ -63,7 +63,7 @@ const fetchMovieGenres = async () => {
     const response = await apiClient(TmdbApiGenreEndpoints.MovieGenres);
     return response.data as GenreResponse;
   } catch (error) {
-    displayAxiosError(error);
+    displayError(error);
   }
 };
 
@@ -74,7 +74,7 @@ const fetchTvGenres = async () => {
     const response = await apiClient(TmdbApiGenreEndpoints.TvGenres);
     return response.data as GenreResponse;
   } catch (error) {
-    displayAxiosError(error);
+    displayError(error);
   }
 };
 
@@ -87,7 +87,7 @@ const getBase64 = async (imageUrl: string) => {
     const { base64 } = await getPlaiceholder(Buffer.from(buffer), { size: 10 });
     return base64;
   } catch (error) {
-    displayAxiosError(error);
+    displayError(error);
   }
 };
 
