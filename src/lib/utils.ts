@@ -2,7 +2,7 @@ import type { RefObject } from "react";
 import type Slider from "react-slick";
 import type { Settings } from "react-slick";
 import { TMDB_IMAGE_BASE_URL } from "./constants";
-import type { TmdbImageSizes } from "./types";
+import type { TmdbImageSizes } from "./validators";
 
 type SliderConfig = Settings & {
   ref?: RefObject<Slider | null>;
@@ -53,7 +53,7 @@ export const getSmallSliderConfig = ({
     {
       breakpoint: 540, // <540 screen width
       settings: {
-        slidesToShow: 2
+        slidesToShow: 2,
       },
     },
     {
