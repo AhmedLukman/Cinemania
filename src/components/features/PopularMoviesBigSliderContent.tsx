@@ -9,7 +9,7 @@ type PopularMoviesBigSliderContentProps = {
   isFirstMovie: boolean;
 };
 
-const PopularMoviesBigSliderContent = async ({
+const PopularMoviesBigSliderContent = ({
   popularMovie: {
     title,
     backdrop_path,
