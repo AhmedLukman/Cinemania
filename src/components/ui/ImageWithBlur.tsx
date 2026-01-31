@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cachedGetBase64 } from "@/lib/serverService";
-import type { TmdbImageSizes } from "@/lib/validators";
 import { getImageUrl, isURL } from "@/lib/utils";
+import type { TmdbImageSizes } from "@/lib/validators";
 
 type ImageWithBlurProps = {
   sizes: string;
