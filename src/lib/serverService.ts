@@ -9,7 +9,6 @@ import {
 } from "./constants";
 import {
   MovieResponseSchema,
-  type MovieResponseType,
   type TmdbApiMovieEndpointsType,
 } from "./validators";
 
@@ -41,7 +40,7 @@ export const fetchMovieList = async (
     TmdbApiMovieEndpointsType,
     typeof TmdbApiMovieEndpoints.Latest
   >,
-): Promise<MovieResponseType> => {
+) => {
   try {
     const response = await apiClient(endpoint);
     const data = MovieResponseSchema.parse(response.data);
