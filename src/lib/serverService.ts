@@ -67,10 +67,12 @@ const fetchGenres = async (type: MediaType) => {
 
 export const cachedGenres = cache(fetchGenres);
 
+const ArrayBufferSchema = z.instanceof(ArrayBuffer);
+
 const getBase64 = async (imageUrl: string) => {
   try {
     const response = await axios.get(imageUrl, { responseType: "arraybuffer" });
-    const buffer = response.data as ArrayBuffer;
+    const buffer = ArrayBufferSchema.parse(response.data);
     const { base64 } = await getPlaiceholder(Buffer.from(buffer), { size: 10 });
     return base64;
   } catch (error) {
