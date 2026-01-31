@@ -1,18 +1,16 @@
 import { SliderProvider } from "@/context/SliderContext";
 import { TmdbApiMovieEndpoints } from "@/lib/constants";
-import { cachedFetchMedia } from "@/lib/serverService";
-import type { Movie, MovieResponse } from "@/lib/types";
+import { cachedMovieList } from "@/lib/serverService";
+import type { MovieType } from "@/lib/validators";
 import BigSlider from "./BigSlider";
 import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
 import PopularMoviesSmallSliderContent from "./PopularMoviesSmallSliderContent";
 import SmallSlider from "./SmallSlider";
 
 const MovieDoubleSlider = async () => {
-  let popularMovies: Movie[];
+  let popularMovies: MovieType[];
   try {
-    const { results } = (await cachedFetchMedia(
-      TmdbApiMovieEndpoints.Popular,
-    )) as MovieResponse;
+    const { results } = await cachedMovieList(TmdbApiMovieEndpoints.Popular);
     popularMovies = results;
   } catch {
     return (

@@ -1,11 +1,17 @@
 import axios from "axios";
 import { getPlaiceholder } from "plaiceholder";
 import { cache } from "react";
+import z from "zod";
 import {
   TMDB_BASE_URL,
   TmdbApiGenreEndpoints,
-  type TmdbApiMovieEndpointsType,
+  type TmdbApiMovieEndpoints,
 } from "./constants";
+import {
+  MovieResponseSchema,
+  type MovieResponseType,
+  type TmdbApiMovieEndpointsType,
+} from "./validators";
 
 const apiClient = axios.create({
   baseURL: TMDB_BASE_URL,
@@ -23,22 +29,30 @@ const displayAxiosError = (error: unknown) => {
       code: error.code,
       response: error.response?.data,
     });
+  } else if (error instanceof z.ZodError) {
+    console.error("Zod validation error:", error.issues);
   } else {
     console.error("Unexpected error:", error);
   }
 };
 
-export const fetchMedia = async (endpoint: TmdbApiMovieEndpointsType) => {
+export const fetchMovieList = async (
+  endpoint: Exclude<
+    TmdbApiMovieEndpointsType,
+    typeof TmdbApiMovieEndpoints.Latest
+  >,
+): Promise<MovieResponseType> => {
   try {
     const response = await apiClient(endpoint);
-    return response.data;
+    const data = MovieResponseSchema.parse(response.data);
+    return data;
   } catch (error) {
     displayAxiosError(error);
     throw error;
   }
 };
 
-export const cachedFetchMedia = cache(fetchMedia);
+export const cachedMovieList = cache(fetchMovieList);
 
 type GenreResponse = {
   genres: { id: number; name: string }[];
