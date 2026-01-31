@@ -60,7 +60,7 @@ type GenreResponse = {
 
 const fetchMovieGenres = async () => {
   try {
-    const response = await apiClient(TmdbApiGenreEndpoints.MovieGenres);
+    const response = await apiClient(TmdbApiGenreEndpoints.Movie);
     return response.data as GenreResponse;
   } catch (error) {
     displayError(error);
@@ -71,7 +71,7 @@ export const cachedFetchMovieGenres = cache(fetchMovieGenres);
 
 const fetchTvGenres = async () => {
   try {
-    const response = await apiClient(TmdbApiGenreEndpoints.TvGenres);
+    const response = await apiClient(TmdbApiGenreEndpoints.TV);
     return response.data as GenreResponse;
   } catch (error) {
     displayError(error);

@@ -29,8 +29,8 @@ export const TmdbPosterSizes = {
 } as const;
 
 export const TmdbApiGenreEndpoints = {
-  MovieGenres: "/genre/movie/list",
-  TvGenres: "/genre/tv/list",
+  Movie: "/genre/movie/list",
+  TV: "/genre/tv/list",
 } as const;
 
 export const TmdbProfileSizes = {
