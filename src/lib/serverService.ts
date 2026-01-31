@@ -8,6 +8,8 @@ import {
   type TmdbApiMovieEndpoints,
 } from "./constants";
 import {
+  GenreResponseSchema,
+  type MediaType,
   MovieResponseSchema,
   type TmdbApiMovieEndpointsType,
 } from "./validators";
@@ -53,31 +55,17 @@ export const fetchMovieList = async (
 
 export const cachedMovieList = cache(fetchMovieList);
 
-type GenreResponse = {
-  genres: { id: number; name: string }[];
-};
-
-const fetchMovieGenres = async () => {
+const fetchGenres = async (type: MediaType) => {
   try {
-    const response = await apiClient(TmdbApiGenreEndpoints.Movie);
-    return response.data as GenreResponse;
+    const response = await apiClient(TmdbApiGenreEndpoints[type]);
+    const data = GenreResponseSchema.parse(response.data);
+    return data;
   } catch (error) {
     displayError(error);
   }
 };
 
-export const cachedFetchMovieGenres = cache(fetchMovieGenres);
-
-const fetchTvGenres = async () => {
-  try {
-    const response = await apiClient(TmdbApiGenreEndpoints.TV);
-    return response.data as GenreResponse;
-  } catch (error) {
-    displayError(error);
-  }
-};
-
-export const cachedFetchTvGenres = cache(fetchTvGenres);
+export const cachedGenres = cache(fetchGenres);
 
 const getBase64 = async (imageUrl: string) => {
   try {

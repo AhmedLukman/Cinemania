@@ -1,5 +1,6 @@
 import { Button, Link } from "@heroui/react";
 import { FaCircleInfo } from "react-icons/fa6";
+import { Media } from "@/lib/constants";
 import GenreList from "../ui/GenreList";
 
 type MovieDetailsProps = {
@@ -33,7 +34,7 @@ const MovieDetails = ({
             {voteAverage?.toFixed(1)}
           </span>
         </div>
-        <GenreList type="movie" genreIds={genreIds} />
+        <GenreList type={Media.Movie} genreIds={genreIds} />
       </div>
       <p className="max-w-prose mt-10 2xl:text-lg line-clamp-6">
         {overview || "No overview available."}

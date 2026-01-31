@@ -56,3 +56,8 @@ export const TmdbLogoSizes = {
   W500: "/w500",
   ORIGINAL: "/original",
 } as const;
+
+export const Media = {
+  Movie: "Movie",
+  TV: "TV",
+} as const;

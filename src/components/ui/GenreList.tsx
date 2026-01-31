@@ -1,18 +1,13 @@
-import {
-  cachedFetchMovieGenres,
-  cachedFetchTvGenres,
-} from "@/lib/serverService";
+import { cachedGenres } from "@/lib/serverService";
+import type { MediaType } from "@/lib/validators";
 
 type GenreListProps = {
   genreIds: number[];
-  type: "movie" | "tv";
+  type: MediaType;
 };
 
 const GenreList = async ({ genreIds, type }: GenreListProps) => {
-  const { genres } =
-    type === "movie"
-      ? (await cachedFetchMovieGenres()) || {}
-      : (await cachedFetchTvGenres()) || {};
+  const { genres } = (await cachedGenres(type)) || {};
 
   return (
     <ul className="gap-3 md:gap-5 flex flex-wrap text-sm mt-2 md:mt-6">

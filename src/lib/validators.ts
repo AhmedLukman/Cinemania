@@ -1,5 +1,6 @@
 import z from "zod";
 import type {
+  Media,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
   TmdbBackdropSizes,
@@ -62,4 +63,18 @@ export const MovieResponseSchema = z.object({
 });
 
 export type MovieType = z.infer<typeof MovieSchema>;
+
 export type MovieResponseType = z.infer<typeof MovieResponseSchema>;
+
+export const GenreResponseSchema = z.object({
+  genres: z.array(
+    z.object({
+      id: z.number(),
+      name: z.string(),
+    }),
+  ),
+});
+
+export type GenreResponse = z.infer<typeof GenreResponseSchema>;
+
+export type MediaType = (typeof Media)[keyof typeof Media];
