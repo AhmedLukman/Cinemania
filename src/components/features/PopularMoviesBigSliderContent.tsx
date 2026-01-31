@@ -1,11 +1,11 @@
 import { TmdbBackdropSizes, TmdbPosterSizes } from "@/lib/constants";
-import type { Movie } from "@/lib/types";
+import type { MovieType } from "@/lib/validators";
 import Backdrop from "../ui/Backdrop";
 import ImageWithBlur from "../ui/ImageWithBlur";
 import MovieDetails from "./MovieDetails";
 
 type PopularMoviesBigSliderContentProps = {
-  popularMovie: Movie;
+  popularMovie: MovieType;
   isFirstMovie: boolean;
 };
 

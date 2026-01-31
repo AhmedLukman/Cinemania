@@ -1,10 +1,10 @@
 import { TmdbBackdropSizes } from "@/lib/constants";
-import type { Movie } from "@/lib/types";
+import type { MovieType } from "@/lib/validators";
 import ImageWithBlur from "../ui/ImageWithBlur";
 import HoverCard from "./HoverCard";
 
 type PopularMoviesSmallSliderContentProps = {
-  popularMovie: Movie;
+  popularMovie: MovieType;
   index: number;
 };
 
