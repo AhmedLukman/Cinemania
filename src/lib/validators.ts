@@ -67,48 +67,61 @@ export type MovieType = z.infer<typeof MovieSchema>;
 
 export type MovieResponseType = z.infer<typeof MovieResponseSchema>;
 
+const SpokenLanguagesSchema = z.object({
+  english_name: z.string(),
+  iso_639_1: z.string(),
+  name: z.string(),
+});
+
+const ProductionCompaniesSchema = z.object({
+  id: z.number(),
+  logo_path: z.string().nullable(),
+  name: z.string(),
+  origin_country: z.string(),
+});
+
+const ProductionCountriesSchema = z.object({
+  iso_3166_1: z.string(),
+  name: z.string(),
+});
+
+const GenreSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
 export const MovieDetailsSchema = z.object({
   adult: z.boolean(), // Defaults to true
   backdrop_path: z.string().nullable(),
-  belongs_to_collection: z.any().nullable(),
-  budget: z.number().int(), // Defaults to 0
-  genres: z.array(
-    z.object({
-      id: z.number().int(),
-      name: z.string(),
-    }),
-  ),
+  belongs_to_collection: z.string().nullable(),
+  budget: z.number(), // Defaults to 0
+  genres: z.array(GenreSchema),
   homepage: z.string(),
-  id: z.number().int(), // Defaults to 0
+  id: z.number(), // Defaults to 0
   imdb_id: z.string().nullable(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
   popularity: z.number(), // Defaults to 0
   poster_path: z.string().nullable(),
-  production_companies: z.array(z.any()),
-  production_countries: z.array(z.any()),
+  production_companies: z.array(ProductionCompaniesSchema),
+  production_countries: z.array(ProductionCountriesSchema),
   release_date: z.string(),
-  revenue: z.number().int(), // Defaults to 0
-  runtime: z.number().int(), // Defaults to 0
-  spoken_languages: z.array(z.any()),
+  revenue: z.number(), // Defaults to 0
+  runtime: z.number(), // Defaults to 0
+  spoken_languages: z.array(SpokenLanguagesSchema),
   status: z.string(),
   tagline: z.string(),
   title: z.string(),
   video: z.boolean(), // Defaults to true
   vote_average: z.number(), // Defaults to 0
-  vote_count: z.number().int(), // Defaults to 0
+  vote_count: z.number(), // Defaults to 0
 });
 
 export type MovieDetailsType = z.infer<typeof MovieDetailsSchema>;
 
 export const GenreResponseSchema = z.object({
-  genres: z.array(
-    z.object({
-      id: z.number(),
-      name: z.string(),
-    }),
-  ),
+  genres: z.array(GenreSchema),
 });
 
 export type GenreResponse = z.infer<typeof GenreResponseSchema>;
