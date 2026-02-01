@@ -14,6 +14,7 @@
     "@heroui/styles": "^3.0.0-beta.5",
     "@types/react-slick": "^0.23.13",
     "axios": "^1.13.2",
+    "m3-ripple": "^1.1.3",
     "next": "16.1.4",
     "react": "19.2.3",
     "react-dom": "19.2.3",
