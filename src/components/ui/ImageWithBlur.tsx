@@ -22,6 +22,7 @@ const ImageWithBlur = async ({
   alt,
   priority = false,
 }: ImageWithBlurProps) => {
+  if (!path) return null;
   const isPathURL = isURL(path);
   const imageUrl = isPathURL ? path : getImageUrl(path, imageSize);
   const blurDataURL = await cachedGetBase64(
