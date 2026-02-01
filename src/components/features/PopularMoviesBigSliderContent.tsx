@@ -30,7 +30,7 @@ const PopularMoviesBigSliderContent = ({
         alt={`${title} backdrop`}
         sizes="100vw"
         priority={isFirstMovie}
-        path={backdrop_path}
+        path={backdrop_path || ""}
         imageSize={TmdbBackdropSizes.ORIGINAL}
         blurImageSize={TmdbBackdropSizes.W300}
       />
@@ -50,7 +50,7 @@ const PopularMoviesBigSliderContent = ({
         <aside className="mt-10 hidden lg:block w-4/12 max-w-xl h-[68svh] rounded-xl relative mx-auto">
           <ImageWithBlur
             className=" object-cover object-center"
-            path={poster_path}
+            path={poster_path || ""}
             alt={`${title} poster`}
             blurImageSize={TmdbPosterSizes.W92}
             imageSize={TmdbPosterSizes.W780}

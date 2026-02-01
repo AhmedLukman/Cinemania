@@ -22,7 +22,6 @@ const ImageWithBlur = async ({
   alt,
   priority = false,
 }: ImageWithBlurProps) => {
-  if (!path) return null; // TODO: Change this later to place dummy film image. Tip: Latest film has null path
   const isPathURL = isURL(path);
   const imageUrl = isPathURL ? path : getImageUrl(path, imageSize);
   const blurDataURL = await cachedGetBase64(
