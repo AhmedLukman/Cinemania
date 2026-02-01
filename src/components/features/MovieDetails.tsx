@@ -1,6 +1,6 @@
-import { Button, Link } from "@heroui/react";
 import { FaCircleInfo } from "react-icons/fa6";
 import { Media } from "@/lib/constants";
+import BorderButton from "../ui/BorderButton";
 import GenreList from "../ui/GenreList";
 
 type MovieDetailsProps = {
@@ -40,15 +40,10 @@ const MovieDetails = ({
         {overview || "No overview available."}
       </p>
       <div className="mt-5 2xl:mt-8">
-        <Link href={`movie/${id}`} className="no-underline">
-          <Button
-            variant="outline"
-            className="text-white rounded-xl border-2 transition-all duration-300 2xl:p-5 hover:bg-transparent hover:opacity-75"
-          >
-            More details
-            <FaCircleInfo />
-          </Button>
-        </Link>
+        <BorderButton href={`movie/${id}`}>
+          More details
+          <FaCircleInfo />
+        </BorderButton>
       </div>
     </div>
   );
