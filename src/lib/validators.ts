@@ -41,14 +41,14 @@ export type TmdbImageSizes =
 
 export const MovieSchema = z.object({
   adult: z.boolean(), // Defaults to true
-  backdrop_path: z.string().or(z.null()),
+  backdrop_path: z.string().nullable(),
   genre_ids: z.array(z.number()),
   id: z.number(), // Defaults to 0
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
   popularity: z.number(), // Defaults to 0
-  poster_path: z.string().or(z.null()),
+  poster_path: z.string().nullable(),
   release_date: z.string(),
   title: z.string(),
   video: z.boolean(), // Defaults to true
@@ -66,6 +66,41 @@ export const MovieResponseSchema = z.object({
 export type MovieType = z.infer<typeof MovieSchema>;
 
 export type MovieResponseType = z.infer<typeof MovieResponseSchema>;
+
+export const MovieDetailsSchema = z.object({
+  adult: z.boolean(), // Defaults to true
+  backdrop_path: z.string().nullable(),
+  belongs_to_collection: z.any().nullable(),
+  budget: z.number().int(), // Defaults to 0
+  genres: z.array(
+    z.object({
+      id: z.number().int(),
+      name: z.string(),
+    }),
+  ),
+  homepage: z.string(),
+  id: z.number().int(), // Defaults to 0
+  imdb_id: z.string().nullable(),
+  original_language: z.string(),
+  original_title: z.string(),
+  overview: z.string(),
+  popularity: z.number(), // Defaults to 0
+  poster_path: z.string().nullable(),
+  production_companies: z.array(z.any()),
+  production_countries: z.array(z.any()),
+  release_date: z.string(),
+  revenue: z.number().int(), // Defaults to 0
+  runtime: z.number().int(), // Defaults to 0
+  spoken_languages: z.array(z.any()),
+  status: z.string(),
+  tagline: z.string(),
+  title: z.string(),
+  video: z.boolean(), // Defaults to true
+  vote_average: z.number(), // Defaults to 0
+  vote_count: z.number().int(), // Defaults to 0
+});
+
+export type MovieDetailsType = z.infer<typeof MovieDetailsSchema>;
 
 export const GenreResponseSchema = z.object({
   genres: z.array(

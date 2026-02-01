@@ -5,11 +5,12 @@ import z from "zod";
 import {
   TMDB_BASE_URL,
   TmdbApiGenreEndpoints,
-  type TmdbApiMovieEndpoints,
+  TmdbApiMovieEndpoints,
 } from "./constants";
 import {
   GenreResponseSchema,
   type MediaType,
+  MovieDetailsSchema,
   MovieResponseSchema,
   type TmdbApiMovieEndpointsType,
 } from "./validators";
@@ -37,7 +38,7 @@ const displayError = (error: unknown) => {
   }
 };
 
-export const fetchMovieList = async (
+const fetchMovieList = async (
   endpoint: Exclude<
     TmdbApiMovieEndpointsType,
     typeof TmdbApiMovieEndpoints.Latest
@@ -54,6 +55,19 @@ export const fetchMovieList = async (
 };
 
 export const cachedMovieList = cache(fetchMovieList);
+
+const fetchLatestMovie = async () => {
+  try {
+    const response = await apiClient(TmdbApiMovieEndpoints.Latest);
+    const data = MovieDetailsSchema.parse(response.data);
+    return data;
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedLatestMovie = cache(fetchLatestMovie);
 
 const fetchGenres = async (type: MediaType) => {
   try {

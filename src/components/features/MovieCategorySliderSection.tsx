@@ -1,37 +1,44 @@
-import {
-  type MovieCategoryHeadings,
-  TmdbApiMovieEndpoints,
-} from "@/lib/constants";
-import { cachedMovieList } from "@/lib/serverService";
-import type { MovieCategoryHeadingsType, MovieType } from "@/lib/validators";
+import { MovieCategoryHeadings, TmdbApiMovieEndpoints } from "@/lib/constants";
+import { cachedLatestMovie, cachedMovieList } from "@/lib/serverService";
+import type {
+  MovieCategoryHeadingsType,
+  MovieDetailsType,
+  MovieType,
+} from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
 import MediaCard from "./MediaCard";
 import MediaCategorySlider from "./MovieCategorySlider";
 
 type MediaCategorySliderSectionProps = {
-  heading: Exclude<
-    MovieCategoryHeadingsType,
-    typeof MovieCategoryHeadings.Latest
-  >;
+  heading: MovieCategoryHeadingsType;
 };
 
 const MediaCategorySliderSection = async ({
   heading,
 }: MediaCategorySliderSectionProps) => {
-  const noWhitespaceHeading = heading.replace(/\s+/g, "") as Exclude<
-    keyof typeof TmdbApiMovieEndpoints,
-    "Latest"
-  >;
+  const noWhitespaceHeading = heading.replace(
+    /\s+/g,
+    "",
+  ) as keyof typeof TmdbApiMovieEndpoints;
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
 
-  let mediaCategory: MovieType[];
+  let mediaCategory: MovieType[] | [MovieDetailsType];
 
   try {
-    const { results } = await cachedMovieList(
-      TmdbApiMovieEndpoints[noWhitespaceHeading],
-    );
-
-    mediaCategory = results;
+    if (heading === MovieCategoryHeadings.Latest) {
+      const data = await cachedLatestMovie();
+      mediaCategory = [data];
+    } else {
+      const { results } = await cachedMovieList(
+        TmdbApiMovieEndpoints[
+          noWhitespaceHeading as Exclude<
+            keyof typeof TmdbApiMovieEndpoints,
+            "Latest"
+          >
+        ],
+      );
+      mediaCategory = results;
+    }
   } catch {
     return (
       <p className="text-red-500 text-center">

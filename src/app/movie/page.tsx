@@ -10,6 +10,7 @@ const MovieHomePage = () => {
       <MediaCategorySliderSection heading={MovieCategoryHeadings.Trending} />
       <MediaCategorySliderSection heading={MovieCategoryHeadings.TopRated} />
       <MediaCategorySliderSection heading={MovieCategoryHeadings.Upcoming} />
+      <MediaCategorySliderSection heading={MovieCategoryHeadings.Latest} />
     </>
   )
 };
