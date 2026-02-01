@@ -54,7 +54,7 @@ const MediaCategorySliderSection = async ({
   }
 
   return (
-    <section className="md:mx-5 lg:mx-10 mt-12 pb-10">
+    <section className="md:mx-5 lg:mx-10 mt-12 md:pb-10">
       <div className="flex p-4 md:pb-14 justify-between items-center">
         <h3 className="text-white z-10 text-2xl md:text-3xl font-serif font-bold">
           {heading}
