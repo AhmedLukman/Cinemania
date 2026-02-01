@@ -61,3 +61,11 @@ export const Media = {
   Movie: "Movie",
   TV: "TV",
 } as const;
+
+export const MovieCategoryHeadings = {
+  NowPlaying: "Now Playing",
+  Trending: "Trending",
+  Upcoming: "Upcoming",
+  TopRated: "Top Rated",
+  Latest: "Latest",
+} as const;

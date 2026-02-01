@@ -1,6 +1,7 @@
 import z from "zod";
 import type {
   Media,
+  MovieCategoryHeadings,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
   TmdbBackdropSizes,
@@ -40,14 +41,14 @@ export type TmdbImageSizes =
 
 export const MovieSchema = z.object({
   adult: z.boolean(), // Defaults to true
-  backdrop_path: z.string(),
+  backdrop_path: z.string().or(z.null()),
   genre_ids: z.array(z.number()),
   id: z.number(), // Defaults to 0
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
   popularity: z.number(), // Defaults to 0
-  poster_path: z.string(),
+  poster_path: z.string().or(z.null()),
   release_date: z.string(),
   title: z.string(),
   video: z.boolean(), // Defaults to true
@@ -78,3 +79,6 @@ export const GenreResponseSchema = z.object({
 export type GenreResponse = z.infer<typeof GenreResponseSchema>;
 
 export type MediaType = (typeof Media)[keyof typeof Media];
+
+export type MovieCategoryHeadingsType =
+  (typeof MovieCategoryHeadings)[keyof typeof MovieCategoryHeadings];
