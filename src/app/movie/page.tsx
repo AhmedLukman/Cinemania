@@ -6,13 +6,11 @@ const MovieHomePage = () => {
   return (
     <>
       <MovieDoubleSlider />
-      <MediaCategorySliderSection heading={MovieCategoryHeadings.NowPlaying} />
-      <MediaCategorySliderSection heading={MovieCategoryHeadings.Trending} />
-      <MediaCategorySliderSection heading={MovieCategoryHeadings.TopRated} />
-      <MediaCategorySliderSection heading={MovieCategoryHeadings.Upcoming} />
-      <MediaCategorySliderSection heading={MovieCategoryHeadings.Latest} />
+      {Object.values(MovieCategoryHeadings).map((heading) => (
+        <MediaCategorySliderSection key={heading} heading={heading} />
+      ))}
     </>
-  )
+  );
 };
 
 export default MovieHomePage;
