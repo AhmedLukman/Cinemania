@@ -1,2 +1,14 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+
+.slick-dots {
+  @apply !hidden md:!block;
+}
+
+.slick-dots li button:before {
+  @apply bg-white rounded mt-3;
+}
+
+.category-slider .slick-slide {
+  @apply px-2 md:px-4;
+}
