@@ -2,7 +2,7 @@
 @import "@heroui/styles";
 
 .slick-dots {
-  @apply !hidden md:!block;
+  @apply hidden! md:block!;
 }
 
 .slick-dots li button:before {
