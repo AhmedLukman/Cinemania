@@ -59,9 +59,11 @@ const MediaCategorySliderSection = async ({
         <h3 className="text-white z-10 text-2xl md:text-3xl font-serif font-bold">
           {heading}
         </h3>
-        <BorderButton href={`/movie/category/${slugHeading}`}>
-          View more
-        </BorderButton>
+        {mediaCategory.length === 20 && (
+          <BorderButton href={`/movie/category/${slugHeading}`}>
+            View more
+          </BorderButton>
+        )}
       </div>
       <MediaCategorySlider length={mediaCategory.length}>
         {mediaCategory.map((result, index) => (
