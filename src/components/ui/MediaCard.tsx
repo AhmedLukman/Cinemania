@@ -2,8 +2,8 @@ import { Card, Link } from "@heroui/react";
 import { TmdbPosterSizes } from "@/lib/constants";
 import type { MovieDetailsType, MovieType } from "@/lib/validators";
 import "m3-ripple/ripple.css";
-import ImageWithBlur from "../ui/ImageWithBlur";
-import RippleClient from "../ui/RippleClient";
+import ImageWithBlur from "./ImageWithBlur";
+import RippleClient from "./RippleClient";
 
 type MediaCardProps = {
   media: MovieType | MovieDetailsType;

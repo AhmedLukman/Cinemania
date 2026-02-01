@@ -6,7 +6,7 @@ import type {
   MovieType,
 } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
-import MediaCard from "./MediaCard";
+import MediaCard from "../ui/MediaCard";
 import MediaCategorySlider from "./MovieCategorySlider";
 
 type MediaCategorySliderSectionProps = {
