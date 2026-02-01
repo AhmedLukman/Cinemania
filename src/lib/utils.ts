@@ -69,9 +69,9 @@ export const getSmallSliderConfig = ({
 });
 
 export const getCategorySliderConfig = (mediaLength: number): SliderConfig => ({
-  infinite: mediaLength <= 4,
+  infinite: mediaLength > 4,
   slidesToShow: 4,
-  slidesToScroll: mediaLength < 4 ? 1 : 4,
+  slidesToScroll: 4,
   dots: true,
   draggable: mediaLength > 4,
   autoplay: true,
@@ -82,14 +82,16 @@ export const getCategorySliderConfig = (mediaLength: number): SliderConfig => ({
       breakpoint: 900,
       settings: {
         slidesToShow: 3,
-        slidesToScroll: mediaLength < 3 ? 1 : 3,
+        slidesToScroll: 3,
+        infinite: mediaLength > 3,
       },
     },
     {
       breakpoint: 640,
       settings: {
         slidesToShow: 2,
-        slidesToScroll: mediaLength < 2 ? 1 : 2,
+        slidesToScroll: 2,
+        infinite: mediaLength > 2,
         arrows: false,
       },
     },
