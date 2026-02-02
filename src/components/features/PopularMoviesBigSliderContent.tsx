@@ -1,27 +1,33 @@
-import { TmdbBackdropSizes, TmdbPosterSizes } from "@/lib/constants";
-import type { MovieType } from "@/lib/validators";
+import { Media, TmdbBackdropSizes, TmdbPosterSizes } from "@/lib/constants";
+import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import Backdrop from "../ui/Backdrop";
 import ImageWithBlur from "../ui/ImageWithBlur";
 import MovieDetails from "./MovieDetails";
 
 type PopularMoviesBigSliderContentProps = {
-  popularMovie: MovieType;
+  popularMovie: MovieType | TvType;
   isFirstMovie: boolean;
+  type: MediaType;
 };
 
 const PopularMoviesBigSliderContent = ({
-  popularMovie: {
-    title,
-    backdrop_path,
-    poster_path,
-    id,
-    overview,
-    release_date,
-    vote_average,
-    genre_ids,
-  },
+  popularMovie,
   isFirstMovie,
+  type,
 }: PopularMoviesBigSliderContentProps) => {
+  const isMovie = type === Media.Movie;
+
+  const title = isMovie
+    ? (popularMovie as MovieType).title
+    : (popularMovie as TvType).name;
+
+  const releaseDate = isMovie
+    ? (popularMovie as MovieType).release_date
+    : (popularMovie as TvType).first_air_date;
+
+  const { backdrop_path, poster_path, id, overview, vote_average, genre_ids } =
+    popularMovie;
+
   return (
     <div className="h-screen relative focus:outline-none">
       {/* Full Screen Image */}
@@ -42,9 +48,10 @@ const PopularMoviesBigSliderContent = ({
           genreIds={genre_ids}
           id={id}
           overview={overview}
-          releaseDate={release_date}
+          releaseDate={releaseDate}
           title={title}
           voteAverage={vote_average}
+          type={type}
         />
         {/* Side Image */}
         <aside className="mt-10 hidden lg:block w-4/12 max-w-xl h-[68svh] rounded-xl relative mx-auto">

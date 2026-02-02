@@ -4,6 +4,7 @@ import type {
   MovieCategoryHeadings,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
+  TmdbApiTvEndpoints,
   TmdbBackdropSizes,
   TmdbLogoSizes,
   TmdbPosterSizes,
@@ -13,6 +14,9 @@ import type {
 
 export type TmdbApiMovieEndpointsType =
   (typeof TmdbApiMovieEndpoints)[keyof typeof TmdbApiMovieEndpoints];
+
+export type TmdbApiTvEndpointsType =
+  (typeof TmdbApiTvEndpoints)[keyof typeof TmdbApiTvEndpoints];
 
 export type TmdbBackdropSizesType =
   (typeof TmdbBackdropSizes)[keyof typeof TmdbBackdropSizes];
@@ -66,6 +70,33 @@ export const MovieResponseSchema = z.object({
 export type MovieType = z.infer<typeof MovieSchema>;
 
 export type MovieResponseType = z.infer<typeof MovieResponseSchema>;
+
+export const TvSchema = z.object({
+  backdrop_path: z.string().nullable(),
+  first_air_date: z.string(),
+  genre_ids: z.array(z.number()),
+  id: z.number(), // Defaults to 0
+  name: z.string(),
+  origin_country: z.array(z.string()),
+  original_language: z.string(),
+  original_name: z.string(),
+  overview: z.string(),
+  popularity: z.number(), // Defaults to 0
+  poster_path: z.string().nullable(),
+  vote_average: z.number(), // Defaults to 0
+  vote_count: z.number(), // Defaults to 0
+});
+
+export const TvResponseSchema = z.object({
+  page: z.number(), // Defaults to 0
+  results: z.array(TvSchema),
+  total_pages: z.number(), // Defaults to 0
+  total_results: z.number(), // Defaults to 0
+});
+
+export type TvType = z.infer<typeof TvSchema>;
+
+export type TvResponseType = z.infer<typeof TvResponseSchema>;
 
 const SpokenLanguagesSchema = z.object({
   english_name: z.string(),

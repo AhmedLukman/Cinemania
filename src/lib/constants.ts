@@ -11,6 +11,15 @@ export const TmdbApiMovieEndpoints = {
   Latest: "/movie/latest",
 } as const;
 
+export const TmdbApiTvEndpoints = {
+  Popular: "/tv/popular",
+  Trending: "/trending/tv/day",
+  TopRated: "/tv/top_rated",
+  AiringToday: "/tv/airing_today",
+  OnTheAir: "/tv/on_the_air",
+  Latest: "/tv/latest",
+} as const;
+
 export const TmdbBackdropSizes = {
   W300: "/w300",
   W780: "/w780",
@@ -67,5 +76,13 @@ export const MovieCategoryHeadings = {
   Trending: "Trending",
   Upcoming: "Upcoming",
   TopRated: "Top Rated",
+  Latest: "Latest",
+} as const;
+
+export const TvCategoryHeadings = {
+  Trending: "Trending",
+  TopRated: "Top Rated",
+  AiringToday: "Airing Today",
+  OnTheAir: "On The Air",
   Latest: "Latest",
 } as const;

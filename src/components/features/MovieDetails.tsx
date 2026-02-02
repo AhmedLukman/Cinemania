@@ -1,5 +1,5 @@
 import { FaCircleInfo } from "react-icons/fa6";
-import { Media } from "@/lib/constants";
+import type { MediaType } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
 import GenreList from "../ui/GenreList";
 
@@ -10,6 +10,7 @@ type MovieDetailsProps = {
   genreIds: number[];
   overview: string;
   id: number;
+  type: MediaType;
 };
 
 const MovieDetails = ({
@@ -19,6 +20,7 @@ const MovieDetails = ({
   genreIds,
   overview,
   id,
+  type,
 }: MovieDetailsProps) => {
   return (
     <div className="lg:w-7/12 xl:w-8/12 pt-24">
@@ -34,13 +36,13 @@ const MovieDetails = ({
             {voteAverage?.toFixed(1)}
           </span>
         </div>
-        <GenreList type={Media.Movie} genreIds={genreIds} />
+        <GenreList type={type} genreIds={genreIds} />
       </div>
       <p className="max-w-prose mt-10 2xl:text-lg line-clamp-6">
         {overview || "No overview available."}
       </p>
       <div className="mt-5 2xl:mt-8">
-        <BorderButton href={`movie/${id}`}>
+        <BorderButton href={`${type.toLowerCase()}/${id}`}>
           More details
           <FaCircleInfo />
         </BorderButton>

@@ -1,16 +1,27 @@
 import { SliderProvider } from "@/context/SliderContext";
-import { TmdbApiMovieEndpoints } from "@/lib/constants";
-import { cachedMovieList } from "@/lib/serverService";
-import type { MovieType } from "@/lib/validators";
+import {
+  Media,
+  TmdbApiMovieEndpoints,
+  TmdbApiTvEndpoints,
+} from "@/lib/constants";
+import { cachedMovieList, cachedTvList } from "@/lib/serverService";
+import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import BigSlider from "./BigSlider";
 import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
 import PopularMoviesSmallSliderContent from "./PopularMoviesSmallSliderContent";
 import SmallSlider from "./SmallSlider";
 
-const MovieDoubleSlider = async () => {
-  let popularMovies: MovieType[];
+type MovieDoubleSliderProps = {
+  type: MediaType;
+};
+
+const MovieDoubleSlider = async ({ type }: MovieDoubleSliderProps) => {
+  let popularMovies: (MovieType | TvType)[];
   try {
-    const { results } = await cachedMovieList(TmdbApiMovieEndpoints.Popular);
+    const { results } =
+      type === Media.Movie
+        ? await cachedMovieList(TmdbApiMovieEndpoints.Popular)
+        : await cachedTvList(TmdbApiTvEndpoints.Popular);
     popularMovies = results;
   } catch {
     return (
@@ -37,6 +48,7 @@ const MovieDoubleSlider = async () => {
               key={popularMovie.id}
               popularMovie={popularMovie}
               isFirstMovie={index === 0}
+              type={type}
             />
           ))}
         </BigSlider>
@@ -46,6 +58,7 @@ const MovieDoubleSlider = async () => {
               key={popularMovie.id}
               popularMovie={popularMovie}
               index={index}
+              type={type}
             />
           ))}
         </SmallSlider>

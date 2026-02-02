@@ -1,17 +1,26 @@
-import { TmdbBackdropSizes } from "@/lib/constants";
-import type { MovieType } from "@/lib/validators";
-import ImageWithBlur from "../ui/ImageWithBlur";
+import { Media, TmdbBackdropSizes } from "@/lib/constants";
+import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import HoverCard from "../ui/HoverCard";
+import ImageWithBlur from "../ui/ImageWithBlur";
 
 type PopularMoviesSmallSliderContentProps = {
-  popularMovie: MovieType;
+  popularMovie: MovieType | TvType;
   index: number;
+  type: MediaType;
 };
 
 const PopularMoviesSmallSliderContent = ({
-  popularMovie: { id, backdrop_path, title },
+  popularMovie,
   index,
+  type,
 }: PopularMoviesSmallSliderContentProps) => {
+  const title =
+    type === Media.Movie
+      ? (popularMovie as MovieType).title
+      : (popularMovie as TvType).name;
+
+  const { id, backdrop_path } = popularMovie;
+
   return (
     <HoverCard key={id} index={index} title={title}>
       <ImageWithBlur

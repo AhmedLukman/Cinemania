@@ -6,6 +6,7 @@ import {
   TMDB_BASE_URL,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
+  TmdbApiTvEndpoints,
 } from "./constants";
 import {
   GenreResponseSchema,
@@ -13,6 +14,8 @@ import {
   MovieDetailsSchema,
   MovieResponseSchema,
   type TmdbApiMovieEndpointsType,
+  type TmdbApiTvEndpointsType,
+  TvResponseSchema,
 } from "./validators";
 
 const apiClient = axios.create({
@@ -55,6 +58,21 @@ const fetchMovieList = async (
 };
 
 export const cachedMovieList = cache(fetchMovieList);
+
+const fetchTvList = async (
+  endpoint: Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>,
+) => {
+  try {
+    const response = await apiClient(endpoint);
+    const data = TvResponseSchema.parse(response.data);
+    return data;
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedTvList = cache(fetchTvList);
 
 const fetchLatestMovie = async () => {
   try {
