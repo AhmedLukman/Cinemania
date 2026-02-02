@@ -15,6 +15,7 @@ import {
   MovieResponseSchema,
   type TmdbApiMovieEndpointsType,
   type TmdbApiTvEndpointsType,
+  TvDetailsSchema,
   TvResponseSchema,
 } from "./validators";
 
@@ -86,6 +87,19 @@ const fetchLatestMovie = async () => {
 };
 
 export const cachedLatestMovie = cache(fetchLatestMovie);
+
+const fetchLatestTv = async () => {
+  try {
+    const response = await apiClient(TmdbApiTvEndpoints.Latest);
+    const data = TvDetailsSchema.parse(response.data);
+    return data;
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedLatestTv = cache(fetchLatestTv);
 
 const fetchGenres = async (type: MediaType) => {
   try {
