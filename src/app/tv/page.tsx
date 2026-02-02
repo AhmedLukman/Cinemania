@@ -1,8 +1,8 @@
-import MovieDoubleSlider from "@/components/features/MovieDoubleSlider";
+import MediaDoubleSlider from "@/components/features/MediaDoubleSlider";
 import { Media } from "@/lib/constants";
 
 const TvHomePage = () => {
-  return <MovieDoubleSlider type={Media.TV} />;
+  return <MediaDoubleSlider type={Media.TV} />;
 };
 
 export default TvHomePage;

@@ -11,30 +11,35 @@ import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
 import PopularMoviesSmallSliderContent from "./PopularMoviesSmallSliderContent";
 import SmallSlider from "./SmallSlider";
 
-type MovieDoubleSliderProps = {
+type MediaDoubleSliderProps = {
   type: MediaType;
 };
 
-const MovieDoubleSlider = async ({ type }: MovieDoubleSliderProps) => {
-  let popularMovies: (MovieType | TvType)[];
+const MediaDoubleSlider = async ({ type }: MediaDoubleSliderProps) => {
+  let popularMedia: (MovieType | TvType)[];
   try {
     const { results } =
       type === Media.Movie
         ? await cachedMovieList(TmdbApiMovieEndpoints.Popular)
         : await cachedTvList(TmdbApiTvEndpoints.Popular);
-    popularMovies = results;
+    popularMedia = results;
   } catch {
     return (
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
-        <p className="text-red-500">⚠️ Error fetching popular movies ⚠️</p>
+        <p className="text-red-500">
+          ⚠️ Error fetching popular{" "}
+          {type === Media.Movie ? "movies" : "TV shows"} ⚠️
+        </p>
       </section>
     );
   }
 
-  if (popularMovies.length === 0) {
+  if (popularMedia.length === 0) {
     return (
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
-        <p className="text-gray-500">No popular movies found. 😢</p>
+        <p className="text-gray-500">
+          No popular {type === Media.Movie ? "movies" : "TV shows"} found. 😢
+        </p>
       </section>
     );
   }
@@ -43,20 +48,20 @@ const MovieDoubleSlider = async ({ type }: MovieDoubleSliderProps) => {
     <SliderProvider>
       <section className="slider-container">
         <BigSlider>
-          {popularMovies.map((popularMovie, index: number) => (
+          {popularMedia.map((item, index: number) => (
             <PopularMoviesBigSliderContent
-              key={popularMovie.id}
-              popularMovie={popularMovie}
+              key={item.id}
+              popularMovie={item}
               isFirstMovie={index === 0}
               type={type}
             />
           ))}
         </BigSlider>
         <SmallSlider>
-          {popularMovies.map((popularMovie, index) => (
+          {popularMedia.map((item, index) => (
             <PopularMoviesSmallSliderContent
-              key={popularMovie.id}
-              popularMovie={popularMovie}
+              key={item.id}
+              popularMovie={item}
               index={index}
               type={type}
             />
@@ -67,4 +72,4 @@ const MovieDoubleSlider = async ({ type }: MovieDoubleSliderProps) => {
   );
 };
 
-export default MovieDoubleSlider;
+export default MediaDoubleSlider;
