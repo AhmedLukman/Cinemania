@@ -139,7 +139,7 @@ const EpisodeSchema = z.object({
   air_date: z.string(),
   episode_number: z.number(), // Defaults to 0
   production_code: z.string(),
-  runtime: z.number(), // Defaults to 0
+  runtime: z.number().nullable(), // Defaults to 0
   season_number: z.number(), // Defaults to 0
   show_id: z.number(), // Defaults to 0
   still_path: z.string().nullable(),
@@ -207,7 +207,7 @@ export const TvDetailsSchema = z.object({
   last_air_date: z.string(),
   last_episode_to_air: EpisodeSchema,
   name: z.string(),
-  next_episode_to_air: EpisodeSchema,
+  next_episode_to_air: EpisodeSchema.nullable(),
   networks: z.array(NetworkSchema),
   number_of_episodes: z.number(), // Defaults to 0
   number_of_seasons: z.number(), // Defaults to 0
