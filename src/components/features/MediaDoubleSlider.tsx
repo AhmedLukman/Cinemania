@@ -4,7 +4,7 @@ import {
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
 } from "@/lib/constants";
-import { cachedMovieList, cachedTvList } from "@/lib/serverService";
+import { cachedMediaList } from "@/lib/serverService";
 import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import BigSlider from "./BigSlider";
 import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
@@ -18,10 +18,12 @@ type MediaDoubleSliderProps = {
 const MediaDoubleSlider = async ({ type }: MediaDoubleSliderProps) => {
   let popularMedia: (MovieType | TvType)[];
   try {
-    const { results } =
+    const { results } = await cachedMediaList(
+      type,
       type === Media.Movie
-        ? await cachedMovieList(TmdbApiMovieEndpoints.Popular)
-        : await cachedTvList(TmdbApiTvEndpoints.Popular);
+        ? TmdbApiMovieEndpoints.Popular
+        : TmdbApiTvEndpoints.Popular,
+    );
     popularMedia = results;
   } catch {
     return (

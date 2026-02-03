@@ -3,6 +3,7 @@ import { getPlaiceholder } from "plaiceholder";
 import { cache } from "react";
 import z from "zod";
 import {
+  Media,
   TMDB_BASE_URL,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
@@ -12,11 +13,15 @@ import {
   GenreResponseSchema,
   type MediaType,
   MovieDetailsSchema,
+  type MovieDetailsType,
   MovieResponseSchema,
+  type MovieResponseType,
   type TmdbApiMovieEndpointsType,
   type TmdbApiTvEndpointsType,
   TvDetailsSchema,
+  type TvDetailsType,
   TvResponseSchema,
+  type TvResponseType,
 } from "./validators";
 
 const apiClient = axios.create({
@@ -42,64 +47,46 @@ const displayError = (error: unknown) => {
   }
 };
 
-const fetchMovieList = async (
-  endpoint: Exclude<
-    TmdbApiMovieEndpointsType,
-    typeof TmdbApiMovieEndpoints.Latest
-  >,
-) => {
+const fetchMediaList = async <T extends MediaType>(
+  type: T,
+  endpoint:
+    | Exclude<TmdbApiMovieEndpointsType, typeof TmdbApiMovieEndpoints.Latest>
+    | Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>,
+): Promise<T extends typeof Media.Movie ? MovieResponseType : TvResponseType> => {
   try {
+    const isMovie = type === Media.Movie;
     const response = await apiClient(endpoint);
-    const data = MovieResponseSchema.parse(response.data);
-    return data;
+    const data = isMovie
+      ? MovieResponseSchema.parse(response.data)
+      : TvResponseSchema.parse(response.data);
+    return data as T extends typeof Media.Movie ? MovieResponseType : TvResponseType;
   } catch (error) {
     displayError(error);
     throw error;
   }
 };
 
-export const cachedMovieList = cache(fetchMovieList);
+export const cachedMediaList = cache(fetchMediaList);
 
-const fetchTvList = async (
-  endpoint: Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>,
-) => {
+const fetchLatestMedia = async <T extends MediaType>(
+  type: T
+): Promise<T extends typeof Media.Movie ? MovieDetailsType : TvDetailsType> => {
   try {
-    const response = await apiClient(endpoint);
-    const data = TvResponseSchema.parse(response.data);
-    return data;
+    const isMovie = type === Media.Movie;
+    const response = await apiClient(
+      isMovie ? TmdbApiMovieEndpoints.Latest : TmdbApiTvEndpoints.Latest,
+    );
+    const data = isMovie
+      ? MovieDetailsSchema.parse(response.data)
+      : TvDetailsSchema.parse(response.data);
+    return data as T extends typeof Media.Movie ? MovieDetailsType : TvDetailsType;
   } catch (error) {
     displayError(error);
     throw error;
   }
 };
 
-export const cachedTvList = cache(fetchTvList);
-
-const fetchLatestMovie = async () => {
-  try {
-    const response = await apiClient(TmdbApiMovieEndpoints.Latest);
-    const data = MovieDetailsSchema.parse(response.data);
-    return data;
-  } catch (error) {
-    displayError(error);
-    throw error;
-  }
-};
-
-export const cachedLatestMovie = cache(fetchLatestMovie);
-
-const fetchLatestTv = async () => {
-  try {
-    const response = await apiClient(TmdbApiTvEndpoints.Latest);
-    const data = TvDetailsSchema.parse(response.data);
-    return data;
-  } catch (error) {
-    displayError(error);
-    throw error;
-  }
-};
-
-export const cachedLatestTv = cache(fetchLatestTv);
+export const cachedLatestMedia = cache(fetchLatestMedia);
 
 const fetchGenres = async (type: MediaType) => {
   try {

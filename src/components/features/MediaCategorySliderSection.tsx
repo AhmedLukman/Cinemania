@@ -1,16 +1,9 @@
 import {
   Media,
-  MovieCategoryHeadings,
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
-  TvCategoryHeadings,
 } from "@/lib/constants";
-import {
-  cachedLatestMovie,
-  cachedLatestTv,
-  cachedMovieList,
-  cachedTvList,
-} from "@/lib/serverService";
+import { cachedLatestMedia, cachedMediaList } from "@/lib/serverService";
 import type {
   MediaType,
   MovieCategoryHeadingsType,
@@ -37,39 +30,23 @@ const MediaCategorySliderSection = async ({
   const noWhitespaceHeading = heading.replace(/\s+/g, "");
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
 
-  let mediaCategory: (MovieType | TvType)[] | [MovieDetailsType | TvDetailsType];
+  let mediaCategory:
+    | (MovieType | TvType)[]
+    | [MovieDetailsType | TvDetailsType];
 
   try {
-    if (isMovie) {
-      if (heading === MovieCategoryHeadings.Latest) {
-        const data = await cachedLatestMovie();
-        mediaCategory = [data];
-      } else {
-        const { results } = await cachedMovieList(
-          TmdbApiMovieEndpoints[
-            noWhitespaceHeading as Exclude<
-              keyof typeof TmdbApiMovieEndpoints,
-              "Latest"
-            >
-          ],
-        );
-        mediaCategory = results;
-      }
+    if (heading === "Latest") {
+      const data = await cachedLatestMedia(type);
+      mediaCategory = [data];
     } else {
-      if (heading === TvCategoryHeadings.Latest) {
-        const data = await cachedLatestTv();
-        mediaCategory = [data];
-      } else {
-        const { results } = await cachedTvList(
-          TmdbApiTvEndpoints[
-            noWhitespaceHeading as Exclude<
-              keyof typeof TmdbApiTvEndpoints,
-              "Latest"
-            >
-          ],
-        );
-        mediaCategory = results;
-      }
+      const endpoints = isMovie ? TmdbApiMovieEndpoints : TmdbApiTvEndpoints;
+      const endpoint =
+        endpoints[
+          noWhitespaceHeading as Exclude<keyof typeof endpoints, "Latest">
+        ];
+
+      const { results } = await cachedMediaList(type, endpoint);
+      mediaCategory = results;
     }
   } catch {
     return (
