@@ -2,7 +2,7 @@ import { Media, TmdbBackdropSizes, TmdbPosterSizes } from "@/lib/constants";
 import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import Backdrop from "../ui/Backdrop";
 import ImageWithBlur from "../ui/ImageWithBlur";
-import MovieDetails from "./MovieDetails";
+import MediaDetails from "./MediaDetails";
 
 type BigSliderContentProps = {
   popularMedia: MovieType | TvType;
@@ -44,7 +44,7 @@ const BigSliderContent = ({
       <Backdrop />
 
       <div className="h-full md:gap-5 lg:flex px-5 md:px-12 lg:px-16 xl:px-20 2xl:px-28 text-white">
-        <MovieDetails
+        <MediaDetails
           genreIds={genre_ids}
           id={id}
           overview={overview}
