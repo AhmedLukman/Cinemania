@@ -83,7 +83,7 @@ const MediaCategorySliderSection = async ({
             priority={index < 4}
             key={result.id}
             media={result}
-            type={type}
+            isMovie={isMovie}
           />
         ))}
       </MediaCategorySlider>

@@ -1,6 +1,6 @@
 import { Card, Link } from "@heroui/react";
-import { Media, TmdbPosterSizes } from "@/lib/constants";
-import type { MediaType, MovieDetailsType, MovieType, TvDetailsType, TvType } from "@/lib/validators";
+import { TmdbPosterSizes } from "@/lib/constants";
+import type { MovieDetailsType, MovieType, TvDetailsType, TvType } from "@/lib/validators";
 import "m3-ripple/ripple.css";
 import ImageWithBlur from "./ImageWithBlur";
 import RippleClient from "./RippleClient";
@@ -9,11 +9,10 @@ type MediaCardProps = {
   media: MovieType | MovieDetailsType | TvType | TvDetailsType;
   priority: boolean;
   href: string;
-  type: MediaType;
+  isMovie: boolean;
 };
 
-const MediaCard = ({ media, priority, href, type }: MediaCardProps) => {
-  const isMovie = type === Media.Movie;
+const MediaCard = ({ media, priority, href, isMovie }: MediaCardProps) => {
   const title = isMovie
     ? (media as MovieType | MovieDetailsType).title
     : (media as TvType | TvDetailsType).name;
