@@ -4,29 +4,29 @@ import Backdrop from "../ui/Backdrop";
 import ImageWithBlur from "../ui/ImageWithBlur";
 import MovieDetails from "./MovieDetails";
 
-type PopularMoviesBigSliderContentProps = {
-  popularMovie: MovieType | TvType;
-  isFirstMovie: boolean;
+type BigSliderContentProps = {
+  popularMedia: MovieType | TvType;
+  isFirstMedia: boolean;
   type: MediaType;
 };
 
-const PopularMoviesBigSliderContent = ({
-  popularMovie,
-  isFirstMovie,
+const BigSliderContent = ({
+  popularMedia,
+  isFirstMedia,
   type,
-}: PopularMoviesBigSliderContentProps) => {
+}: BigSliderContentProps) => {
   const isMovie = type === Media.Movie;
 
   const title = isMovie
-    ? (popularMovie as MovieType).title
-    : (popularMovie as TvType).name;
+    ? (popularMedia as MovieType).title
+    : (popularMedia as TvType).name;
 
   const releaseDate = isMovie
-    ? (popularMovie as MovieType).release_date
-    : (popularMovie as TvType).first_air_date;
+    ? (popularMedia as MovieType).release_date
+    : (popularMedia as TvType).first_air_date;
 
   const { backdrop_path, poster_path, id, overview, vote_average, genre_ids } =
-    popularMovie;
+    popularMedia;
 
   return (
     <div className="h-screen relative focus:outline-none">
@@ -35,7 +35,7 @@ const PopularMoviesBigSliderContent = ({
         className="object-cover object-center -z-20"
         alt={`${title} backdrop`}
         sizes="100vw"
-        priority={isFirstMovie}
+        priority={isFirstMedia}
         path={backdrop_path || ""}
         imageSize={TmdbBackdropSizes.ORIGINAL}
         blurImageSize={TmdbBackdropSizes.W300}
@@ -61,7 +61,7 @@ const PopularMoviesBigSliderContent = ({
             alt={`${title} poster`}
             blurImageSize={TmdbPosterSizes.W92}
             imageSize={TmdbPosterSizes.W780}
-            priority={isFirstMovie}
+            priority={isFirstMedia}
             sizes="(min-width: 1280px) 33vw, (min-width: 1024px) 41.666vw, 0vw"
           />
         </aside>
@@ -70,4 +70,4 @@ const PopularMoviesBigSliderContent = ({
   );
 };
 
-export default PopularMoviesBigSliderContent;
+export default BigSliderContent;

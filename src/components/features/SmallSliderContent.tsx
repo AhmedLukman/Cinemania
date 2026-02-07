@@ -3,23 +3,23 @@ import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import HoverCard from "../ui/HoverCard";
 import ImageWithBlur from "../ui/ImageWithBlur";
 
-type PopularMoviesSmallSliderContentProps = {
-  popularMovie: MovieType | TvType;
+type SmallSliderContentProps = {
+  popularMedia: MovieType | TvType;
   index: number;
   type: MediaType;
 };
 
-const PopularMoviesSmallSliderContent = ({
-  popularMovie,
+const SmallSliderContent = ({
+  popularMedia,
   index,
   type,
-}: PopularMoviesSmallSliderContentProps) => {
+}: SmallSliderContentProps) => {
   const title =
     type === Media.Movie
-      ? (popularMovie as MovieType).title
-      : (popularMovie as TvType).name;
+      ? (popularMedia as MovieType).title
+      : (popularMedia as TvType).name;
 
-  const { id, backdrop_path } = popularMovie;
+  const { id, backdrop_path } = popularMedia;
 
   return (
     <HoverCard key={id} index={index} title={title}>
@@ -36,4 +36,4 @@ const PopularMoviesSmallSliderContent = ({
   );
 };
 
-export default PopularMoviesSmallSliderContent;
+export default SmallSliderContent;

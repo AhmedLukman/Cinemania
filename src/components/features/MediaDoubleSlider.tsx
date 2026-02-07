@@ -7,9 +7,9 @@ import {
 import { cachedMediaList } from "@/lib/serverService";
 import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import BigSlider from "./BigSlider";
-import PopularMoviesBigSliderContent from "./PopularMoviesBigSliderContent";
-import PopularMoviesSmallSliderContent from "./PopularMoviesSmallSliderContent";
+import BigSliderContent from "./BigSliderContent";
 import SmallSlider from "./SmallSlider";
+import SmallSliderContent from "./SmallSliderContent";
 
 type MediaDoubleSliderProps = {
   type: MediaType;
@@ -51,19 +51,19 @@ const MediaDoubleSlider = async ({ type }: MediaDoubleSliderProps) => {
       <section className="slider-container">
         <BigSlider>
           {popularMedia.map((item, index: number) => (
-            <PopularMoviesBigSliderContent
+            <BigSliderContent
               key={item.id}
-              popularMovie={item}
-              isFirstMovie={index === 0}
+              popularMedia={item}
+              isFirstMedia={index === 0}
               type={type}
             />
           ))}
         </BigSlider>
         <SmallSlider>
           {popularMedia.map((item, index) => (
-            <PopularMoviesSmallSliderContent
+            <SmallSliderContent
               key={item.id}
-              popularMovie={item}
+              popularMedia={item}
               index={index}
               type={type}
             />
