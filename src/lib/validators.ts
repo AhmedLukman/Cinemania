@@ -44,61 +44,6 @@ export type TmdbImageSizes =
   | TmdbStillSizesType
   | TmdbLogoSizesType;
 
-export const MovieSchema = z.object({
-  adult: z.boolean(), // Defaults to true
-  backdrop_path: z.string().nullable(),
-  genre_ids: z.array(z.number()),
-  id: z.number(), // Defaults to 0
-  original_language: z.string(),
-  original_title: z.string(),
-  overview: z.string(),
-  popularity: z.number(), // Defaults to 0
-  poster_path: z.string().nullable(),
-  release_date: z.string(),
-  title: z.string(),
-  video: z.boolean(), // Defaults to true
-  vote_average: z.number(), // Defaults to 0
-  vote_count: z.number(), // Defaults to 0
-});
-
-export const MovieResponseSchema = z.object({
-  page: z.number(), // Defaults to 0
-  results: z.array(MovieSchema),
-  total_pages: z.number(), // Defaults to 0
-  total_results: z.number(), // Defaults to 0
-});
-
-export type MovieType = z.infer<typeof MovieSchema>;
-
-export type MovieResponseType = z.infer<typeof MovieResponseSchema>;
-
-export const TvSchema = z.object({
-  backdrop_path: z.string().nullable(),
-  first_air_date: z.string(),
-  genre_ids: z.array(z.number()),
-  id: z.number(), // Defaults to 0
-  name: z.string(),
-  origin_country: z.array(z.string()),
-  original_language: z.string(),
-  original_name: z.string(),
-  overview: z.string(),
-  popularity: z.number(), // Defaults to 0
-  poster_path: z.string().nullable(),
-  vote_average: z.number(), // Defaults to 0
-  vote_count: z.number(), // Defaults to 0
-});
-
-export const TvResponseSchema = z.object({
-  page: z.number(), // Defaults to 0
-  results: z.array(TvSchema),
-  total_pages: z.number(), // Defaults to 0
-  total_results: z.number(), // Defaults to 0
-});
-
-export type TvType = z.infer<typeof TvSchema>;
-
-export type TvResponseType = z.infer<typeof TvResponseSchema>;
-
 const SpokenLanguagesSchema = z.object({
   english_name: z.string(),
   iso_639_1: z.string(),
@@ -121,6 +66,69 @@ const GenreSchema = z.object({
   id: z.number(),
   name: z.string(),
 });
+
+const BaseMediaSchema = z.object({
+  backdrop_path: z.string().nullable(),
+  id: z.number(),
+  original_language: z.string(),
+  overview: z.string(),
+  popularity: z.number(),
+  poster_path: z.string().nullable(),
+  vote_average: z.number(),
+  vote_count: z.number(),
+});
+
+const BaseDetailsSchema = BaseMediaSchema.extend({
+  adult: z.boolean(),
+  genres: z.array(GenreSchema),
+  homepage: z.string(),
+  production_companies: z.array(ProductionCompaniesSchema),
+  production_countries: z.array(ProductionCountriesSchema),
+  spoken_languages: z.array(SpokenLanguagesSchema),
+  status: z.string(),
+  tagline: z.string(),
+});
+
+export const MovieSchema = BaseMediaSchema.extend({
+  adult: z.boolean(),
+  genre_ids: z.array(z.number()),
+  original_title: z.string(),
+  release_date: z.string(),
+  title: z.string(),
+  video: z.boolean(),
+});
+
+export const TvSchema = BaseMediaSchema.extend({
+  first_air_date: z.string(),
+  genre_ids: z.array(z.number()),
+  name: z.string(),
+  origin_country: z.array(z.string()),
+  original_name: z.string(),
+});
+
+const createPaginatedResponseSchema = <
+  T extends typeof MovieSchema | typeof TvSchema,
+>(
+  schema: T,
+) =>
+  z.object({
+    page: z.number(),
+    results: z.array(schema),
+    total_pages: z.number(),
+    total_results: z.number(),
+  });
+
+export const MovieResponseSchema = createPaginatedResponseSchema(MovieSchema);
+
+export type MovieType = z.infer<typeof MovieSchema>;
+
+export type MovieResponseType = z.infer<typeof MovieResponseSchema>;
+
+export const TvResponseSchema = createPaginatedResponseSchema(TvSchema);
+
+export type TvType = z.infer<typeof TvSchema>;
+
+export type TvResponseType = z.infer<typeof TvResponseSchema>;
 
 const CreatedBySchema = z.object({
   id: z.number(), // Defaults to 0
@@ -163,69 +171,37 @@ const SeasonSchema = z.object({
   vote_average: z.number(), // Defaults to 0
 });
 
-export const MovieDetailsSchema = z.object({
-  adult: z.boolean(), // Defaults to true
-  backdrop_path: z.string().nullable(),
+export const MovieDetailsSchema = BaseDetailsSchema.extend({
   belongs_to_collection: z.string().nullable(),
-  budget: z.number(), // Defaults to 0
-  genres: z.array(GenreSchema),
-  homepage: z.string(),
-  id: z.number(), // Defaults to 0
+  budget: z.number(),
   imdb_id: z.string().nullable(),
-  original_language: z.string(),
   original_title: z.string(),
-  overview: z.string(),
-  popularity: z.number(), // Defaults to 0
-  poster_path: z.string().nullable(),
-  production_companies: z.array(ProductionCompaniesSchema),
-  production_countries: z.array(ProductionCountriesSchema),
   release_date: z.string(),
-  revenue: z.number(), // Defaults to 0
-  runtime: z.number(), // Defaults to 0
-  spoken_languages: z.array(SpokenLanguagesSchema),
-  status: z.string(),
-  tagline: z.string(),
+  revenue: z.number(),
+  runtime: z.number(),
   title: z.string(),
-  video: z.boolean(), // Defaults to true
-  vote_average: z.number(), // Defaults to 0
-  vote_count: z.number(), // Defaults to 0
+  video: z.boolean(),
 });
 
 export type MovieDetailsType = z.infer<typeof MovieDetailsSchema>;
 
-export const TvDetailsSchema = z.object({
-  adult: z.boolean(), // Defaults to true
-  backdrop_path: z.string().nullable(),
+export const TvDetailsSchema = BaseDetailsSchema.extend({
   created_by: z.array(CreatedBySchema),
   episode_run_time: z.array(z.number()),
   first_air_date: z.string(),
-  genres: z.array(GenreSchema),
-  homepage: z.string(),
-  id: z.number(), // Defaults to 0
-  in_production: z.boolean(), // Defaults to true
+  in_production: z.boolean(),
   languages: z.array(z.string()),
   last_air_date: z.string(),
   last_episode_to_air: EpisodeSchema,
   name: z.string(),
   next_episode_to_air: EpisodeSchema.nullable(),
   networks: z.array(NetworkSchema),
-  number_of_episodes: z.number(), // Defaults to 0
-  number_of_seasons: z.number(), // Defaults to 0
+  number_of_episodes: z.number(),
+  number_of_seasons: z.number(),
   origin_country: z.array(z.string()),
-  original_language: z.string(),
   original_name: z.string(),
-  overview: z.string(),
-  popularity: z.number(), // Defaults to 0
-  poster_path: z.string().nullable(),
-  production_companies: z.array(ProductionCompaniesSchema),
-  production_countries: z.array(ProductionCountriesSchema),
   seasons: z.array(SeasonSchema),
-  spoken_languages: z.array(SpokenLanguagesSchema),
-  status: z.string(),
-  tagline: z.string(),
   type: z.string(),
-  vote_average: z.number(), // Defaults to 0
-  vote_count: z.number(), // Defaults to 0
 });
 
 export type TvDetailsType = z.infer<typeof TvDetailsSchema>;
