@@ -3,7 +3,7 @@ import {
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
 } from "@/lib/constants";
-import { cachedLatestMedia, cachedMediaList } from "@/lib/serverService";
+import { cachedMediaDetails, cachedMediaList } from "@/lib/serverService";
 import type {
   MediaType,
   MovieCategoryHeadingsType,
@@ -36,7 +36,7 @@ const MediaCategorySliderSection = async ({
 
   try {
     if (heading === "Latest") {
-      const data = await cachedLatestMedia(type);
+      const data = await cachedMediaDetails(type);
       mediaCategory = [data];
     } else {
       const endpoints = isMovie ? TmdbApiMovieEndpoints : TmdbApiTvEndpoints;

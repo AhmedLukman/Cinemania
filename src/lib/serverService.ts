@@ -68,7 +68,7 @@ const fetchMediaList = async <T extends MediaType>(
 
 export const cachedMediaList = cache(fetchMediaList);
 
-const fetchLatestMedia = async <T extends MediaType>(
+const fetchMediaDetails = async <T extends MediaType>(
   type: T
 ): Promise<T extends typeof Media.Movie ? MovieDetailsType : TvDetailsType> => {
   try {
@@ -86,7 +86,7 @@ const fetchLatestMedia = async <T extends MediaType>(
   }
 };
 
-export const cachedLatestMedia = cache(fetchLatestMedia);
+export const cachedMediaDetails = cache(fetchMediaDetails);
 
 const fetchGenres = async (type: MediaType) => {
   try {
