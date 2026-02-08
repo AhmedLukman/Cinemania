@@ -4,6 +4,7 @@ import { cn } from "@heroui/styles";
 import { AnimatePresence, motion } from "framer-motion";
 import { type ReactNode, useState } from "react";
 import { useSliderContext } from "@/context/SliderContext";
+import RippleClient from "./RippleClient";
 
 const ANIMATE_DIRECTION = "right";
 
@@ -97,6 +98,7 @@ const HoverCard = ({
           { "cursor-default": isActive },
         )}
       >
+        <RippleClient />
         <AnimatePresence mode="wait">
           <motion.div
             className="relative h-full w-full"
