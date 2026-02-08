@@ -52,14 +52,18 @@ const fetchMediaList = async <T extends MediaType>(
   endpoint:
     | Exclude<TmdbApiMovieEndpointsType, typeof TmdbApiMovieEndpoints.Latest>
     | Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>,
-): Promise<T extends typeof Media.Movie ? MovieResponseType : TvResponseType> => {
+): Promise<
+  T extends typeof Media.Movie ? MovieResponseType : TvResponseType
+> => {
   try {
     const isMovie = type === Media.Movie;
     const response = await apiClient(endpoint);
     const data = isMovie
       ? MovieResponseSchema.parse(response.data)
       : TvResponseSchema.parse(response.data);
-    return data as T extends typeof Media.Movie ? MovieResponseType : TvResponseType;
+    return data as T extends typeof Media.Movie
+      ? MovieResponseType
+      : TvResponseType;
   } catch (error) {
     displayError(error);
     throw error;
@@ -69,7 +73,7 @@ const fetchMediaList = async <T extends MediaType>(
 export const cachedMediaList = cache(fetchMediaList);
 
 const fetchMediaDetails = async <T extends MediaType>(
-  type: T
+  type: T,
 ): Promise<T extends typeof Media.Movie ? MovieDetailsType : TvDetailsType> => {
   try {
     const isMovie = type === Media.Movie;
@@ -79,7 +83,9 @@ const fetchMediaDetails = async <T extends MediaType>(
     const data = isMovie
       ? MovieDetailsSchema.parse(response.data)
       : TvDetailsSchema.parse(response.data);
-    return data as T extends typeof Media.Movie ? MovieDetailsType : TvDetailsType;
+    return data as T extends typeof Media.Movie
+      ? MovieDetailsType
+      : TvDetailsType;
   } catch (error) {
     displayError(error);
     throw error;

@@ -1,6 +1,11 @@
 import { Card, Link } from "@heroui/react";
 import { TmdbPosterSizes } from "@/lib/constants";
-import type { MovieDetailsType, MovieType, TvDetailsType, TvType } from "@/lib/validators";
+import type {
+  MovieDetailsType,
+  MovieType,
+  TvDetailsType,
+  TvType,
+} from "@/lib/validators";
 import "m3-ripple/ripple.css";
 import ImageWithBlur from "./ImageWithBlur";
 import RippleClient from "./RippleClient";
@@ -17,7 +22,7 @@ const MediaCard = ({ media, priority, href, isMovie }: MediaCardProps) => {
     ? (media as MovieType | MovieDetailsType).title
     : (media as TvType | TvDetailsType).name;
   const src = media.poster_path || "";
-  
+
   return (
     <Link href={href}>
       <Card className="border-none relative hover:cursor-pointer hover:opacity-100 active:opacity-100 group h-72 xl:h-92 2xl:h-112 shadow-sm shadow-gray-500">
