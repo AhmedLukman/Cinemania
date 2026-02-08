@@ -2,7 +2,7 @@
 
 import Slider from "react-slick";
 
-const MediaCategorySlider = ({
+const CategorySlider = ({
   children,
   length,
 }: {
@@ -58,4 +58,4 @@ const MediaCategorySlider = ({
   );
 };
 
-export default MediaCategorySlider;
+export default CategorySlider;

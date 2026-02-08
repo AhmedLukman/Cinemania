@@ -15,17 +15,17 @@ import type {
 } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
 import MediaCard from "../ui/MediaCard";
-import MediaCategorySlider from "./MediaCategorySlider";
+import CategorySlider from "./CategorySlider";
 
-type MediaCategorySliderSectionProps = {
+type CategorySliderSectionProps = {
   heading: MovieCategoryHeadingsType | TvCategoryHeadingsType;
   type: MediaType;
 };
 
-const MediaCategorySliderSection = async ({
+const CategorySliderSection = async ({
   heading,
   type,
-}: MediaCategorySliderSectionProps) => {
+}: CategorySliderSectionProps) => {
   const isMovie = type === Media.Movie;
   const noWhitespaceHeading = heading.replace(/\s+/g, "");
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
@@ -76,7 +76,7 @@ const MediaCategorySliderSection = async ({
           </BorderButton>
         )}
       </div>
-      <MediaCategorySlider length={mediaCategory.length}>
+      <CategorySlider length={mediaCategory.length}>
         {mediaCategory.map((result, index) => (
           <MediaCard
             href={`/${type.toLowerCase()}/${result.id}`}
@@ -86,9 +86,9 @@ const MediaCategorySliderSection = async ({
             isMovie={isMovie}
           />
         ))}
-      </MediaCategorySlider>
+      </CategorySlider>
     </section>
   );
 };
 
-export default MediaCategorySliderSection;
+export default CategorySliderSection;

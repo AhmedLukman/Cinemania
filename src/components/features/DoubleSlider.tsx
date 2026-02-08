@@ -11,11 +11,11 @@ import BigSliderContent from "./BigSliderContent";
 import SmallSlider from "./SmallSlider";
 import SmallSliderContent from "./SmallSliderContent";
 
-type MediaDoubleSliderProps = {
+type DoubleSliderProps = {
   type: MediaType;
 };
 
-const MediaDoubleSlider = async ({ type }: MediaDoubleSliderProps) => {
+const DoubleSlider = async ({ type }: DoubleSliderProps) => {
   let popularMedia: (MovieType | TvType)[];
   try {
     const { results } = await cachedMediaList(
@@ -74,4 +74,4 @@ const MediaDoubleSlider = async ({ type }: MediaDoubleSliderProps) => {
   );
 };
 
-export default MediaDoubleSlider;
+export default DoubleSlider;

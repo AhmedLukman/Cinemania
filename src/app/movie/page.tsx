@@ -1,13 +1,13 @@
-import MediaCategorySliderSection from "@/components/features/MediaCategorySliderSection";
-import MediaDoubleSlider from "@/components/features/MediaDoubleSlider";
+import CategorySliderSection from "@/components/features/CategorySliderSection";
+import DoubleSlider from "@/components/features/DoubleSlider";
 import { Media, MovieCategoryHeadings } from "@/lib/constants";
 
 const MovieHomePage = () => {
   return (
     <>
-      <MediaDoubleSlider type={Media.Movie} />
+      <DoubleSlider type={Media.Movie} />
       {Object.values(MovieCategoryHeadings).map((heading) => (
-        <MediaCategorySliderSection
+        <CategorySliderSection
           key={heading}
           heading={heading}
           type={Media.Movie}

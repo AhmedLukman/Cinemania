@@ -1,13 +1,13 @@
-import MediaCategorySliderSection from "@/components/features/MediaCategorySliderSection";
-import MediaDoubleSlider from "@/components/features/MediaDoubleSlider";
+import CategorySliderSection from "@/components/features/CategorySliderSection";
+import DoubleSlider from "@/components/features/DoubleSlider";
 import { Media, TvCategoryHeadings } from "@/lib/constants";
 
 const TvHomePage = () => {
   return (
     <>
-      <MediaDoubleSlider type={Media.TV} />
+      <DoubleSlider type={Media.TV} />
       {Object.values(TvCategoryHeadings).map((heading) => (
-        <MediaCategorySliderSection
+        <CategorySliderSection
           key={heading}
           heading={heading}
           type={Media.TV}
