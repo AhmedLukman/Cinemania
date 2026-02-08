@@ -69,21 +69,31 @@ export const getSmallSliderConfig = ({
 });
 
 export const getCategorySliderConfig = (mediaLength: number): SliderConfig => ({
-  infinite: mediaLength > 4,
-  slidesToShow: 4,
-  slidesToScroll: 4,
+  infinite: mediaLength > 5,
+  slidesToShow: 5,
+  slidesToScroll: 5,
   dots: true,
-  draggable: mediaLength > 4,
+  draggable: mediaLength > 5,
   autoplay: true,
   arrows: false,
   autoplaySpeed: 6000,
   responsive: [
+    {
+      breakpoint: 1500,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: mediaLength > 4,
+        draggable: mediaLength > 4,
+      },
+    },
     {
       breakpoint: 900,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 3,
         infinite: mediaLength > 3,
+        draggable: mediaLength > 3,
       },
     },
     {
@@ -92,6 +102,7 @@ export const getCategorySliderConfig = (mediaLength: number): SliderConfig => ({
         slidesToShow: 2,
         slidesToScroll: 2,
         infinite: mediaLength > 2,
+        draggable: mediaLength > 2,
         arrows: false,
       },
     },
