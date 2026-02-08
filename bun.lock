@@ -13,6 +13,7 @@
         "next": "16.1.4",
         "react": "19.2.3",
         "react-dom": "19.2.3",
+        "react-scroll-to-top": "^3.1.0",
         "react-slick": "^0.31.0",
         "slick-carousel": "^1.8.1",
         "zod": "^4.3.6",
@@ -553,6 +554,8 @@
     "react-aria-components": ["react-aria-components@1.14.0", "", { "dependencies": { "@internationalized/date": "^3.10.1", "@internationalized/string": "^3.2.7", "@react-aria/autocomplete": "3.0.0-rc.4", "@react-aria/collections": "^3.0.1", "@react-aria/dnd": "^3.11.4", "@react-aria/focus": "^3.21.3", "@react-aria/interactions": "^3.26.0", "@react-aria/live-announcer": "^3.4.4", "@react-aria/overlays": "^3.31.0", "@react-aria/ssr": "^3.9.10", "@react-aria/textfield": "^3.18.3", "@react-aria/toolbar": "3.0.0-beta.22", "@react-aria/utils": "^3.32.0", "@react-aria/virtualizer": "^4.1.11", "@react-stately/autocomplete": "3.0.0-beta.4", "@react-stately/layout": "^4.5.2", "@react-stately/selection": "^3.20.7", "@react-stately/table": "^3.15.2", "@react-stately/utils": "^3.11.0", "@react-stately/virtualizer": "^4.4.4", "@react-types/form": "^3.7.16", "@react-types/grid": "^3.3.6", "@react-types/shared": "^3.32.1", "@react-types/table": "^3.13.4", "@swc/helpers": "^0.5.0", "client-only": "^0.0.1", "react-aria": "^3.45.0", "react-stately": "^3.43.0", "use-sync-external-store": "^1.4.0" }, "peerDependencies": { "react": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1", "react-dom": "^16.8.0 || ^17.0.0-rc.1 || ^18.0.0 || ^19.0.0-rc.1" } }, "sha512-u21N/yS6Ozk9P9oO8wxMNZSFiPk6F3aAE9w6aN7pseGPApkjXqDyPNCnTsTTvMtVL3QRBkVbf7fJ5yi2hksVEg=="],
 
     "react-dom": ["react-dom@19.2.3", "", { "dependencies": { "scheduler": "^0.27.0" }, "peerDependencies": { "react": "^19.2.3" } }, "sha512-yELu4WmLPw5Mr/lmeEpox5rw3RETacE++JgHqQzd2dg+YbJuat3jH4ingc+WPZhxaoFzdv9y33G+F7Nl5O0GBg=="],
+
+    "react-scroll-to-top": ["react-scroll-to-top@3.1.0", "", { "peerDependencies": { "react": "^16.8.0 || 17.x || ^18 || ^19" } }, "sha512-hD3bJQgCblywG2gcI515BcxP43MZkBidsYEVt9ak5pu1UOoQDJzIJp89zwccbpFuqeHZ29Lxs00T9DSxQr4cmw=="],
 
     "react-slick": ["react-slick@0.31.0", "", { "dependencies": { "classnames": "^2.2.5", "json2mq": "^0.2.0", "lodash.debounce": "^4.0.8", "resize-observer-polyfill": "^1.5.0" }, "peerDependencies": { "react": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0", "react-dom": "^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0" } }, "sha512-zo6VLT8wuSBJffg/TFPbzrw2dEnfZ/cUKmYsKByh3AgatRv29m2LoFbq5vRMa3R3A4wp4d8gwbJKO2fWZFaI3g=="],
 
