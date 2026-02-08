@@ -8,7 +8,7 @@ import type {
 } from "@/lib/validators";
 import "m3-ripple/ripple.css";
 import ImageWithBlur from "./ImageWithBlur";
-import RippleClient from "./RippleClient";
+import RippleUI from "./RippleUI";
 
 type MediaCardProps = {
   media: MovieType | MovieDetailsType | TvType | TvDetailsType;
@@ -26,7 +26,7 @@ const MediaCard = ({ media, priority, href, isMovie }: MediaCardProps) => {
   return (
     <Link href={href}>
       <Card className="border-none relative hover:cursor-pointer hover:opacity-100 active:opacity-100 group h-72 xl:h-92 2xl:h-112 shadow-sm shadow-gray-500">
-        <RippleClient />
+        <RippleUI />
         <ImageWithBlur
           alt={`${title} image`}
           blurImageSize={TmdbPosterSizes.W92}

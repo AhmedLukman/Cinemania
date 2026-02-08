@@ -2,8 +2,8 @@
 
 import { Ripple } from "m3-ripple";
 
-const RippleClient = () => {
+const RippleUI = () => {
   return <Ripple className="z-5" />;
 };
 
-export default RippleClient;
+export default RippleUI;
