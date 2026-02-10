@@ -7,7 +7,7 @@ import MediaDetails from "./MediaDetails";
 type BigSliderContentProps = {
   popularMedia: MovieType | TvType;
   isFirstMedia: boolean;
-  type: MediaType;
+  type: Exclude<MediaType, typeof Media.Celebrity>;
 };
 
 const BigSliderContent = ({

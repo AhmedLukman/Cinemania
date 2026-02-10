@@ -5,17 +5,23 @@ import z from "zod";
 import {
   Media,
   TMDB_BASE_URL,
+  TmdbApiCelebrityEndpoints,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
 } from "./constants";
 import {
+  CelebrityDetailsSchema,
+  type CelebrityDetailsType,
+  CelebrityResponseSchema,
+  type CelebrityResponseType,
   GenreResponseSchema,
   type MediaType,
   MovieDetailsSchema,
   type MovieDetailsType,
   MovieResponseSchema,
   type MovieResponseType,
+  type TmdbApiCelebrityEndpointsType,
   type TmdbApiMovieEndpointsType,
   type TmdbApiTvEndpointsType,
   TvDetailsSchema,
@@ -51,19 +57,32 @@ const fetchMediaList = async <T extends MediaType>(
   type: T,
   endpoint:
     | Exclude<TmdbApiMovieEndpointsType, typeof TmdbApiMovieEndpoints.Latest>
-    | Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>,
+    | Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>
+    | Exclude<
+        TmdbApiCelebrityEndpointsType,
+        typeof TmdbApiCelebrityEndpoints.Latest
+      >,
 ): Promise<
-  T extends typeof Media.Movie ? MovieResponseType : TvResponseType
+  T extends typeof Media.Movie
+    ? MovieResponseType
+    : T extends typeof Media.TV
+      ? TvResponseType
+      : CelebrityResponseType
 > => {
   try {
     const isMovie = type === Media.Movie;
+    const isTV = type === Media.TV;
     const response = await apiClient(endpoint);
     const data = isMovie
       ? MovieResponseSchema.parse(response.data)
-      : TvResponseSchema.parse(response.data);
+      : isTV
+        ? TvResponseSchema.parse(response.data)
+        : CelebrityResponseSchema.parse(response.data);
     return data as T extends typeof Media.Movie
       ? MovieResponseType
-      : TvResponseType;
+      : T extends typeof Media.TV
+        ? TvResponseType
+        : CelebrityResponseType;
   } catch (error) {
     displayError(error);
     throw error;
@@ -74,18 +93,33 @@ export const cachedMediaList = cache(fetchMediaList);
 
 const fetchMediaDetails = async <T extends MediaType>(
   type: T,
-): Promise<T extends typeof Media.Movie ? MovieDetailsType : TvDetailsType> => {
+): Promise<
+  T extends typeof Media.Movie
+    ? MovieDetailsType
+    : T extends typeof Media.TV
+      ? TvDetailsType
+      : CelebrityDetailsType
+> => {
   try {
     const isMovie = type === Media.Movie;
+    const isTV = type === Media.TV;
     const response = await apiClient(
-      isMovie ? TmdbApiMovieEndpoints.Latest : TmdbApiTvEndpoints.Latest,
+      isMovie
+        ? TmdbApiMovieEndpoints.Latest
+        : isTV
+          ? TmdbApiTvEndpoints.Latest
+          : TmdbApiCelebrityEndpoints.Latest,
     );
     const data = isMovie
       ? MovieDetailsSchema.parse(response.data)
-      : TvDetailsSchema.parse(response.data);
+      : isTV
+        ? TvDetailsSchema.parse(response.data)
+        : CelebrityDetailsSchema.parse(response.data);
     return data as T extends typeof Media.Movie
       ? MovieDetailsType
-      : TvDetailsType;
+      : T extends typeof Media.TV
+        ? TvDetailsType
+        : CelebrityDetailsType;
   } catch (error) {
     displayError(error);
     throw error;
@@ -94,7 +128,9 @@ const fetchMediaDetails = async <T extends MediaType>(
 
 export const cachedMediaDetails = cache(fetchMediaDetails);
 
-const fetchGenres = async (type: MediaType) => {
+const fetchGenres = async (
+  type: Exclude<MediaType, typeof Media.Celebrity>,
+) => {
   try {
     const response = await apiClient(TmdbApiGenreEndpoints[type]);
     const data = GenreResponseSchema.parse(response.data);

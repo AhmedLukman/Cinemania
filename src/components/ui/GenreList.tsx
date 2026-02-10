@@ -1,9 +1,10 @@
+import type { Media } from "@/lib/constants";
 import { cachedGenres } from "@/lib/serverService";
 import type { MediaType } from "@/lib/validators";
 
 type GenreListProps = {
   genreIds: number[];
-  type: MediaType;
+  type: Exclude<MediaType, typeof Media.Celebrity>;
 };
 
 const GenreList = async ({ genreIds, type }: GenreListProps) => {

@@ -1,10 +1,14 @@
 import {
   Media,
+  TmdbApiCelebrityEndpoints,
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
 } from "@/lib/constants";
 import { cachedMediaDetails, cachedMediaList } from "@/lib/serverService";
 import type {
+  CelebrityCategoryHeadingsType,
+  CelebrityDetailsType,
+  CelebrityType,
   MediaType,
   MovieCategoryHeadingsType,
   MovieDetailsType,
@@ -18,7 +22,10 @@ import MediaCard from "../ui/MediaCard";
 import CategorySlider from "./CategorySlider";
 
 type CategorySliderSectionProps = {
-  heading: MovieCategoryHeadingsType | TvCategoryHeadingsType;
+  heading:
+    | MovieCategoryHeadingsType
+    | TvCategoryHeadingsType
+    | CelebrityCategoryHeadingsType;
   type: MediaType;
 };
 
@@ -27,19 +34,24 @@ const CategorySliderSection = async ({
   type,
 }: CategorySliderSectionProps) => {
   const isMovie = type === Media.Movie;
+  const isTV = type === Media.TV;
   const noWhitespaceHeading = heading.replace(/\s+/g, "");
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
 
   let mediaCategory:
-    | (MovieType | TvType)[]
-    | [MovieDetailsType | TvDetailsType];
+    | (MovieType | TvType | CelebrityType)[]
+    | [MovieDetailsType | TvDetailsType | CelebrityDetailsType];
 
   try {
     if (heading === "Latest") {
       const data = await cachedMediaDetails(type);
       mediaCategory = [data];
     } else {
-      const endpoints = isMovie ? TmdbApiMovieEndpoints : TmdbApiTvEndpoints;
+      const endpoints = isMovie
+        ? TmdbApiMovieEndpoints
+        : isTV
+          ? TmdbApiTvEndpoints
+          : TmdbApiCelebrityEndpoints;
       const endpoint =
         endpoints[
           noWhitespaceHeading as Exclude<keyof typeof endpoints, "Latest">
@@ -51,7 +63,8 @@ const CategorySliderSection = async ({
   } catch {
     return (
       <p className="text-red-500 text-center">
-        ⚠️ Error fetching {heading} {isMovie ? "movies" : "TV shows"} ⚠️
+        ⚠️ Error fetching {heading}{" "}
+        {isMovie ? "movies" : isTV ? "TV shows" : "celebrities"} ⚠️
       </p>
     );
   }
@@ -59,7 +72,8 @@ const CategorySliderSection = async ({
   if (mediaCategory.length === 0) {
     return (
       <p className="text-gray-500 text-center">
-        No {heading} {isMovie ? "movies" : "TV shows"} found.
+        No {heading} {isMovie ? "movies" : isTV ? "TV shows" : "celebrities"}{" "}
+        found.
       </p>
     );
   }
@@ -83,7 +97,7 @@ const CategorySliderSection = async ({
             priority={index < 4}
             key={result.id}
             media={result}
-            isMovie={isMovie}
+            type={type}
           />
         ))}
       </CategorySlider>

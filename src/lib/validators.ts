@@ -1,7 +1,9 @@
 import z from "zod";
 import type {
+  CelebrityCategoryHeadings,
   Media,
   MovieCategoryHeadings,
+  TmdbApiCelebrityEndpoints,
   TmdbApiGenreEndpoints,
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
@@ -18,6 +20,9 @@ export type TmdbApiMovieEndpointsType =
 
 export type TmdbApiTvEndpointsType =
   (typeof TmdbApiTvEndpoints)[keyof typeof TmdbApiTvEndpoints];
+
+export type TmdbApiCelebrityEndpointsType =
+  (typeof TmdbApiCelebrityEndpoints)[keyof typeof TmdbApiCelebrityEndpoints];
 
 export type TmdbBackdropSizesType =
   (typeof TmdbBackdropSizes)[keyof typeof TmdbBackdropSizes];
@@ -107,7 +112,7 @@ export const TvSchema = BaseMediaSchema.extend({
 });
 
 const createPaginatedResponseSchema = <
-  T extends typeof MovieSchema | typeof TvSchema,
+  T extends typeof MovieSchema | typeof TvSchema | typeof CelebritySchema,
 >(
   schema: T,
 ) =>
@@ -129,6 +134,45 @@ export const TvResponseSchema = createPaginatedResponseSchema(TvSchema);
 export type TvType = z.infer<typeof TvSchema>;
 
 export type TvResponseType = z.infer<typeof TvResponseSchema>;
+
+const KnownForItemSchema = z.object({
+  adult: z.boolean().optional(),
+  backdrop_path: z.string().nullable().optional(),
+  genre_ids: z.array(z.number()).optional(),
+  id: z.number(),
+  media_type: z.string(),
+  original_language: z.string().optional(),
+  original_title: z.string().optional(),
+  original_name: z.string().optional(),
+  overview: z.string().optional(),
+  poster_path: z.string().nullable().optional(),
+  release_date: z.string().optional(),
+  first_air_date: z.string().optional(),
+  title: z.string().optional(),
+  name: z.string().optional(),
+  video: z.boolean().optional(),
+  vote_average: z.number().optional(),
+  vote_count: z.number().optional(),
+  origin_country: z.array(z.string()).optional(),
+});
+
+export const CelebritySchema = z.object({
+  adult: z.boolean().nullable(),
+  gender: z.number().nullable(),
+  id: z.number().nullable(),
+  known_for: z.array(KnownForItemSchema).nullish(),
+  known_for_department: z.string().nullable(),
+  name: z.string().nullable(),
+  popularity: z.number().nullable(),
+  profile_path: z.string().nullable(),
+});
+
+export const CelebrityResponseSchema =
+  createPaginatedResponseSchema(CelebritySchema);
+
+export type CelebrityType = z.infer<typeof CelebritySchema>;
+
+export type CelebrityResponseType = z.infer<typeof CelebrityResponseSchema>;
 
 const CreatedBySchema = z.object({
   id: z.number(), // Defaults to 0
@@ -206,6 +250,25 @@ export const TvDetailsSchema = BaseDetailsSchema.extend({
 
 export type TvDetailsType = z.infer<typeof TvDetailsSchema>;
 
+export const CelebrityDetailsSchema = z.object({
+  adult: z.boolean(), // Defaults to true
+  also_known_as: z.array(z.string()),
+  biography: z.string(),
+  birthday: z.string().nullable(),
+  deathday: z.string().nullable(),
+  gender: z.number(), // Defaults to 0
+  homepage: z.string().nullable(),
+  id: z.number(), // Defaults to 0
+  imdb_id: z.string().nullable(),
+  known_for_department: z.string().nullable(),
+  name: z.string(),
+  place_of_birth: z.string().nullable(),
+  popularity: z.number(), // Defaults to 0
+  profile_path: z.string().nullable(),
+});
+
+export type CelebrityDetailsType = z.infer<typeof CelebrityDetailsSchema>;
+
 export const GenreResponseSchema = z.object({
   genres: z.array(GenreSchema),
 });
@@ -219,3 +282,6 @@ export type MovieCategoryHeadingsType =
 
 export type TvCategoryHeadingsType =
   (typeof TvCategoryHeadings)[keyof typeof TvCategoryHeadings];
+
+export type CelebrityCategoryHeadingsType =
+  (typeof CelebrityCategoryHeadings)[keyof typeof CelebrityCategoryHeadings];

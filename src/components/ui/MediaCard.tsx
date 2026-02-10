@@ -1,6 +1,9 @@
 import { Card, Link } from "@heroui/react";
-import { TmdbPosterSizes } from "@/lib/constants";
+import { Media, TmdbPosterSizes } from "@/lib/constants";
 import type {
+  CelebrityDetailsType,
+  CelebrityType,
+  MediaType,
   MovieDetailsType,
   MovieType,
   TvDetailsType,
@@ -11,17 +14,30 @@ import ImageWithBlur from "./ImageWithBlur";
 import RippleUI from "./RippleUI";
 
 type MediaCardProps = {
-  media: MovieType | MovieDetailsType | TvType | TvDetailsType;
+  media:
+    | MovieType
+    | MovieDetailsType
+    | TvType
+    | TvDetailsType
+    | CelebrityType
+    | CelebrityDetailsType;
   priority: boolean;
   href: string;
-  isMovie: boolean;
+  type: MediaType;
 };
 
-const MediaCard = ({ media, priority, href, isMovie }: MediaCardProps) => {
-  const title = isMovie
-    ? (media as MovieType | MovieDetailsType).title
-    : (media as TvType | TvDetailsType).name;
-  const src = media.poster_path || "";
+const MediaCard = ({ media, priority, href, type }: MediaCardProps) => {
+  const title =
+    type === Media.Movie
+      ? (media as MovieType | MovieDetailsType).title
+      : (media as TvType | TvDetailsType | CelebrityDetailsType | CelebrityType)
+          .name;
+
+  const src =
+    type === Media.Celebrity
+      ? (media as CelebrityType | CelebrityDetailsType).profile_path || ""
+      : (media as MovieType | MovieDetailsType | TvType | TvDetailsType)
+          .poster_path || "";
 
   return (
     <Link href={href}>

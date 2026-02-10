@@ -12,7 +12,7 @@ import SmallSlider from "./SmallSlider";
 import SmallSliderContent from "./SmallSliderContent";
 
 type DoubleSliderProps = {
-  type: MediaType;
+  type: Exclude<MediaType, typeof Media.Celebrity>;
 };
 
 const DoubleSlider = async ({ type }: DoubleSliderProps) => {
