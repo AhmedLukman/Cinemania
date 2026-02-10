@@ -157,13 +157,13 @@ const KnownForItemSchema = z.object({
 });
 
 export const CelebritySchema = z.object({
-  adult: z.boolean().nullable(),
-  gender: z.number().nullable(),
-  id: z.number().nullable(),
+  adult: z.boolean(),
+  gender: z.number(),
+  id: z.number(),
   known_for: z.array(KnownForItemSchema).nullish(),
   known_for_department: z.string().nullable(),
-  name: z.string().nullable(),
-  popularity: z.number().nullable(),
+  name: z.string(),
+  popularity: z.number(),
   profile_path: z.string().nullable(),
 });
 
