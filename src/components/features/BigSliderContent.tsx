@@ -1,4 +1,4 @@
-import { Media, TmdbBackdropSizes, TmdbPosterSizes } from "@/lib/constants";
+import { Entity, TmdbBackdropSizes, TmdbPosterSizes } from "@/lib/constants";
 import type { MediaType, MovieType, TvType } from "@/lib/validators";
 import Backdrop from "../ui/Backdrop";
 import ImageWithBlur from "../ui/ImageWithBlur";
@@ -7,7 +7,7 @@ import MediaDetails from "./MediaDetails";
 type BigSliderContentProps = {
   popularMedia: MovieType | TvType;
   isFirstMedia: boolean;
-  type: Exclude<MediaType, typeof Media.Celebrity>;
+  type: MediaType;
 };
 
 const BigSliderContent = ({
@@ -15,7 +15,7 @@ const BigSliderContent = ({
   isFirstMedia,
   type,
 }: BigSliderContentProps) => {
-  const isMovie = type === Media.Movie;
+  const isMovie = type === Entity.Movie;
 
   const title = isMovie
     ? (popularMedia as MovieType).title

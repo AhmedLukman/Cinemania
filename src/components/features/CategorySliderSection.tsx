@@ -1,5 +1,5 @@
 import {
-  Media,
+  Entity,
   TmdbApiCelebrityEndpoints,
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
@@ -16,7 +16,7 @@ import type {
   CelebrityCategoryHeadingsType,
   CelebrityDetailsType,
   CelebrityType,
-  MediaType,
+  EntityType,
   MovieCategoryHeadingsType,
   MovieDetailsType,
   MovieType,
@@ -28,7 +28,7 @@ import type {
   TvType,
 } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
-import MediaCard from "../ui/MediaCard";
+import EntityCard from "../ui/EntityCard";
 import CategorySlider from "./CategorySlider";
 
 type CategorySliderSectionProps = {
@@ -36,22 +36,25 @@ type CategorySliderSectionProps = {
     | MovieCategoryHeadingsType
     | TvCategoryHeadingsType
     | CelebrityCategoryHeadingsType;
-  type: MediaType;
+  type: EntityType;
 };
 
-type EntityType = MovieType | TvType | CelebrityType;
+type EntityUnion = MovieType | TvType | CelebrityType;
 
 type MediaListResult = {
-  results: EntityType[];
+  results: EntityUnion[];
 };
 
 type ListEndpointByEntity = {
-  [Media.Movie]: Exclude<
+  [Entity.Movie]: Exclude<
     TmdbApiMovieEndpointsType,
     typeof TmdbApiMovieEndpoints.Latest
   >;
-  [Media.TV]: Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>;
-  [Media.Celebrity]: Exclude<
+  [Entity.TV]: Exclude<
+    TmdbApiTvEndpointsType,
+    typeof TmdbApiTvEndpoints.Latest
+  >;
+  [Entity.Celebrity]: Exclude<
     TmdbApiCelebrityEndpointsType,
     typeof TmdbApiCelebrityEndpoints.Latest
   >;
@@ -61,43 +64,43 @@ const CategorySliderSection = async ({
   heading,
   type,
 }: CategorySliderSectionProps) => {
-  const isMovie = type === Media.Movie;
-  const isTV = type === Media.TV;
+  const isMovie = type === Entity.Movie;
+  const isTV = type === Entity.TV;
   const noWhitespaceHeading = heading.replace(/\s+/g, "");
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
 
   let mediaCategory:
-    | EntityType[]
+    | EntityUnion[]
     | [MovieDetailsType | TvDetailsType | CelebrityDetailsType];
 
   const detailFetchers: Record<
-    MediaType,
+    EntityType,
     () => Promise<MovieDetailsType | TvDetailsType | CelebrityDetailsType>
   > = {
-    [Media.Movie]: () => cachedMovieDetails(),
-    [Media.TV]: () => cachedTvDetails(),
-    [Media.Celebrity]: () => cachedCelebrityDetails(),
+    [Entity.Movie]: () => cachedMovieDetails(),
+    [Entity.TV]: () => cachedTvDetails(),
+    [Entity.Celebrity]: () => cachedCelebrityDetails(),
   };
 
   const fetchDetailsByType = () => detailFetchers[type]();
 
   const endpointMaps = {
-    [Media.Movie]: TmdbApiMovieEndpoints,
-    [Media.TV]: TmdbApiTvEndpoints,
-    [Media.Celebrity]: TmdbApiCelebrityEndpoints,
+    [Entity.Movie]: TmdbApiMovieEndpoints,
+    [Entity.TV]: TmdbApiTvEndpoints,
+    [Entity.Celebrity]: TmdbApiCelebrityEndpoints,
   } as const;
 
   const listFetchers: Record<
-    MediaType,
-    (endpoint: ListEndpointByEntity[MediaType]) => Promise<MediaListResult>
+    EntityType,
+    (endpoint: ListEndpointByEntity[EntityType]) => Promise<MediaListResult>
   > = {
-    [Media.Movie]: (endpoint) =>
-      cachedMovieList(endpoint as ListEndpointByEntity[typeof Media.Movie]),
-    [Media.TV]: (endpoint) =>
-      cachedTvList(endpoint as ListEndpointByEntity[typeof Media.TV]),
-    [Media.Celebrity]: (endpoint) =>
+    [Entity.Movie]: (endpoint) =>
+      cachedMovieList(endpoint as ListEndpointByEntity[typeof Entity.Movie]),
+    [Entity.TV]: (endpoint) =>
+      cachedTvList(endpoint as ListEndpointByEntity[typeof Entity.TV]),
+    [Entity.Celebrity]: (endpoint) =>
       cachedCelebrityList(
-        endpoint as ListEndpointByEntity[typeof Media.Celebrity],
+        endpoint as ListEndpointByEntity[typeof Entity.Celebrity],
       ),
   };
 
@@ -150,7 +153,7 @@ const CategorySliderSection = async ({
       </div>
       <CategorySlider length={mediaCategory.length}>
         {mediaCategory.map((result, index) => (
-          <MediaCard
+          <EntityCard
             href={`/${type.toLowerCase()}/${result.id}`}
             priority={index < 4}
             key={result.id}

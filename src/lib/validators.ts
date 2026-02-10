@@ -1,7 +1,7 @@
 import z from "zod";
 import type {
   CelebrityCategoryHeadings,
-  Media,
+  Entity,
   MovieCategoryHeadings,
   TmdbApiCelebrityEndpoints,
   TmdbApiGenreEndpoints,
@@ -275,7 +275,9 @@ export const GenreResponseSchema = z.object({
 
 export type GenreResponse = z.infer<typeof GenreResponseSchema>;
 
-export type MediaType = (typeof Media)[keyof typeof Media];
+export type EntityType = (typeof Entity)[keyof typeof Entity];
+
+export type MediaType = typeof Entity.Movie | typeof Entity.TV;
 
 export type MovieCategoryHeadingsType =
   (typeof MovieCategoryHeadings)[keyof typeof MovieCategoryHeadings];

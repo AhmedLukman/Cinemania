@@ -1,5 +1,4 @@
 import { FaCircleInfo } from "react-icons/fa6";
-import type { Media } from "@/lib/constants";
 import type { MediaType } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
 import GenreList from "../ui/GenreList";
@@ -11,7 +10,7 @@ type MediaDetailsProps = {
   genreIds: number[];
   overview: string;
   id: number;
-  type: Exclude<MediaType, typeof Media.Celebrity>;
+  type: MediaType;
 };
 
 const MediaDetails = ({

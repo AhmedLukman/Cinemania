@@ -3,7 +3,6 @@ import { getPlaiceholder } from "plaiceholder";
 import { cache } from "react";
 import z from "zod";
 import {
-  type Media,
   TMDB_BASE_URL,
   TmdbApiCelebrityEndpoints,
   TmdbApiGenreEndpoints,
@@ -134,9 +133,7 @@ export const cachedMovieDetails = cache(fetchMovieDetails);
 export const cachedTvDetails = cache(fetchTvDetails);
 export const cachedCelebrityDetails = cache(fetchCelebrityDetails);
 
-const fetchGenres = async (
-  type: Exclude<MediaType, typeof Media.Celebrity>,
-) => {
+const fetchGenres = async (type: MediaType) => {
   try {
     const response = await apiClient(TmdbApiGenreEndpoints[type]);
     const data = GenreResponseSchema.parse(response.data);

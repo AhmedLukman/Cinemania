@@ -1,9 +1,9 @@
 import { Card, Link } from "@heroui/react";
-import { Media, TmdbPosterSizes } from "@/lib/constants";
+import { Entity, TmdbPosterSizes } from "@/lib/constants";
 import type {
   CelebrityDetailsType,
   CelebrityType,
-  MediaType,
+  EntityType,
   MovieDetailsType,
   MovieType,
   TvDetailsType,
@@ -13,7 +13,7 @@ import "m3-ripple/ripple.css";
 import ImageWithBlur from "./ImageWithBlur";
 import RippleUI from "./RippleUI";
 
-type MediaCardProps = {
+type EntityCardProps = {
   media:
     | MovieType
     | MovieDetailsType
@@ -23,18 +23,18 @@ type MediaCardProps = {
     | CelebrityDetailsType;
   priority: boolean;
   href: string;
-  type: MediaType;
+  type: EntityType;
 };
 
-const MediaCard = ({ media, priority, href, type }: MediaCardProps) => {
+const EntityCard = ({ media, priority, href, type }: EntityCardProps) => {
   const title =
-    type === Media.Movie
+    type === Entity.Movie
       ? (media as MovieType | MovieDetailsType).title
       : (media as TvType | TvDetailsType | CelebrityDetailsType | CelebrityType)
           .name;
 
   const src =
-    type === Media.Celebrity
+    type === Entity.Celebrity
       ? (media as CelebrityType | CelebrityDetailsType).profile_path || ""
       : (media as MovieType | MovieDetailsType | TvType | TvDetailsType)
           .poster_path || "";
@@ -65,4 +65,4 @@ const MediaCard = ({ media, priority, href, type }: MediaCardProps) => {
   );
 };
 
-export default MediaCard;
+export default EntityCard;

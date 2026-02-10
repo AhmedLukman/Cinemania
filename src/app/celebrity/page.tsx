@@ -1,5 +1,5 @@
-import CategorySliderSection from "@/components/features/CategorySliderSection"
-import { CelebrityCategoryHeadings, Media } from "@/lib/constants"
+import CategorySliderSection from "@/components/features/CategorySliderSection";
+import { CelebrityCategoryHeadings, Entity } from "@/lib/constants";
 
 const CelebrityHomePage = () => {
   return (
@@ -8,11 +8,11 @@ const CelebrityHomePage = () => {
         <CategorySliderSection
           key={heading}
           heading={heading}
-          type={Media.Celebrity}
+          type={Entity.Celebrity}
         />
       ))}
     </>
   );
-}
+};
 
-export default CelebrityHomePage
+export default CelebrityHomePage;

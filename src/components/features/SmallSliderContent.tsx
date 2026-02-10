@@ -1,12 +1,12 @@
-import { Media, TmdbBackdropSizes } from "@/lib/constants";
-import type { MediaType, MovieType, TvType } from "@/lib/validators";
+import { Entity, TmdbBackdropSizes } from "@/lib/constants";
+import type { EntityType, MovieType, TvType } from "@/lib/validators";
 import HoverCard from "../ui/HoverCard";
 import ImageWithBlur from "../ui/ImageWithBlur";
 
 type SmallSliderContentProps = {
   popularMedia: MovieType | TvType;
   index: number;
-  type: MediaType;
+  type: EntityType;
 };
 
 const SmallSliderContent = ({
@@ -15,7 +15,7 @@ const SmallSliderContent = ({
   type,
 }: SmallSliderContentProps) => {
   const title =
-    type === Media.Movie
+    type === Entity.Movie
       ? (popularMedia as MovieType).title
       : (popularMedia as TvType).name;
 

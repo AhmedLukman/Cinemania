@@ -1,6 +1,6 @@
 import { SliderProvider } from "@/context/SliderContext";
 import {
-  Media,
+  Entity,
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
 } from "@/lib/constants";
@@ -12,14 +12,14 @@ import SmallSlider from "./SmallSlider";
 import SmallSliderContent from "./SmallSliderContent";
 
 type DoubleSliderProps = {
-  type: Exclude<MediaType, typeof Media.Celebrity>;
+  type: MediaType;
 };
 
 const DoubleSlider = async ({ type }: DoubleSliderProps) => {
   let popularMedia: (MovieType | TvType)[];
   try {
     const { results } =
-      type === Media.Movie
+      type === Entity.Movie
         ? await cachedMovieList(TmdbApiMovieEndpoints.Popular)
         : await cachedTvList(TmdbApiTvEndpoints.Popular);
     popularMedia = results;
@@ -28,7 +28,7 @@ const DoubleSlider = async ({ type }: DoubleSliderProps) => {
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
         <p className="text-red-500">
           ⚠️ Error fetching popular{" "}
-          {type === Media.Movie ? "movies" : "TV shows"} ⚠️
+          {type === Entity.Movie ? "movies" : "TV shows"} ⚠️
         </p>
       </section>
     );
@@ -38,7 +38,7 @@ const DoubleSlider = async ({ type }: DoubleSliderProps) => {
     return (
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
         <p className="text-gray-500">
-          No popular {type === Media.Movie ? "movies" : "TV shows"} found. 😢
+          No popular {type === Entity.Movie ? "movies" : "TV shows"} found. 😢
         </p>
       </section>
     );

@@ -72,7 +72,7 @@ export const TmdbLogoSizes = {
   ORIGINAL: "/original",
 } as const;
 
-export const Media = {
+export const Entity = {
   Movie: "Movie",
   TV: "TV",
   Celebrity: "People",
