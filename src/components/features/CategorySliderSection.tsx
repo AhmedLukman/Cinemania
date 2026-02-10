@@ -15,16 +15,16 @@ import {
 import type {
   CelebrityCategoryHeadingsType,
   CelebrityDetailsType,
+  CelebrityListEndpoint,
   CelebrityType,
   EntityType,
   MovieCategoryHeadingsType,
   MovieDetailsType,
+  MovieListEndpoint,
   MovieType,
-  TmdbApiCelebrityEndpointsType,
-  TmdbApiMovieEndpointsType,
-  TmdbApiTvEndpointsType,
   TvCategoryHeadingsType,
   TvDetailsType,
+  TvListEndpoint,
   TvType,
 } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
@@ -46,18 +46,9 @@ type MediaListResult = {
 };
 
 type ListEndpointByEntity = {
-  [Entity.Movie]: Exclude<
-    TmdbApiMovieEndpointsType,
-    typeof TmdbApiMovieEndpoints.Latest
-  >;
-  [Entity.TV]: Exclude<
-    TmdbApiTvEndpointsType,
-    typeof TmdbApiTvEndpoints.Latest
-  >;
-  [Entity.Celebrity]: Exclude<
-    TmdbApiCelebrityEndpointsType,
-    typeof TmdbApiCelebrityEndpoints.Latest
-  >;
+  [Entity.Movie]: MovieListEndpoint;
+  [Entity.TV]: TvListEndpoint;
+  [Entity.Celebrity]: CelebrityListEndpoint;
 };
 
 const CategorySliderSection = async ({

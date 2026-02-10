@@ -287,3 +287,18 @@ export type TvCategoryHeadingsType =
 
 export type CelebrityCategoryHeadingsType =
   (typeof CelebrityCategoryHeadings)[keyof typeof CelebrityCategoryHeadings];
+
+export type MovieListEndpoint = Exclude<
+  TmdbApiMovieEndpointsType,
+  typeof TmdbApiMovieEndpoints.Latest
+>;
+
+export type TvListEndpoint = Exclude<
+  TmdbApiTvEndpointsType,
+  typeof TmdbApiTvEndpoints.Latest
+>;
+
+export type CelebrityListEndpoint = Exclude<
+  TmdbApiCelebrityEndpointsType,
+  typeof TmdbApiCelebrityEndpoints.Latest
+>;

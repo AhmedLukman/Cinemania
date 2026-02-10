@@ -12,19 +12,19 @@ import {
 import {
   CelebrityDetailsSchema,
   type CelebrityDetailsType,
+  type CelebrityListEndpoint,
   CelebrityResponseSchema,
   type CelebrityResponseType,
   GenreResponseSchema,
   type MediaType,
   MovieDetailsSchema,
   type MovieDetailsType,
+  type MovieListEndpoint,
   MovieResponseSchema,
   type MovieResponseType,
-  type TmdbApiCelebrityEndpointsType,
-  type TmdbApiMovieEndpointsType,
-  type TmdbApiTvEndpointsType,
   TvDetailsSchema,
   type TvDetailsType,
+  type TvListEndpoint,
   TvResponseSchema,
   type TvResponseType,
 } from "./validators";
@@ -53,10 +53,7 @@ const displayError = (error: unknown) => {
 };
 
 const fetchMovieList = async (
-  endpoint: Exclude<
-    TmdbApiMovieEndpointsType,
-    typeof TmdbApiMovieEndpoints.Latest
-  >,
+  endpoint: MovieListEndpoint,
 ): Promise<MovieResponseType> => {
   try {
     const response = await apiClient(endpoint);
@@ -68,7 +65,7 @@ const fetchMovieList = async (
 };
 
 const fetchTvList = async (
-  endpoint: Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>,
+  endpoint: TvListEndpoint,
 ): Promise<TvResponseType> => {
   try {
     const response = await apiClient(endpoint);
@@ -80,10 +77,7 @@ const fetchTvList = async (
 };
 
 const fetchCelebrityList = async (
-  endpoint: Exclude<
-    TmdbApiCelebrityEndpointsType,
-    typeof TmdbApiCelebrityEndpoints.Latest
-  >,
+  endpoint: CelebrityListEndpoint,
 ): Promise<CelebrityResponseType> => {
   try {
     const response = await apiClient(endpoint);
