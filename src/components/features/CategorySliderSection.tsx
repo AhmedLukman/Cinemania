@@ -4,7 +4,14 @@ import {
   TmdbApiMovieEndpoints,
   TmdbApiTvEndpoints,
 } from "@/lib/constants";
-import { cachedMediaDetails, cachedMediaList } from "@/lib/serverService";
+import {
+  cachedCelebrityDetails,
+  cachedCelebrityList,
+  cachedMovieDetails,
+  cachedMovieList,
+  cachedTvDetails,
+  cachedTvList,
+} from "@/lib/serverService";
 import type {
   CelebrityCategoryHeadingsType,
   CelebrityDetailsType,
@@ -13,6 +20,9 @@ import type {
   MovieCategoryHeadingsType,
   MovieDetailsType,
   MovieType,
+  TmdbApiCelebrityEndpointsType,
+  TmdbApiMovieEndpointsType,
+  TmdbApiTvEndpointsType,
   TvCategoryHeadingsType,
   TvDetailsType,
   TvType,
@@ -29,6 +39,24 @@ type CategorySliderSectionProps = {
   type: MediaType;
 };
 
+type EntityType = MovieType | TvType | CelebrityType;
+
+type MediaListResult = {
+  results: EntityType[];
+};
+
+type ListEndpointByEntity = {
+  [Media.Movie]: Exclude<
+    TmdbApiMovieEndpointsType,
+    typeof TmdbApiMovieEndpoints.Latest
+  >;
+  [Media.TV]: Exclude<TmdbApiTvEndpointsType, typeof TmdbApiTvEndpoints.Latest>;
+  [Media.Celebrity]: Exclude<
+    TmdbApiCelebrityEndpointsType,
+    typeof TmdbApiCelebrityEndpoints.Latest
+  >;
+};
+
 const CategorySliderSection = async ({
   heading,
   type,
@@ -39,25 +67,55 @@ const CategorySliderSection = async ({
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
 
   let mediaCategory:
-    | (MovieType | TvType | CelebrityType)[]
+    | EntityType[]
     | [MovieDetailsType | TvDetailsType | CelebrityDetailsType];
+
+  const detailFetchers: Record<
+    MediaType,
+    () => Promise<MovieDetailsType | TvDetailsType | CelebrityDetailsType>
+  > = {
+    [Media.Movie]: () => cachedMovieDetails(),
+    [Media.TV]: () => cachedTvDetails(),
+    [Media.Celebrity]: () => cachedCelebrityDetails(),
+  };
+
+  const fetchDetailsByType = () => detailFetchers[type]();
+
+  const endpointMaps = {
+    [Media.Movie]: TmdbApiMovieEndpoints,
+    [Media.TV]: TmdbApiTvEndpoints,
+    [Media.Celebrity]: TmdbApiCelebrityEndpoints,
+  } as const;
+
+  const listFetchers: Record<
+    MediaType,
+    (endpoint: ListEndpointByEntity[MediaType]) => Promise<MediaListResult>
+  > = {
+    [Media.Movie]: (endpoint) =>
+      cachedMovieList(endpoint as ListEndpointByEntity[typeof Media.Movie]),
+    [Media.TV]: (endpoint) =>
+      cachedTvList(endpoint as ListEndpointByEntity[typeof Media.TV]),
+    [Media.Celebrity]: (endpoint) =>
+      cachedCelebrityList(
+        endpoint as ListEndpointByEntity[typeof Media.Celebrity],
+      ),
+  };
+
+  const fetchListByType = () => {
+    const endpoints = endpointMaps[type];
+    const endpoint =
+      endpoints[
+        noWhitespaceHeading as Exclude<keyof typeof endpoints, "Latest">
+      ];
+    return listFetchers[type](endpoint);
+  };
 
   try {
     if (heading === "Latest") {
-      const data = await cachedMediaDetails(type);
+      const data = await fetchDetailsByType();
       mediaCategory = [data];
     } else {
-      const endpoints = isMovie
-        ? TmdbApiMovieEndpoints
-        : isTV
-          ? TmdbApiTvEndpoints
-          : TmdbApiCelebrityEndpoints;
-      const endpoint =
-        endpoints[
-          noWhitespaceHeading as Exclude<keyof typeof endpoints, "Latest">
-        ];
-
-      const { results } = await cachedMediaList(type, endpoint);
+      const { results } = await fetchListByType();
       mediaCategory = results;
     }
   } catch {
