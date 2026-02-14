@@ -57,6 +57,7 @@ const CategorySliderSection = async ({
 }: CategorySliderSectionProps) => {
   const isMovie = type === Entity.Movie;
   const isTV = type === Entity.TV;
+  const basePath = type === Entity.Celebrity ? "celebrity" : type.toLowerCase();
   const noWhitespaceHeading = heading.replace(/\s+/g, "");
   const slugHeading = heading.toLowerCase().replace(/ /g, "-");
 
@@ -137,7 +138,7 @@ const CategorySliderSection = async ({
           {heading}
         </h3>
         {mediaCategory.length === 20 && (
-          <BorderButton href={`/${type.toLowerCase()}/category/${slugHeading}`}>
+          <BorderButton href={`/${basePath}/category/${slugHeading}`}>
             View more
           </BorderButton>
         )}
@@ -145,7 +146,7 @@ const CategorySliderSection = async ({
       <CategorySlider length={mediaCategory.length}>
         {mediaCategory.map((result, index) => (
           <EntityCard
-            href={`/${type.toLowerCase()}/${result.id}`}
+            href={`/${basePath}/${result.id}`}
             priority={index < 4}
             key={result.id}
             media={result}
