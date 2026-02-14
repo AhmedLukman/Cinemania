@@ -89,12 +89,12 @@ const HoverCard = ({
   const isActive = index === activeSlide;
 
   return (
-    <div className="h-[25svh] p-2 rounded-md">
+    <div className="h-[25svh] p-2 rounded-xl">
       <motion.div
         onMouseLeave={handleMouseLeave}
         onMouseEnter={handleMouseEnter}
         className={cn(
-          "rounded-lg overflow-hidden group/card relative h-full w-full cursor-pointer",
+          "rounded-xl overflow-hidden group/card relative h-full w-full cursor-pointer",
           { "cursor-default": isActive },
         )}
       >
