@@ -25,7 +25,9 @@ const SmallSlider = ({ children }: PropsWithChildren) => {
   const isMobile = windowWidth > 0 && windowWidth < 640;
 
   return (
-    <div className="absolute w-full bottom-0 overflow-hidden">
+    <div
+      className="absolute w-full bottom-0 overflow-hidden group/slider"
+    >
       <Slider
         swipeToSlide={true}
         focusOnSelect={true}
@@ -38,7 +40,7 @@ const SmallSlider = ({ children }: PropsWithChildren) => {
         asNavFor={bigSliderNav}
         className={
           isMobile
-            ? "pt-0 translate-y-0 opacity-100"
+            ? "pt-20 focus-within:pt-0 focus-within:translate-y-0 focus-within:opacity-100 translate-y-[60%] opacity-50 transition-all duration-300 ease-in-out"
             : "pt-20 hover:pt-0 active:pt-0 translate-y-[60%] hover:translate-y-0 active:translate-y-0 opacity-50 hover:opacity-100 active:opacity-100 transition-all duration-300 ease-in-out"
         }
       >
