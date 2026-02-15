@@ -88,6 +88,7 @@ const HoverCard = ({
 
   const isActive = index === activeSlide;
 
+
   return (
     <div className="h-[25svh] p-2 rounded-xl">
       <motion.div
@@ -108,10 +109,10 @@ const HoverCard = ({
             }
             exit="exit"
           >
-            <motion.div
+            <div
               className={cn(
-                "absolute inset-0 w-full h-full z-10 transition bg-black/40   duration-500",
-                isActive || hasMouseEntered ? " block" : "hidden",
+                "absolute left-0 top-0 h-full bg-black/60 z-30 transition-all duration-300",
+                isActive || hasMouseEntered ? "w-full " : "w-0",
               )}
             />
             <motion.div
@@ -130,7 +131,7 @@ const HoverCard = ({
                 duration: 0.5,
                 ease: "easeOut",
               }}
-              className="text-white absolute bottom-4 w-full left-4 z-40"
+              className="text-white absolute bottom-4 w-full left-10 z-40"
               animate={
                 isActive || hasMouseEntered ? ANIMATE_DIRECTION : "initial"
               }
