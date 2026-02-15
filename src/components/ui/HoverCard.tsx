@@ -127,17 +127,18 @@ const HoverCard = ({
             </motion.div>
             <motion.div
               variants={TEXT_VARIANTS}
+              initial="initial"
+              animate={
+                isActive || hasMouseEntered ? ANIMATE_DIRECTION : "initial"
+              }
               transition={{
                 duration: 0.5,
                 ease: "easeOut",
               }}
               className="text-white absolute bottom-4 w-full left-10 z-40"
-              animate={
-                isActive || hasMouseEntered ? ANIMATE_DIRECTION : "initial"
-              }
             >
               <p className="font-bold text-xl max-w-[80%] xl:max-w-[88.5%]">
-                {hasMouseEntered || isActive ? title : ""}
+                {title}
               </p>
             </motion.div>
           </motion.div>
