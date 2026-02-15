@@ -25,7 +25,6 @@ const SmallSlider = ({ children }: PropsWithChildren) => {
   return (
     <div className="absolute w-full bottom-0 overflow-hidden">
       <Slider
-        key={windowWidth}
         swipeToSlide={true}
         focusOnSelect={true}
         arrows={false}
