@@ -22,6 +22,8 @@ const SmallSlider = ({ children }: PropsWithChildren) => {
     return 5;
   };
 
+  const isMobile = windowWidth > 0 && windowWidth < 640;
+
   return (
     <div className="absolute w-full bottom-0 overflow-hidden">
       <Slider
@@ -34,7 +36,11 @@ const SmallSlider = ({ children }: PropsWithChildren) => {
         slidesToShow={getSlidesToShow()}
         ref={smallSliderRef}
         asNavFor={bigSliderNav}
-        className="pt-20 hover:pt-0 translate-y-[60%] hover:translate-y-0 opacity-50 hover:opacity-100 transition-all duration-300 ease-in-out"
+        className={
+          isMobile
+            ? "pt-0 translate-y-0 opacity-100"
+            : "pt-20 hover:pt-0 active:pt-0 translate-y-[60%] hover:translate-y-0 active:translate-y-0 opacity-50 hover:opacity-100 active:opacity-100 transition-all duration-300 ease-in-out"
+        }
       >
         {children}
       </Slider>
