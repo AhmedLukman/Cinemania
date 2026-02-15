@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { useSliderContext } from "@/context/SliderContext";
 
 const BigSlider = ({ children }: PropsWithChildren) => {
-  const { bigSliderRef, miniSliderNav, handleBeforeChange } =
+  const { bigSliderRef, smallSliderNav, handleBeforeChange } =
     useSliderContext();
 
   return (
@@ -13,7 +13,7 @@ const BigSlider = ({ children }: PropsWithChildren) => {
       arrows={false}
       dots={false}
       ref={bigSliderRef}
-      asNavFor={miniSliderNav}
+      asNavFor={smallSliderNav}
       beforeChange={handleBeforeChange}
     >
       {children}

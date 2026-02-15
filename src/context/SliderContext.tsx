@@ -14,8 +14,8 @@ import useSliderSync from "@/hooks/useSliderSync";
 
 type SliderContextType = {
   bigSliderRef: RefObject<Slider | null>;
-  miniSliderNav: Slider | undefined;
-  miniSliderRef: RefObject<Slider | null>;
+  smallSliderNav: Slider | undefined;
+  smallSliderRef: RefObject<Slider | null>;
   bigSliderNav: Slider | undefined;
   activeSlide: number;
   setActiveSlide: Dispatch<SetStateAction<number>>;
@@ -25,7 +25,7 @@ type SliderContextType = {
 const SliderContext = createContext<SliderContextType | undefined>(undefined);
 
 export const SliderProvider = ({ children }: PropsWithChildren) => {
-  const { bigSliderRef, miniSliderNav, miniSliderRef, bigSliderNav } =
+  const { bigSliderRef, smallSliderNav, smallSliderRef, bigSliderNav } =
     useSliderSync();
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -35,8 +35,8 @@ export const SliderProvider = ({ children }: PropsWithChildren) => {
 
   const value = {
     bigSliderRef,
-    miniSliderNav,
-    miniSliderRef,
+    smallSliderNav,
+    smallSliderRef,
     bigSliderNav,
     activeSlide,
     setActiveSlide,

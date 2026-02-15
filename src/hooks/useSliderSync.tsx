@@ -5,22 +5,22 @@ const useSliderSync = () => {
   const [bigSliderNav, setBigSliderNav] = useState<Slider | undefined>(
     undefined,
   );
-  const [miniSliderNav, setMiniSliderNav] = useState<Slider | undefined>(
+  const [smallSliderNav, setSmallSliderNav] = useState<Slider | undefined>(
     undefined,
   );
   const bigSliderRef = useRef<Slider | null>(null);
-  const miniSliderRef = useRef<Slider | null>(null);
+  const smallSliderRef = useRef<Slider | null>(null);
 
   useEffect(() => {
     setBigSliderNav(bigSliderRef.current ?? undefined);
-    setMiniSliderNav(miniSliderRef.current ?? undefined);
+    setSmallSliderNav(smallSliderRef.current ?? undefined);
   }, []);
 
   return {
     bigSliderRef,
-    miniSliderRef,
+    smallSliderRef,
     bigSliderNav,
-    miniSliderNav,
+    smallSliderNav,
   };
 };
 
