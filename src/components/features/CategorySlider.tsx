@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 
 const CategorySlider = ({
@@ -9,48 +10,36 @@ const CategorySlider = ({
   children: React.ReactNode;
   length: number;
 }) => {
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const getSlides = () => {
+    if (windowWidth < 640) return 2;
+    if (windowWidth < 900) return 3;
+    if (windowWidth < 1500) return 4;
+    return 5;
+  };
+
+  const numberOfSlides = getSlides();
+
   return (
     <div className="slider-container">
       <Slider
         className="category-slider"
-        infinite={length > 5}
-        slidesToShow={5}
-        slidesToScroll={5}
+        infinite={length > numberOfSlides}
+        slidesToShow={numberOfSlides}
+        slidesToScroll={numberOfSlides}
         dots={true}
-        draggable={length > 5}
+        draggable={length > numberOfSlides}
         autoplay={true}
         arrows={false}
         autoplaySpeed={6000}
-        responsive={[
-          {
-            breakpoint: 1500,
-            settings: {
-              slidesToShow: 4,
-              slidesToScroll: 4,
-              infinite: length > 4,
-              draggable: length > 4,
-            },
-          },
-          {
-            breakpoint: 900,
-            settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              infinite: length > 3,
-              draggable: length > 3,
-            },
-          },
-          {
-            breakpoint: 640,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 2,
-              infinite: length > 2,
-              draggable: length > 2,
-              arrows: false,
-            },
-          },
-        ]}
       >
         {children}
       </Slider>
