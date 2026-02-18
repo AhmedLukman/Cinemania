@@ -69,8 +69,8 @@ const CategorySliderSection = async ({
     EntityType,
     () => Promise<MovieDetailsType | TvDetailsType | CelebrityDetailsType>
   > = {
-    [Entity.Movie]: () => cachedMovieDetails(),
-    [Entity.TV]: () => cachedTvDetails(),
+    [Entity.Movie]: () => cachedMovieDetails(TmdbApiMovieEndpoints.Latest),
+    [Entity.TV]: () => cachedTvDetails(TmdbApiTvEndpoints.Latest),
     [Entity.Celebrity]: () => cachedCelebrityDetails(),
   };
 

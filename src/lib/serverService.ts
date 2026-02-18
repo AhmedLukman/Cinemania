@@ -6,8 +6,6 @@ import {
   TMDB_BASE_URL,
   TmdbApiCelebrityEndpoints,
   TmdbApiGenreEndpoints,
-  TmdbApiMovieEndpoints,
-  TmdbApiTvEndpoints,
 } from "./constants";
 import {
   CelebrityDetailsSchema,
@@ -92,10 +90,11 @@ export const cachedMovieList = cache(fetchMovieList);
 export const cachedTvList = cache(fetchTvList);
 export const cachedCelebrityList = cache(fetchCelebrityList);
 
-// TODO: Make this flexible to accept any endpoint, not just latest
-const fetchMovieDetails = async (): Promise<MovieDetailsType> => {
+const fetchMovieDetails = async (
+  endpoint: `/movie/${string}`,
+): Promise<MovieDetailsType> => {
   try {
-    const response = await apiClient(TmdbApiMovieEndpoints.Latest);
+    const response = await apiClient(endpoint);
     return MovieDetailsSchema.parse(response.data);
   } catch (error) {
     displayError(error);
@@ -103,9 +102,11 @@ const fetchMovieDetails = async (): Promise<MovieDetailsType> => {
   }
 };
 
-const fetchTvDetails = async (): Promise<TvDetailsType> => {
+const fetchTvDetails = async (
+  endpoint: `/tv/${string}`,
+): Promise<TvDetailsType> => {
   try {
-    const response = await apiClient(TmdbApiTvEndpoints.Latest);
+    const response = await apiClient(endpoint);
     return TvDetailsSchema.parse(response.data);
   } catch (error) {
     displayError(error);
