@@ -3,7 +3,7 @@ import type { MediaType } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
 import GenreList from "../ui/GenreList";
 
-type MediaDetailsProps = {
+type MediaDetailsPreviewProps = {
   title: string;
   releaseDate: string;
   voteAverage: number;
@@ -13,7 +13,7 @@ type MediaDetailsProps = {
   type: MediaType;
 };
 
-const MediaDetails = ({
+const MediaDetailsPreview = ({
   title,
   releaseDate,
   voteAverage,
@@ -21,7 +21,7 @@ const MediaDetails = ({
   overview,
   id,
   type,
-}: MediaDetailsProps) => {
+}: MediaDetailsPreviewProps) => {
   return (
     <div className="lg:w-7/12 xl:w-8/12 pt-24">
       <h2 className="text-3xl xl:text-5xl font-bold font-serif md:max-w-prose">
@@ -51,4 +51,4 @@ const MediaDetails = ({
   );
 };
 
-export default MediaDetails;
+export default MediaDetailsPreview;
