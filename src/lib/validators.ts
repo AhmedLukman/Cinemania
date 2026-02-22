@@ -222,6 +222,43 @@ const BelongsToCollectionSchema = z.object({
   backdrop_path: z.string().nullable(),
 });
 
+const CastMemberSchema = z.object({
+  adult: z.boolean(), // Defaults to true
+  gender: z.number(), // Defaults to 0
+  id: z.number(), // Defaults to 0
+  known_for_department: z.string(),
+  name: z.string(),
+  original_name: z.string(),
+  popularity: z.number(), // Defaults to 0
+  profile_path: z.string().nullable(),
+  cast_id: z.number(), // Defaults to 0
+  character: z.string(),
+  credit_id: z.string(),
+  order: z.number(), // Defaults to 0
+});
+
+const CrewMemberSchema = z.object({
+  adult: z.boolean(), // Defaults to true
+  gender: z.number(), // Defaults to 0
+  id: z.number(), // Defaults to 0
+  known_for_department: z.string(),
+  name: z.string(),
+  original_name: z.string(),
+  popularity: z.number(), // Defaults to 0
+  profile_path: z.string().nullable(),
+  credit_id: z.string(),
+  department: z.string(),
+  job: z.string(),
+});
+
+export const CreditsSchema = z.object({
+  id: z.number(), // Defaults to 0
+  cast: z.array(CastMemberSchema),
+  crew: z.array(CrewMemberSchema),
+});
+
+export type CreditsType = z.infer<typeof CreditsSchema>;
+
 export const MovieDetailsSchema = BaseDetailsSchema.extend({
   belongs_to_collection: BelongsToCollectionSchema.nullable(),
   budget: z.number(),
