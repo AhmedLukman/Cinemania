@@ -18,7 +18,7 @@ const MediaDetailsLayout = ({
   children,
 }: MediaDetailsLayoutProps) => {
   return (
-    <div className="h-screen relative focus:outline-none">
+    <div className="min-h-screen relative focus:outline-none">
       {/* Full Screen Image */}
       <ImageWithBlur
         className="object-cover object-center -z-20"
