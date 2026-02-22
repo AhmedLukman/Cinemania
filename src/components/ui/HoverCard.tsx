@@ -88,7 +88,6 @@ const HoverCard = ({
 
   const isActive = index === activeSlide;
 
-
   return (
     <div className="h-[25svh] p-2 rounded-xl">
       <motion.div

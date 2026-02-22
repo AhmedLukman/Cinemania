@@ -25,9 +25,7 @@ const SmallSlider = ({ children }: PropsWithChildren) => {
   const isMobile = windowWidth > 0 && windowWidth < 640;
 
   return (
-    <div
-      className="absolute w-full bottom-0 overflow-hidden group/slider"
-    >
+    <div className="absolute w-full bottom-0 overflow-hidden group/slider">
       <Slider
         swipeToSlide={true}
         focusOnSelect={true}

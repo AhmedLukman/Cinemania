@@ -21,5 +21,4 @@ const BorderButton = ({ href, children }: BorderButtonProps) => {
   );
 };
 
-
 export default BorderButton;
