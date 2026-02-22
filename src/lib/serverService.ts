@@ -13,6 +13,10 @@ import {
   type CelebrityListEndpoint,
   CelebrityResponseSchema,
   type CelebrityResponseType,
+  CreditsSchema,
+  type CreditsType,
+  ExternalIdsSchema,
+  type ExternalIdsType,
   GenreResponseSchema,
   type MediaType,
   MovieDetailsSchema,
@@ -127,6 +131,34 @@ const fetchCelebrityDetails = async (): Promise<CelebrityDetailsType> => {
 export const cachedMovieDetails = cache(fetchMovieDetails);
 export const cachedTvDetails = cache(fetchTvDetails);
 export const cachedCelebrityDetails = cache(fetchCelebrityDetails);
+
+const fetchMovieCredits = async (
+  endpoint: `/movie/${string}/credits`,
+): Promise<CreditsType> => {
+  try {
+    const response = await apiClient(endpoint);
+    return CreditsSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedMovieCredits = cache(fetchMovieCredits);
+
+const fetchMovieLinks = async (
+  endpoint: `/movie/${string}/external_ids`,
+): Promise<ExternalIdsType> => {
+  try {
+    const response = await apiClient(endpoint);
+    return ExternalIdsSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedMovieLinks = cache(fetchMovieLinks);
 
 const fetchGenres = async (type: MediaType) => {
   try {
