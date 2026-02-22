@@ -62,6 +62,8 @@ const ProductionCompaniesSchema = z.object({
   origin_country: z.string(),
 });
 
+export type ProductionCompany = z.infer<typeof ProductionCompaniesSchema>;
+
 const ProductionCountriesSchema = z.object({
   iso_3166_1: z.string(),
   name: z.string(),

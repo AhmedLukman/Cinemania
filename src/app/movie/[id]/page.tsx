@@ -1,4 +1,5 @@
-import { Link, ScrollShadow, Tooltip } from "@heroui/react";
+import { Link, Tooltip } from "@heroui/react";
+import type { IconType } from "react-icons";
 import {
   FaFacebook,
   FaGlobe,
@@ -7,6 +8,7 @@ import {
   FaSquareXTwitter,
 } from "react-icons/fa6";
 import MediaDetailsLayout from "@/components/layout/MediaDetailsLayout";
+import CompanyCard from "@/components/ui/CompanyCard";
 import GenreList from "@/components/ui/GenreList";
 import {
   cachedMovieCredits,
@@ -14,8 +16,20 @@ import {
   cachedMovieLinks,
 } from "@/lib/serverService";
 import { getDirector } from "@/lib/utils";
+import type { ExternalIdsType } from "@/lib/validators";
 
-const socialLinksConfig = [
+const linksConfig: {
+  key: Exclude<keyof ExternalIdsType, "id"> | "homepage";
+  icon: IconType;
+  label: string;
+  baseUrl: string;
+}[] = [
+  {
+    key: "homepage",
+    icon: FaGlobe,
+    label: "Official Website",
+    baseUrl: "",
+  },
   {
     key: "twitter_id",
     icon: FaSquareXTwitter,
@@ -63,6 +77,7 @@ const MovieDetailsPage = async ({
     genres,
     overview,
     homepage,
+    production_companies,
   } = details;
   const credits = await cachedMovieCredits(`/movie/${id}/credits`);
   const links = await cachedMovieLinks(`/movie/${id}/external_ids`);
@@ -125,45 +140,30 @@ const MovieDetailsPage = async ({
             </div>
             <div className="space-y-2 md:w-1/2">
               <p className="text-[#cecece] text-sm">Production Companies:</p>
-              <ScrollShadow
-                orientation="horizontal"
-                className="scroll-shadow-container flex gap-5 rounded-xl overflow-x-auto pb-2"
-              >
-                {production_countries.map((company) => (
-                  <div key={company.iso_3166_1}>{company.name}</div>
+              <div className="flex flex-wrap gap-4">
+                {production_companies.map((company) => (
+                  <CompanyCard key={company.id} company={company} />
                 ))}
-              </ScrollShadow>
+              </div>
             </div>
           </div>
           <p className="italic text-sm text-[#cecece] pt-5 text-center">
             ~ {tagline}
           </p>
           <div className="flex justify-center gap-4 pt-2">
-            {homepage && (
-              <Tooltip>
-                <Tooltip.Trigger>
-                  <Link
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    href={homepage}
-                    aria-label="Official Website"
-                  >
-                    <FaGlobe className="w-5 h-5" />
-                  </Link>
-                </Tooltip.Trigger>
-                <Tooltip.Content offset={5}>Official Website</Tooltip.Content>
-              </Tooltip>
-            )}
-            {socialLinksConfig.map(({ key, icon: Icon, label, baseUrl }) => {
-              const url = links[key];
-              if (!url) return null;
+            {linksConfig.map(({ key, icon: Icon, label, baseUrl }) => {
+              const href =
+                key === "homepage"
+                  ? homepage
+                  : links[key] && `${baseUrl}${links[key]}`;
+              if (!href) return null;
               return (
                 <Tooltip key={key}>
                   <Tooltip.Trigger>
                     <Link
                       rel="noopener noreferrer"
                       target="_blank"
-                      href={`${baseUrl}${url}`}
+                      href={href}
                       aria-label={label}
                     >
                       <Icon className="w-5 h-5" />
