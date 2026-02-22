@@ -3,6 +3,7 @@ import Image from "next/image";
 import { TmdbLogoSizes } from "@/lib/constants";
 import { getImageUrl } from "@/lib/utils";
 import type { ProductionCompany } from "@/lib/validators";
+import RippleUI from "./RippleUI";
 
 type CompanyCardProps = {
   company: ProductionCompany & { logo_path: string | null };
@@ -26,6 +27,7 @@ const CompanyCard = ({
             fill
             className="object-contain p-2"
           />
+          <RippleUI />
         </Card>
       </Link>
     </Tooltip.Trigger>
