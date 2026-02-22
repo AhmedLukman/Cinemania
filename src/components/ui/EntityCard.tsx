@@ -10,7 +10,6 @@ import type {
   TvDetailsType,
   TvType,
 } from "@/lib/validators";
-import "m3-ripple/ripple.css";
 import ImageWithBlur from "./ImageWithBlur";
 import RippleUI from "./RippleUI";
 
