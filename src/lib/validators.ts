@@ -261,11 +261,11 @@ export type CreditsType = z.infer<typeof CreditsSchema>;
 
 export const ExternalIdsSchema = z.object({
   id: z.number(), // Defaults to 0
-  imdb_id: z.string(),
-  wikidata_id: z.string(),
-  facebook_id: z.string(),
-  instagram_id: z.string(),
-  twitter_id: z.string(),
+  imdb_id: z.string().nullable(),
+  wikidata_id: z.string().nullable(),
+  facebook_id: z.string().nullable(),
+  instagram_id: z.string().nullable(),
+  twitter_id: z.string().nullable(),
 });
 
 export type ExternalIdsType = z.infer<typeof ExternalIdsSchema>;
