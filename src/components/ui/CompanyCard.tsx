@@ -12,7 +12,7 @@ type CompanyCardProps = {
 const CompanyCard = ({
   company: { name, logo_path, id },
 }: CompanyCardProps) => (
-  <Tooltip>
+  <Tooltip delay={0}>
     <Tooltip.Trigger>
       <Link
         rel="noopener noreferrer"

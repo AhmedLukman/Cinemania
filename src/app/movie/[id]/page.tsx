@@ -158,7 +158,7 @@ const MovieDetailsPage = async ({
                   : links[key] && `${baseUrl}${links[key]}`;
               if (!href) return null;
               return (
-                <Tooltip key={key}>
+                <Tooltip key={key} delay={0}>
                   <Tooltip.Trigger>
                     <Link
                       rel="noopener noreferrer"
