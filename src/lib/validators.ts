@@ -259,6 +259,17 @@ export const CreditsSchema = z.object({
 
 export type CreditsType = z.infer<typeof CreditsSchema>;
 
+export const ExternalIdsSchema = z.object({
+  id: z.number(), // Defaults to 0
+  imdb_id: z.string(),
+  wikidata_id: z.string(),
+  facebook_id: z.string(),
+  instagram_id: z.string(),
+  twitter_id: z.string(),
+});
+
+export type ExternalIdsType = z.infer<typeof ExternalIdsSchema>;
+
 export const MovieDetailsSchema = BaseDetailsSchema.extend({
   belongs_to_collection: BelongsToCollectionSchema.nullable(),
   budget: z.number(),
