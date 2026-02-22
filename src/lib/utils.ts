@@ -1,5 +1,5 @@
 import { TMDB_IMAGE_BASE_URL } from "./constants";
-import type { TmdbImageSizes } from "./validators";
+import type { CreditsType, TmdbImageSizes } from "./validators";
 
 export const getImageUrl = (path: string, size: TmdbImageSizes) =>
   `${TMDB_IMAGE_BASE_URL}${size}${path}`;
@@ -12,3 +12,6 @@ export const isURL = (url: string) => {
     return false;
   }
 };
+
+export const getDirector = (credits: CreditsType) =>
+  credits?.crew?.find((person) => person.job === "Director");
