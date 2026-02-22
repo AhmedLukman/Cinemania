@@ -215,8 +215,15 @@ const SeasonSchema = z.object({
   vote_average: z.number(), // Defaults to 0
 });
 
+const BelongsToCollectionSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  poster_path: z.string().nullable(),
+  backdrop_path: z.string().nullable(),
+});
+
 export const MovieDetailsSchema = BaseDetailsSchema.extend({
-  belongs_to_collection: z.string().nullable(),
+  belongs_to_collection: BelongsToCollectionSchema.nullable(),
   budget: z.number(),
   imdb_id: z.string().nullable(),
   original_title: z.string(),
