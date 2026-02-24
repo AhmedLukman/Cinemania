@@ -1,60 +1,13 @@
-import { Link, Tooltip } from "@heroui/react";
-import type { IconType } from "react-icons";
-import {
-  FaFacebook,
-  FaGlobe,
-  FaImdb,
-  FaInstagram,
-  FaSquareXTwitter,
-} from "react-icons/fa6";
 import MediaDetailsLayout from "@/components/layout/MediaDetailsLayout";
 import CompanyCard from "@/components/ui/CompanyCard";
 import GenreList from "@/components/ui/GenreList";
+import LinksList from "@/components/ui/LinksList";
 import {
   cachedMovieCredits,
   cachedMovieDetails,
   cachedMovieLinks,
 } from "@/lib/serverService";
 import { getDirector } from "@/lib/utils";
-import type { ExternalIdsType } from "@/lib/validators";
-
-const linksConfig: {
-  key: Exclude<keyof ExternalIdsType, "id"> | "homepage";
-  icon: IconType;
-  label: string;
-  baseUrl: string;
-}[] = [
-  {
-    key: "homepage",
-    icon: FaGlobe,
-    label: "Official Website",
-    baseUrl: "",
-  },
-  {
-    key: "twitter_id",
-    icon: FaSquareXTwitter,
-    label: "X",
-    baseUrl: "https://x.com/",
-  },
-  {
-    key: "instagram_id",
-    icon: FaInstagram,
-    label: "Instagram",
-    baseUrl: "https://instagram.com/",
-  },
-  {
-    key: "facebook_id",
-    icon: FaFacebook,
-    label: "Facebook",
-    baseUrl: "https://facebook.com/",
-  },
-  {
-    key: "imdb_id",
-    icon: FaImdb,
-    label: "IMDb",
-    baseUrl: "https://www.imdb.com/title/",
-  },
-] as const;
 
 const MovieDetailsPage = async ({
   params,
@@ -158,32 +111,7 @@ const MovieDetailsPage = async ({
               ~ {tagline}
             </p>
           )}
-          {links && (
-            <div className="flex justify-center gap-4 pt-2">
-              {linksConfig.map(({ key, icon: Icon, label, baseUrl }) => {
-                const href =
-                  key === "homepage"
-                    ? homepage
-                    : links[key] && `${baseUrl}${links[key]}`;
-                if (!href) return null;
-                return (
-                  <Tooltip key={key} delay={0}>
-                    <Tooltip.Trigger>
-                      <Link
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        href={href}
-                        aria-label={label}
-                      >
-                        <Icon className="w-5 h-5" />
-                      </Link>
-                    </Tooltip.Trigger>
-                    <Tooltip.Content offset={5}>{label}</Tooltip.Content>
-                  </Tooltip>
-                );
-              })}
-            </div>
-          )}
+          <LinksList links={links} homepage={homepage} />
         </div>
       </div>
     </MediaDetailsLayout>
