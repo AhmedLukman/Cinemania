@@ -10,7 +10,7 @@ type CompanyCardProps = {
 };
 
 const CompanyCard = ({
-  company: { name, logo_path, id },
+  company: { name, logo_path, id, origin_country },
 }: CompanyCardProps) => (
   <Tooltip delay={0}>
     <Tooltip.Trigger>
@@ -31,7 +31,7 @@ const CompanyCard = ({
         </Card>
       </Link>
     </Tooltip.Trigger>
-    <Tooltip.Content>{name}</Tooltip.Content>
+    <Tooltip.Content>{name} ({origin_country})</Tooltip.Content>
   </Tooltip>
 );
 
