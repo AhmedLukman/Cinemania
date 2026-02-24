@@ -42,7 +42,7 @@ const linksConfig = [
 ] as const;
 
 type LinksListProps = {
-  links: Omit<ExternalIdsType, "id"> | null;
+  links: ExternalIdsType | null;
   homepage: string;
 };
 
@@ -55,8 +55,8 @@ const LinksList = ({ links, homepage }: LinksListProps) => {
         const href =
           key === "homepage"
             ? homepage
-            : links[key as keyof typeof links] &&
-              `${baseUrl}${links[key as keyof typeof links]}`;
+            : links[key] &&
+              `${baseUrl}${links[key]}`;
         if (!href) return null;
         return (
           <Tooltip key={key} delay={0}>

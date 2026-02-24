@@ -10,7 +10,7 @@ import LinksList from "../ui/LinksList";
 type MediaDetailsProps = {
   details: MovieDetailsType;
   credits: CreditsType | null;
-  links: Omit<ExternalIdsType, "id"> | null;
+  links: ExternalIdsType | null;
 };
 
 const getDirector = (credits: CreditsType | null) => {
