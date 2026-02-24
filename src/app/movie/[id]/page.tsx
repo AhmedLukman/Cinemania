@@ -79,9 +79,15 @@ const MovieDetailsPage = async ({
     homepage,
     production_companies,
   } = details;
-  const credits = await cachedMovieCredits(`/movie/${id}/credits`);
-  const links = await cachedMovieLinks(`/movie/${id}/external_ids`);
-  const director = getDirector(credits);
+  const [creditsResult, linksResult] = await Promise.allSettled([
+    cachedMovieCredits(`/movie/${id}/credits`),
+    cachedMovieLinks(`/movie/${id}/external_ids`),
+  ]);
+
+  const credits =
+    creditsResult.status === "fulfilled" ? creditsResult.value : null;
+  const links = linksResult.status === "fulfilled" ? linksResult.value : null;
+  const director = credits ? getDirector(credits) : null;
   return (
     <MediaDetailsLayout
       backdrop_path={backdrop_path}
@@ -152,30 +158,32 @@ const MovieDetailsPage = async ({
               ~ {tagline}
             </p>
           )}
-          <div className="flex justify-center gap-4 pt-2">
-            {linksConfig.map(({ key, icon: Icon, label, baseUrl }) => {
-              const href =
-                key === "homepage"
-                  ? homepage
-                  : links[key] && `${baseUrl}${links[key]}`;
-              if (!href) return null;
-              return (
-                <Tooltip key={key} delay={0}>
-                  <Tooltip.Trigger>
-                    <Link
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      href={href}
-                      aria-label={label}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </Link>
-                  </Tooltip.Trigger>
-                  <Tooltip.Content offset={5}>{label}</Tooltip.Content>
-                </Tooltip>
-              );
-            })}
-          </div>
+          {links && (
+            <div className="flex justify-center gap-4 pt-2">
+              {linksConfig.map(({ key, icon: Icon, label, baseUrl }) => {
+                const href =
+                  key === "homepage"
+                    ? homepage
+                    : links[key] && `${baseUrl}${links[key]}`;
+                if (!href) return null;
+                return (
+                  <Tooltip key={key} delay={0}>
+                    <Tooltip.Trigger>
+                      <Link
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        href={href}
+                        aria-label={label}
+                      >
+                        <Icon className="w-5 h-5" />
+                      </Link>
+                    </Tooltip.Trigger>
+                    <Tooltip.Content offset={5}>{label}</Tooltip.Content>
+                  </Tooltip>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </MediaDetailsLayout>
