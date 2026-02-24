@@ -93,7 +93,7 @@ const BaseDetailsSchema = BaseMediaSchema.extend({
   production_countries: z.array(ProductionCountriesSchema),
   spoken_languages: z.array(SpokenLanguagesSchema),
   status: z.string(),
-  tagline: z.string(),
+  tagline: z.string().nullable(),
 });
 
 export const MovieSchema = BaseMediaSchema.extend({

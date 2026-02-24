@@ -147,9 +147,11 @@ const MovieDetailsPage = async ({
               </div>
             </div>
           </div>
-          <p className="italic text-sm text-[#cecece] pt-5 text-center">
-            ~ {tagline}
-          </p>
+          {tagline && (
+            <p className="italic text-sm text-[#cecece] pt-5 text-center">
+              ~ {tagline}
+            </p>
+          )}
           <div className="flex justify-center gap-4 pt-2">
             {linksConfig.map(({ key, icon: Icon, label, baseUrl }) => {
               const href =
