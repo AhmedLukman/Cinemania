@@ -67,7 +67,9 @@ const CategorySliderSection = async ({
 
   const detailFetchers: Record<
     EntityType,
-    () => Promise<MovieDetailsType | TvDetailsType | CelebrityDetailsType>
+    () => Promise<
+      MovieDetailsType | TvDetailsType | CelebrityDetailsType | null
+    >
   > = {
     [Entity.Movie]: () => cachedMovieDetails(TmdbApiMovieEndpoints.Latest),
     [Entity.TV]: () => cachedTvDetails(TmdbApiTvEndpoints.Latest),
@@ -108,7 +110,7 @@ const CategorySliderSection = async ({
   try {
     if (heading === "Latest") {
       const data = await fetchDetailsByType();
-      mediaCategory = [data];
+      mediaCategory = data ? [data] : [];
     } else {
       const { results } = await fetchListByType();
       mediaCategory = results;
