@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import MediaDetails from "@/components/features/MediaDetails";
 import MediaDetailsLayout from "@/components/layout/MediaDetailsLayout";
 import {
@@ -13,6 +14,10 @@ const MovieDetailsPage = async ({
 }) => {
   const { id } = await params;
   const details = await cachedMovieDetails(`/movie/${id}`);
+
+  if (!details) {
+    notFound();
+  }
 
   const [creditsResult, linksResult] = await Promise.allSettled([
     cachedMovieCredits(`/movie/${id}/credits`),
