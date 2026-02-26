@@ -12,3 +12,7 @@
 .category-slider .slick-slide {
   @apply px-2 md:px-4;
 }
+
+.salty-ripple {
+  --ripple-hover-opacity: 0;
+}
