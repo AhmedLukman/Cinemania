@@ -20,7 +20,7 @@ const CompanyCard = ({
         href={`https://www.themoviedb.org/company/${id}`} // TODO: Consider linking to Cinemania's own company page if implemented in the future
         aria-label={name}
       >
-        <Card className="h-6 w-12 xl:h-9 xl:w-15 2xl:h-12 2xl:w-24">
+        <Card className="h-10 w-20 2xl:h-12 2xl:w-24">
           <Image
             src={logo_path ? getImageUrl(logo_path, TmdbLogoSizes.W154) : ""} // TODO: Add placeholder image for companies without logo
             alt={name}
@@ -31,7 +31,9 @@ const CompanyCard = ({
         </Card>
       </Link>
     </Tooltip.Trigger>
-    <Tooltip.Content>{name} ({origin_country})</Tooltip.Content>
+    <Tooltip.Content>
+      {name} ({origin_country})
+    </Tooltip.Content>
   </Tooltip>
 );
 
