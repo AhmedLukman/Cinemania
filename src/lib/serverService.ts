@@ -96,11 +96,14 @@ export const cachedCelebrityList = cache(fetchCelebrityList);
 
 const fetchMovieDetails = async (
   endpoint: `/movie/${string}`,
-): Promise<MovieDetailsType> => {
+): Promise<MovieDetailsType | null> => {
   try {
     const response = await apiClient(endpoint);
     return MovieDetailsSchema.parse(response.data);
   } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
     displayError(error);
     throw error;
   }
@@ -108,21 +111,27 @@ const fetchMovieDetails = async (
 
 const fetchTvDetails = async (
   endpoint: `/tv/${string}`,
-): Promise<TvDetailsType> => {
+): Promise<TvDetailsType | null> => {
   try {
     const response = await apiClient(endpoint);
     return TvDetailsSchema.parse(response.data);
   } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
     displayError(error);
     throw error;
   }
 };
 
-const fetchCelebrityDetails = async (): Promise<CelebrityDetailsType> => {
+const fetchCelebrityDetails = async (): Promise<CelebrityDetailsType | null> => {
   try {
     const response = await apiClient(TmdbApiCelebrityEndpoints.Latest);
     return CelebrityDetailsSchema.parse(response.data);
   } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
     displayError(error);
     throw error;
   }
