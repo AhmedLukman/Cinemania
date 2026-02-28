@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import CollectionSection from "@/components/features/CollectionSection";
 import MediaDetails from "@/components/features/MediaDetails";
 import MediaDetailsLayout from "@/components/layout/MediaDetailsLayout";
 import {
@@ -29,14 +30,17 @@ const MovieDetailsPage = async ({
   const links = linksResult.status === "fulfilled" ? linksResult.value : null;
 
   return (
-    <MediaDetailsLayout
-      backdrop_path={details.backdrop_path}
-      poster_path={details.poster_path}
-      title={details.title}
-      priority={true}
-    >
-      <MediaDetails details={details} credits={credits} links={links} />
-    </MediaDetailsLayout>
+    <>
+      <MediaDetailsLayout
+        backdrop_path={details.backdrop_path}
+        poster_path={details.poster_path}
+        title={details.title}
+        priority={true}
+      >
+        <MediaDetails details={details} credits={credits} links={links} />
+      </MediaDetailsLayout>
+      <CollectionSection collection={details.belongs_to_collection} />
+    </>
   );
 };
 

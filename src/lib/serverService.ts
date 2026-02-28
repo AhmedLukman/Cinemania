@@ -13,6 +13,7 @@ import {
   type CelebrityListEndpoint,
   CelebrityResponseSchema,
   type CelebrityResponseType,
+  CollectionSchema,
   CreditsSchema,
   type CreditsType,
   ExternalIdsSchema,
@@ -195,3 +196,15 @@ const getBase64 = async (imageUrl: string) => {
 };
 
 export const cachedGetBase64 = cache(getBase64);
+
+const fetchMovieCollections = async (endpoint: `/collection/${string}`) => {
+  try {
+    const response = await apiClient(endpoint);
+    return CollectionSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedMovieCollections = cache(fetchMovieCollections);

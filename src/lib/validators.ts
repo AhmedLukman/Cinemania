@@ -224,6 +224,8 @@ const BelongsToCollectionSchema = z.object({
   backdrop_path: z.string().nullable(),
 });
 
+export type CollectionPreviewType = z.infer<typeof BelongsToCollectionSchema>;
+
 const CastMemberSchema = z.object({
   adult: z.boolean(), // Defaults to true
   gender: z.number(), // Defaults to 0
@@ -331,6 +333,19 @@ export const GenreResponseSchema = z.object({
 });
 
 export type GenreResponse = z.infer<typeof GenreResponseSchema>;
+
+export const CollectionSchema = z.object({
+  id: z.number(), // Defaults to 0
+  name: z.string(),
+  original_language: z.string(),
+  original_name: z.string(),
+  overview: z.string(),
+  poster_path: z.string().nullable(),
+  backdrop_path: z.string().nullable(),
+  parts: MovieSchema.array(),
+});
+
+export type CollectionType = z.infer<typeof CollectionSchema>;
 
 export type EntityType = (typeof Entity)[keyof typeof Entity];
 
