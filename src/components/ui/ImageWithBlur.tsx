@@ -36,6 +36,7 @@ const ImageWithBlur = async ({
       placeholder={blurDataURL ? "blur" : "empty"}
       blurDataURL={blurDataURL}
       priority={priority}
+      unoptimized
       fill
       src={imageUrl}
       sizes={sizes}
