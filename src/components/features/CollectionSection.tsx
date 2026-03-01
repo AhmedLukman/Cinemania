@@ -46,7 +46,7 @@ const CollectionSection = async ({ collection }: CollectionSectionProps) => {
         >
           <div className="absolute inset-0 bg-black/60" />
           <div className="relative z-10">
-            <div className="flex p-5 md:pt-10 md:pb-14 md:px-20 justify-between items-center">
+            <div className="flex p-5 md:pt-10 md:pb-14 gap-5 md:px-20 justify-between items-center">
               <h3 className="text-white z-10 text-2xl md:text-3xl font-serif font-bold">
                 {name}
               </h3>
