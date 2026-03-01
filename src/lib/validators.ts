@@ -351,6 +351,26 @@ export type EntityType = (typeof Entity)[keyof typeof Entity];
 
 export type MediaType = typeof Entity.Movie | typeof Entity.TV;
 
+const ImageSchema = z.object({
+  aspect_ratio: z.number(), // Defaults to 0
+  file_path: z.string(),
+  height: z.number(), // Defaults to 0
+  iso_639_1: z.string().nullable(),
+  vote_average: z.number(), // Defaults to 0
+  vote_count: z.number(), // Defaults to 0
+  width: z.number(), // Defaults to 0
+});
+
+export const CollectionImagesSchema = z.object({
+  id: z.number(), // Defaults to 0
+  backdrops: z.array(ImageSchema),
+  posters: z.array(ImageSchema),
+});
+
+export type CollectionImagesType = z.infer<typeof CollectionImagesSchema>;
+
+export type ImageType = z.infer<typeof ImageSchema>;
+
 export type MovieCategoryHeadingsType =
   (typeof MovieCategoryHeadings)[keyof typeof MovieCategoryHeadings];
 

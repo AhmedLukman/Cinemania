@@ -13,6 +13,7 @@ import {
   type CelebrityListEndpoint,
   CelebrityResponseSchema,
   type CelebrityResponseType,
+  CollectionImagesSchema,
   CollectionSchema,
   CreditsSchema,
   type CreditsType,
@@ -208,3 +209,17 @@ const fetchMovieCollections = async (endpoint: `/collection/${string}`) => {
 };
 
 export const cachedMovieCollections = cache(fetchMovieCollections);
+
+const fetchCollectionImages = async (
+  endpoint: `/collection/${string}/images`,
+) => {
+  try {
+    const response = await apiClient(endpoint);
+    return CollectionImagesSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedCollectionImages = cache(fetchCollectionImages);

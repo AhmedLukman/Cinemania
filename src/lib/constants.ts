@@ -43,6 +43,14 @@ export const TmdbPosterSizes = {
   ORIGINAL: "/original",
 } as const;
 
+export const ImageSize = {
+  ExtraSmall: "/w92",
+  Small: "/w300",
+  Medium: "/w500",
+  Large: "/w1280",
+  Original: "/original",
+} as const;
+
 export const TmdbApiGenreEndpoints = {
   Movie: "/genre/movie/list",
   TV: "/genre/tv/list",
