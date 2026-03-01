@@ -25,9 +25,9 @@ const ProviderSection = async ({ id }: ProviderSectionProps) => {
         <h3 className="z-10 text-white text-2xl md:text-3xl font-serif font-bold">
           Watch Providers
         </h3>
-        <Select className="w-[256px]" placeholder="Select one">
+        <Select className="w-[256px]" defaultValue={countryCodes[0]}>
           <Select.Trigger className="h-10">
-            <Select.Value className="flex gap-3 items-center"/>
+            <Select.Value className="flex gap-3 items-center" />
             <Select.Indicator />
           </Select.Trigger>
           <Select.Popover>
