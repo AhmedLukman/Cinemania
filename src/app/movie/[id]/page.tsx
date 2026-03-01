@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import CollectionSection from "@/components/features/CollectionSection";
 import MediaDetails from "@/components/features/MediaDetails";
+import ProviderSection from "@/components/features/ProviderSection";
 import MediaDetailsLayout from "@/components/layout/MediaDetailsLayout";
 import {
   cachedMovieCredits,
@@ -40,6 +41,7 @@ const MovieDetailsPage = async ({
         <MediaDetails details={details} credits={credits} links={links} />
       </MediaDetailsLayout>
       <CollectionSection collection={details.belongs_to_collection} />
+      <ProviderSection id={id} />
     </>
   );
 };

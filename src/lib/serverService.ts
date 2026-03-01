@@ -26,6 +26,7 @@ import {
   type MovieListEndpoint,
   MovieResponseSchema,
   type MovieResponseType,
+  ProvidersResponseSchema,
   TvDetailsSchema,
   type TvDetailsType,
   type TvListEndpoint,
@@ -223,3 +224,17 @@ const fetchCollectionImages = async (
 };
 
 export const cachedCollectionImages = cache(fetchCollectionImages);
+
+const fetchProviders = async (
+  endpoint: `/${Lowercase<MediaType>}/${string}/watch/providers`,
+) => {
+  try {
+    const response = await apiClient(endpoint);
+    return ProvidersResponseSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedProviders = cache(fetchProviders);

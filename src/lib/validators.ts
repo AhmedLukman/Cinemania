@@ -367,6 +367,25 @@ export const CollectionImagesSchema = z.object({
   posters: z.array(ImageSchema),
 });
 
+const ProviderSchema = z.object({
+  display_priority: z.number(),
+  logo_path: z.string(),
+  provider_id: z.number(),
+  provider_name: z.string(),
+}); 
+
+const ProvidersSchema = z.object({
+  link: z.string(),
+  flatrate: z.array(ProviderSchema).nullish(),
+  rent: z.array(ProviderSchema).nullish(),
+  buy: z.array(ProviderSchema).nullish(),
+});
+
+export const ProvidersResponseSchema = z.object({
+  id: z.number(),
+  results: z.record(z.string(), ProvidersSchema),
+});
+
 export type CollectionImagesType = z.infer<typeof CollectionImagesSchema>;
 
 export type ImageType = z.infer<typeof ImageSchema>;
