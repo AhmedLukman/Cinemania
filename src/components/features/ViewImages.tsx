@@ -43,7 +43,7 @@ const ViewImages = ({ imageData, title }: ViewImagesProps) => {
 
               {(!(imageData.backdrops.length > 0) ||
                 !(imageData.posters.length > 0)) && (
-                <p className="text-red-500">
+                <p className="text-gray-500">
                   😢 Sorry, no images available at the moment
                 </p>
               )}
