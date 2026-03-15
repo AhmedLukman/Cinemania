@@ -37,6 +37,7 @@ npx tsc --noEmit    # Run TypeScript compiler check
 - Prefer explicit type annotations over function parameters
 - Use named exports over default exports
 - Keep functions small and focused; use early returns
+- Follow codebase pattern
 
 ### Naming Conventions
 - **Components**: PascalCase (e.g., `MovieCard`, `SliderProvider`)
