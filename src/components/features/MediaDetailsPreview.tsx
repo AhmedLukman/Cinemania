@@ -27,7 +27,7 @@ const MediaDetailsPreview = ({
       <h2 className="text-3xl xl:text-5xl font-bold font-serif md:max-w-prose">
         {title}
       </h2>
-      <div className="flex justify-between items-center gap-5 md:gap-0 flex-wrap md:max-w-prose">
+      <div className="flex justify-between items-center gap-5 flex-wrap md:max-w-prose">
         <div className="space-x-5 text-sm mt-2 md:mt-6">
           <time dateTime={releaseDate.substring(0, 4)}>
             {releaseDate.substring(0, 4)}
