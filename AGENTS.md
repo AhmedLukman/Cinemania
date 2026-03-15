@@ -38,6 +38,7 @@ npx tsc --noEmit    # Run TypeScript compiler check
 - Use named exports over default exports
 - Keep functions small and focused; use early returns
 - Follow codebase pattern
+- Always search official TMDB documentation to verify API reponse shape if you are adding a new fetch functionality
 
 ### Naming Conventions
 - **Components**: PascalCase (e.g., `MovieCard`, `SliderProvider`)
