@@ -9,7 +9,6 @@ type BorderButtonProps = {
 
 const BorderButton = ({ href, children, ...props }: BorderButtonProps) => {
   const className = buttonVariants({
-    variant: "outline",
     className:
       "text-white rounded-xl border-2 transition-all duration-300 2xl:p-5 bg-transparent relative hover:opacity-75",
   });

@@ -22,6 +22,7 @@ import {
   GenreResponseSchema,
   MediaImagesSchema,
   type MediaType,
+  MediaVideosSchema,
   MovieDetailsSchema,
   type MovieDetailsType,
   type MovieListEndpoint,
@@ -249,6 +250,30 @@ const fetchTvImages = async (endpoint: `/tv/${string}/images`) => {
 };
 
 export const cachedTvImages = cache(fetchTvImages);
+
+const fetchMovieVideos = async (endpoint: `/movie/${string}/videos`) => {
+  try {
+    const response = await apiClient(endpoint);
+    return MediaVideosSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedMovieVideos = cache(fetchMovieVideos);
+
+const fetchTvVideos = async (endpoint: `/tv/${string}/videos`) => {
+  try {
+    const response = await apiClient(endpoint);
+    return MediaVideosSchema.parse(response.data);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
+};
+
+export const cachedTvVideos = cache(fetchTvVideos);
 
 const fetchProviders = async (
   endpoint: `/${Lowercase<MediaType>}/${string}/watch/providers`,

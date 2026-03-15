@@ -396,6 +396,28 @@ export type MediaImagesType = z.infer<typeof MediaImagesSchema>;
 
 export type ImageType = z.infer<typeof ImageSchema>;
 
+const VideoSchema = z.object({
+  id: z.string(),
+  iso_639_1: z.string(),
+  iso_3166_1: z.string(),
+  key: z.string(),
+  name: z.string(),
+  official: z.boolean(), // Defaults to true
+  published_at: z.string(),
+  site: z.string(),
+  size: z.number(), // Defaults to 0
+  type: z.string(),
+});
+
+export const MediaVideosSchema = z.object({
+  id: z.number(), // Defaults to 0
+  results: z.array(VideoSchema),
+});
+
+export type MediaVideosType = z.infer<typeof MediaVideosSchema>;
+
+export type VideoType = z.infer<typeof VideoSchema>;
+
 export type MovieCategoryHeadingsType =
   (typeof MovieCategoryHeadings)[keyof typeof MovieCategoryHeadings];
 

@@ -2,18 +2,21 @@ import type {
   CreditsType,
   ExternalIdsType,
   MediaImagesType,
+  MediaVideosType,
   MovieDetailsType,
 } from "@/lib/validators";
 import CompanyCard from "../ui/CompanyCard";
 import GenreList from "../ui/GenreList";
 import LinksList from "../ui/LinksList";
 import ViewImages from "./ViewImages";
+import ViewVideos from "./ViewVideos";
 
 type MediaDetailsProps = {
   details: MovieDetailsType;
   credits: CreditsType | null;
   links: ExternalIdsType | null;
   images: MediaImagesType | null;
+  videos: MediaVideosType | null;
 };
 
 const getDirector = (credits: CreditsType | null) => {
@@ -26,6 +29,7 @@ const MediaDetails = ({
   credits,
   links,
   images,
+  videos,
 }: MediaDetailsProps) => {
   const {
     title,
@@ -63,11 +67,10 @@ const MediaDetails = ({
       <p className="max-w-prose mt-10 2xl:text-lg line-clamp-6">
         {overview || "No overview available."}
       </p>
-      {images && (
-        <div className="mt-10">
-          <ViewImages imageData={images} title={title} />
-        </div>
-      )}
+      <div className="flex mt-10 gap-4">
+        {videos && <ViewVideos videoData={videos} title={title} />}
+        {images && <ViewImages imageData={images} title={title} />}
+      </div>
       <div className="mt-5 space-y-2 p-6 rounded-lg bg-linear-to-b from-white/20 via-white/10 to-white/20">
         <div className="flex gap-2 flex-col md:flex-row md:gap-5">
           <div className="space-y-2 md:w-1/2">
