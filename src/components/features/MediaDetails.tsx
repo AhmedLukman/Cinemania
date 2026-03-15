@@ -1,3 +1,4 @@
+import { formatRuntime } from "@/lib/utils";
 import type {
   CreditsType,
   ExternalIdsType,
@@ -44,6 +45,7 @@ const MediaDetails = ({
     tagline,
     homepage,
     production_companies,
+    runtime,
   } = details;
 
   const director = getDirector(credits);
@@ -53,17 +55,16 @@ const MediaDetails = ({
       <h2 className="text-3xl xl:text-5xl font-bold font-serif md:max-w-prose">
         {title}
       </h2>
-      <div className="flex justify-between items-center gap-5 md:gap-0 flex-wrap md:max-w-prose">
-        <div className="space-x-5 text-sm mt-4">
-          <time dateTime={release_date.substring(0, 4)}>
-            {release_date.substring(0, 4)}
-          </time>
-          <span className="border rounded-md p-1">
-            {vote_average?.toFixed(1)}
-          </span>
-        </div>
-        <GenreList genres={genres} />
+      <div className="flex gap-5 items-center text-sm mt-4">
+        <time dateTime={release_date.substring(0, 4)}>
+          {release_date.substring(0, 4)}
+        </time>
+        <span className="border rounded-md p-1 px-2">
+          {vote_average?.toFixed(1)}
+        </span>
+        <span>{formatRuntime(runtime)}</span>
       </div>
+      <GenreList genres={genres} />
       <p className="max-w-prose mt-10 2xl:text-lg line-clamp-6">
         {overview || "No overview available."}
       </p>
