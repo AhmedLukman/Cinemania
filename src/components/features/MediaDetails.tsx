@@ -1,4 +1,4 @@
-import { formatRuntime } from "@/lib/utils";
+import { formatDate, formatRuntime } from "@/lib/utils";
 import type {
   CreditsType,
   ExternalIdsType,
@@ -49,22 +49,26 @@ const MediaDetails = ({
   } = details;
 
   const director = getDirector(credits);
+  const { day, suffix, month, year } = formatDate(release_date);
 
   return (
     <div className="lg:w-7/12 xl:w-8/12 pt-24">
       <h2 className="text-3xl xl:text-5xl font-bold font-serif md:max-w-prose">
         {title}
       </h2>
-      <div className="flex gap-5 items-center text-sm mt-4">
-        <time dateTime={release_date.substring(0, 4)}>
-          {release_date.substring(0, 4)}
-        </time>
-        <span className="border rounded-md p-1 px-2">
-          {vote_average?.toFixed(1)}
-        </span>
-        <span>{formatRuntime(runtime)}</span>
+      <div className="flex justify-between items-center gap-5 md:gap-0 flex-wrap md:max-w-prose">
+        <div className="space-x-5 text-sm mt-2 md:mt-6">
+          <time dateTime={release_date}>
+            {day}
+            <sup>{suffix}</sup> {month}, {year}
+          </time>
+          <span className="border rounded-md p-1 px-2">
+            {vote_average?.toFixed(1)}
+          </span>
+          <span>{formatRuntime(runtime)}</span>
+        </div>
+        <GenreList genres={genres} />
       </div>
-      <GenreList genres={genres} />
       <p className="max-w-prose mt-10 2xl:text-lg line-clamp-6">
         {overview || "No overview available."}
       </p>

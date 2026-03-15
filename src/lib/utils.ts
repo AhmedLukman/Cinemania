@@ -21,3 +21,21 @@ export const formatRuntime = (minutes: number) => {
   const remainingMinutes = minutes % 60;
   return `${hours}h ${remainingMinutes}m`;
 };
+
+export const formatDate = (date: string) => {
+  if (!date) return { day: "-", suffix: "", month: "", year: "" };
+  const d = new Date(date);
+  const day = d.getUTCDate();
+  const month = d.toLocaleString("en-US", { month: "short", timeZone: "UTC" });
+  const year = d.getUTCFullYear();
+
+  // Ordinal suffix logic
+  const j = day % 10;
+  const k = day % 100;
+  let suffix = "th";
+  if (j === 1 && k !== 11) suffix = "st";
+  if (j === 2 && k !== 12) suffix = "nd";
+  if (j === 3 && k !== 13) suffix = "rd";
+
+  return { day, suffix, month, year };
+};
