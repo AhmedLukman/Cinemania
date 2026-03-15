@@ -66,6 +66,7 @@ const MediaDetails = ({
       {logo ? (
         <div className="mb-4">
           <Image
+            unoptimized
             priority
             src={getImageUrl(logo.file_path, TmdbLogoSizes.W500)}
             alt={`${title} logo`}
