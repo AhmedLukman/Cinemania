@@ -16,19 +16,19 @@ type DoubleSliderProps = {
 };
 
 const DoubleSlider = async ({ type }: DoubleSliderProps) => {
+  const isMovie = type === Entity.Movie;
   let popularMedia: (MovieType | TvType)[];
+
   try {
-    const { results } =
-      type === Entity.Movie
-        ? await cachedMovieList(TmdbApiMovieEndpoints.Popular)
-        : await cachedTvList(TmdbApiTvEndpoints.Popular);
+    const { results } = isMovie
+      ? await cachedMovieList(TmdbApiMovieEndpoints.Popular)
+      : await cachedTvList(TmdbApiTvEndpoints.Popular);
     popularMedia = results;
   } catch {
     return (
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
         <p className="text-red-500">
-          ⚠️ Error fetching popular{" "}
-          {type === Entity.Movie ? "movies" : "TV shows"} ⚠️
+          ⚠️ Error fetching popular {isMovie ? "movies" : "TV shows"} ⚠️
         </p>
       </section>
     );
@@ -38,7 +38,7 @@ const DoubleSlider = async ({ type }: DoubleSliderProps) => {
     return (
       <section className="h-screen flex items-center 2xl:text-lg justify-center">
         <p className="text-gray-500">
-          No popular {type === Entity.Movie ? "movies" : "TV shows"} found. 😢
+          No popular {isMovie ? "movies" : "TV shows"} found. 😢
         </p>
       </section>
     );
