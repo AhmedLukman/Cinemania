@@ -28,11 +28,11 @@ const MediaDetailsPreview = ({
         {title}
       </h2>
       <div className="flex justify-between items-center gap-5 md:gap-0 flex-wrap md:max-w-prose">
-        <div className="space-x-5 text-sm mt-4">
+        <div className="space-x-5 text-sm mt-2 md:mt-6">
           <time dateTime={releaseDate.substring(0, 4)}>
             {releaseDate.substring(0, 4)}
           </time>
-          <span className="border rounded-md p-1">
+          <span className="border rounded-md p-1 px-2">
             {voteAverage?.toFixed(1)}
           </span>
         </div>
