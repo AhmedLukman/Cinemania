@@ -1,4 +1,6 @@
-import { formatDate, formatRuntime } from "@/lib/utils";
+import Image from "next/image";
+import { TmdbLogoSizes } from "@/lib/constants";
+import { formatDate, formatRuntime, getImageUrl } from "@/lib/utils";
 import type {
   CreditsType,
   ExternalIdsType,
@@ -51,11 +53,30 @@ const MediaDetails = ({
   const director = getDirector(credits);
   const { day, suffix, month, year } = formatDate(release_date);
 
+  const logo =
+    images?.logos.find(
+      (logo) => logo.iso_639_1 === "en" && logo.file_path.endsWith(".svg"),
+    ) ||
+    images?.logos.find((logo) => logo.file_path.endsWith(".svg")) ||
+    images?.logos.find((logo) => logo.iso_639_1 === "en") ||
+    images?.logos[0];
+
   return (
     <div className="lg:w-7/12 xl:w-8/12 pt-24">
-      <h2 className="text-3xl xl:text-5xl font-bold font-serif md:max-w-prose">
-        {title}
-      </h2>
+      {logo ? (
+        <div className="mb-4">
+          <Image
+            priority
+            src={getImageUrl(logo.file_path, TmdbLogoSizes.W500)}
+            alt={`${title} logo`}
+            className="h-24 w-auto object-contain object-left"
+          />
+        </div>
+      ) : (
+        <h2 className="text-3xl xl:text-5xl font-bold font-serif md:max-w-prose">
+          {title}
+        </h2>
+      )}
       <div className="flex justify-between items-center gap-5 md:gap-0 flex-wrap md:max-w-prose">
         <div className="space-x-5 text-sm mt-2 md:mt-6">
           <time dateTime={release_date}>
