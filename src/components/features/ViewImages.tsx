@@ -1,15 +1,17 @@
 import { Button, Modal } from "@heroui/react";
 import { FaImage } from "react-icons/fa6";
-import type { CollectionImagesType } from "@/lib/validators";
+import type { CollectionImagesType, MediaImagesType } from "@/lib/validators";
 import BorderButton from "../ui/BorderButton";
 import ImageModalSection from "./ImageModalSection";
 
 type ViewImagesProps = {
-  imageData: CollectionImagesType;
+  imageData: CollectionImagesType | MediaImagesType;
   title: string;
 };
 
 const ViewImages = ({ imageData, title }: ViewImagesProps) => {
+  const hasLogos = "logos" in imageData;
+
   return (
     <Modal>
       <BorderButton>
@@ -41,12 +43,21 @@ const ViewImages = ({ imageData, title }: ViewImagesProps) => {
                 />
               )}
 
-              {(!(imageData.backdrops.length > 0) ||
-                !(imageData.posters.length > 0)) && (
-                <p className="text-gray-500">
-                  😢 Sorry, no images available at the moment
-                </p>
+              {hasLogos && imageData.logos.length > 0 && (
+                <ImageModalSection
+                  images={imageData.logos}
+                  title={title}
+                  heading="Logos"
+                />
               )}
+
+              {imageData.backdrops.length === 0 &&
+                imageData.posters.length === 0 &&
+                (!hasLogos || imageData.logos.length === 0) && (
+                  <p className="text-gray-500">
+                    😢 Sorry, no images available at the moment
+                  </p>
+                )}
             </Modal.Body>
             <Modal.Footer className="border-t border-[#292f46] pt-4">
               <Button variant="danger-soft" slot="close">

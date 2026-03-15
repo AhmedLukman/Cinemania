@@ -6,6 +6,7 @@ import MediaDetailsLayout from "@/components/layout/MediaDetailsLayout";
 import {
   cachedMovieCredits,
   cachedMovieDetails,
+  cachedMovieImages,
   cachedMovieLinks,
 } from "@/lib/serverService";
 
@@ -21,14 +22,17 @@ const MovieDetailsPage = async ({
     notFound();
   }
 
-  const [creditsResult, linksResult] = await Promise.allSettled([
+  const [creditsResult, linksResult, imagesResult] = await Promise.allSettled([
     cachedMovieCredits(`/movie/${id}/credits`),
     cachedMovieLinks(`/movie/${id}/external_ids`),
+    cachedMovieImages(`/movie/${id}/images`),
   ]);
 
   const credits =
     creditsResult.status === "fulfilled" ? creditsResult.value : null;
   const links = linksResult.status === "fulfilled" ? linksResult.value : null;
+  const images =
+    imagesResult.status === "fulfilled" ? imagesResult.value : null;
 
   return (
     <>
@@ -38,7 +42,12 @@ const MovieDetailsPage = async ({
         title={details.title}
         priority={true}
       >
-        <MediaDetails details={details} credits={credits} links={links} />
+        <MediaDetails
+          details={details}
+          credits={credits}
+          links={links}
+          images={images}
+        />
       </MediaDetailsLayout>
       <CollectionSection collection={details.belongs_to_collection} />
       <ProviderSection id={id} />

@@ -9,7 +9,7 @@ const ImageModalSection = async ({
 }: {
   images: ImageType[];
   title: string;
-  heading: string;
+  heading: "Backdrops" | "Posters" | "Logos";
 }) => {
   return (
     <section>
@@ -17,7 +17,7 @@ const ImageModalSection = async ({
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {images.map((image) => {
           const aspectRatio =
-            heading === "Backdrops"
+            heading === "Backdrops" || heading === "Logos"
               ? "aspect-video"
               : heading === "Posters"
                 ? "aspect-[2/3]"
@@ -34,7 +34,7 @@ const ImageModalSection = async ({
                 blurImageSize={ImageSize.ExtraSmall}
                 imageSize={ImageSize.Medium}
                 sizes="(max-width: 768px) 50vw, 33vw"
-                className="rounded-md object-cover"
+                className={`rounded-md ${heading === "Logos" ? "object-contain" : "object-cover"}`}
               />
             </div>
           );
