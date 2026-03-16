@@ -70,6 +70,8 @@ const MediaDetails = ({
             priority
             src={getImageUrl(logo.file_path, TmdbLogoSizes.W500)}
             alt={`${title} logo`}
+            width={logo.width}
+            height={logo.height}
             className="h-24 w-auto object-contain object-left"
           />
         </div>
